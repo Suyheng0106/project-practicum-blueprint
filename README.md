@@ -22,9 +22,9 @@ Update this section whenever you work on a phase. Your advisor reads it to follo
 | Last updated | [STUDENT INPUT: YYYY-MM-DD] |
 
 | Phase | Planned due | Status | Submitted on |
-|---|---|---|---|
-| 1. Domain & Problem Teardown | | Not started | |
-| 2. Scope, Logic & MoSCoW | | Not started | |
+|---|---|---|---| 
+| 1. Domain & Problem Teardown | | Submitted | 2026-10-16 |
+| 2. Scope, Logic & MoSCoW | | Submitted | 2026-10-16 |
 | 3. Architecture, ERD & API Planning | | Not started | |
 | 4. UI/UX & Figma Design | | Not started | |
 | 5. Backend Core & API Implementation | | Not started | |
