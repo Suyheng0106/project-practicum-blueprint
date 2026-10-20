@@ -22,13 +22,13 @@
 | ID | Pain point | Who suffers | How often |
 |---|---|---|---|
 | PP-01 | Hard to understand what skills a job actually needs. | Students looking for first jobs. | Every time they read a job post. |
-| PP-02 | Hard to find jobs that are actually meant for students or beginners. | Students looking for work. | Weekly, when searching for jobs. |
+| PP-02 | Wasting time clicking on job posts only to realize they require years of experience. | Students looking for their first job. | Students looking for work. | Weekly, when searching for jobs. |
 | PP-03 | Not knowing how to prepare for interviews or build a good project portfolio. | Students who get interview calls. | Before and during interviews. |
 | PP-04 | Wasting time manually checking if their skills match the job post. | All student job seekers. | Every time they want to apply. |
 
 **Problem statement in one sentence**
 
-> University students struggle to get internships because job descriptions are confusing and beginner jobs are hard to find, which costs them time and confidence.
+> University students struggle to find their first internships and jobs. Job descriptions use confusing words, so students don't know if they actually have the right skills. Since jobs are scattered across Facebook and different websites, students end up wasting time applying for the wrong roles and feeling stressed out.
 
 ## 2. Target User Persona
 
@@ -38,7 +38,7 @@
 | A typical day | Goes to class, does homework, and scrolls Facebook or job websites at night to find internships. | |
 | Daily struggles | Gets confused by big words in job posts (PP-01); gets annoyed finding jobs on Facebook that actually need 3 years of experience (PP-02); doesn't know if his school projects are good enough to show employers (PP-03). | |
 | Goals | Find a software internship before graduating. | |
-| Tech literacy | High. Uses computer and phone every day. Knows how to use ChatGPT. | |
+| Tech literacy | High. Uses a laptop and smartphone daily, along with tools like VS Code, GitHub, and ChatGPT. | |
 | What they would say about the problem | "I see many job posts on Facebook, but I don't know if I'm good enough to apply, and checking takes too long." | |
 
 ## 3. Domain Terminology
