@@ -15,7 +15,7 @@
 
 **Context**
 
-> University students want to find internships and first jobs, but the process is confusing. Job postings use complicated words, and it is hard to tell if what they learn in class matches what employers want. Because jobs are scattered across Facebook and websites, students waste time applying for the wrong roles and feel stressed.
+> Finding a first job is confusing for students. Job descriptions are hard to understand, making it unclear if they have the right skills. Because jobs are scattered everywhere, students waste time applying for the wrong roles and feel stressed.
 
 **Pain points**
 
