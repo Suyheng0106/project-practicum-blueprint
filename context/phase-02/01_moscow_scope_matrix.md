@@ -29,7 +29,7 @@ IDs never change. If a feature changes priority, change the Priority column and 
 | F-03 | Automated Skill Gap Analyzer | Must-Have | PP-01 | This is the main unique angle of the app. |
 | F-04 | Real-World Preparation Hub (guides, tips) | Should-Have | PP-03 | Helps students after they find a skill gap. |
 | F-05 | AI Learning Roadmap Generator | Could-Have | PP-01 | Good extra feature, but not required for MVP. |
-| F-06 | In-App Direct Job Applications | Could-Have | None | Good extra feature if time allows |
+| F-06 | In-App Direct Job Applications | Could-Have | None | Good extra feature. Makes applying easier for students |
 | F-07 | Live Chat with Employers | Won't-Have | None | Needs a big backend; out of scope for this class. |
 | F-08 | Auto-generate PDF Resumes | Won't-Have | None | Too many formatting edge cases. Future work. |
 
