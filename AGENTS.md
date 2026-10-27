@@ -23,4 +23,20 @@ This is a solo Bachelor capstone monorepo. The student's planning documents in `
 
 ## Stack and commands
 
-[STUDENT INPUT: your language, framework, database and client framework, plus the commands to install, run, test and seed the project.]
+- **Backend:** Node.js (v22.x), Express (v4.x), TypeScript (v5.x), Prisma ORM (v5.x)
+- **Database:** PostgreSQL 16 (via Docker Compose)
+- **Clients:** Flutter (v3.41.x) with Dart (Candidate Mobile) & React (v18.x) + Vite + TypeScript (Employer Web Portal)
+- **Authentication:** JWT with bcrypt (`Authorization: Bearer <token>`)
+- **API Spec & Testing:** Postman collection in `api-specs/`
+- **Conventions:** API on port 8000, route prefix `/api/v1`, health check `GET /api/v1/health`
+
+### Planned Commands (from Phase 5 onward)
+- **Start database:** `docker compose up -d`
+- **Backend install:** `cd backend && npm install`
+- **Database migrate & seed:** `cd backend && npx prisma migrate dev && npx prisma db seed`
+- **Run API (port 8000):** `cd backend && npm run dev`
+- **Run API tests:** Execute Postman collection in `api-specs/`
+- **Employer web portal install:** `cd web && npm install`
+- **Run employer web portal:** `cd web && npm run dev`
+- **Mobile client install:** `cd mobile && flutter pub get`
+- **Run mobile client:** `cd mobile && flutter run`

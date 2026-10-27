@@ -2,7 +2,7 @@
 
 **Objective:** Describe the 5–8 most important things users do with your app, step by step, including what happens when something goes wrong. These journeys become your screens (Phase 4), your demo (Phase 6) and your test cases (Phase 7).
 
-**Status:** Submitted · **Last updated:** 2026-10-15
+**Status:** In Progress / Revised · **Last updated:** 2026-10-27
 
 ## Done When
 
@@ -110,10 +110,67 @@ Scenario: Failure or edge case
   Then they see a message saying "Content coming soon"
 ```
 
+### UJ-06 — Employer Posts an Entry-Level Job (Web Portal)
+
+| Persona | Trigger | Pre-conditions | Features |
+|---|---|---|---|
+| P-02 | Needs an intern and wants to publish an opening | Logged in to Web Portal, company profile set up | F-09 |
+
+```gherkin
+Scenario: Happy path
+  Given the employer is on the "Post a Job" page on the Web Portal
+  When they enter the job title, description, and select required skills
+  And they click "Publish Job"
+  Then the job is saved and appears on the employer's active listings and the student job board
+
+Scenario: Failure or edge case
+  Given the employer is on the "Post a Job" page on the Web Portal
+  When they try to publish without selecting any required skills
+  Then they see an error message "Please select at least one required skill" and the job is not created
+```
+
+### UJ-07 — Candidate Applies to a Job (Mobile App)
+
+| Persona | Trigger | Pre-conditions | Features |
+|---|---|---|---|
+| P-01 | Finds a job with a high skill match and wants to apply | Logged in on mobile, viewing a Job Listing | F-06, F-03 |
+
+```gherkin
+Scenario: Happy path
+  Given the user has viewed their skill fit for a Job Listing
+  When they click the "Apply Now" button
+  Then their application is submitted and the button changes to "Applied"
+
+Scenario: Failure or edge case
+  Given the user has already submitted an application for this job
+  When they view the Job Listing
+  Then the button is disabled and displays "Already Applied"
+```
+
+### UJ-08 — Employer Reviews Applicants (Web Portal)
+
+| Persona | Trigger | Pre-conditions | Features |
+|---|---|---|---|
+| P-02 | Wants to evaluate student candidates who applied | Logged in to Web Portal, viewing a posted job | F-09, F-06 |
+
+```gherkin
+Scenario: Happy path
+  Given candidates have applied to an active job listing
+  When the employer opens the "Applicants" tab for that job on the Web Portal
+  Then they see a list of student applicants with their profiles and matching skill percentages
+
+Scenario: Failure or edge case
+  Given no students have applied to the job yet
+  When the employer opens the "Applicants" tab
+  Then they see an empty state message saying "No applications received yet"
+```
+
 ## 3. Coverage
 
 | Must-Have feature | Covered by journey(s) |
 |---|---|
 | F-01 | UJ-01, UJ-03 |
 | F-02 | UJ-02, UJ-04 |
-| F-03 | UJ-03 |
+| F-03 | UJ-03, UJ-07 |
+| F-06 | UJ-07, UJ-08 |
+| F-09 | UJ-06, UJ-08 |

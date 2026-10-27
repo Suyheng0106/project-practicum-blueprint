@@ -1,4 +1,4 @@
-# [STUDENT INPUT: Project Title]
+# SkillBridge
 
 Bachelor of Computer Science — Individual Capstone
 
@@ -7,7 +7,7 @@ Bachelor of Computer Science — Individual Capstone
 | Student | [STUDENT INPUT: name and student ID] |
 | Advisor | [STUDENT INPUT] |
 | Term | [STUDENT INPUT] |
-| Pitch | [STUDENT INPUT: one sentence: who has the problem, and what your app does about it] |
+| Pitch | SkillBridge automatically compares a student's skills to a job's needs and only shows jobs meant for students, saving them time and confusion. |
 
 First time here? Read the guide: [template/README.md](template/README.md)
 
@@ -17,15 +17,15 @@ Update this section whenever you work on a phase. Your advisor reads it to follo
 
 | | |
 |---|---|
-| Now working on | [STUDENT INPUT: phase and task] |
-| Blockers | [STUDENT INPUT: or "None"] |
-| Last updated | [STUDENT INPUT: YYYY-MM-DD] |
+| Now working on | Phase 3 — Architecture, ERD & API Planning |
+| Blockers | None |
+| Last updated | 2026-10-27 |
 
 | Phase | Planned due | Status | Submitted on |
 |---|---|---|---| 
 | 1. Domain & Problem Teardown | | Submitted | 2026-10-16 |
 | 2. Scope, Logic & MoSCoW | | Submitted | 2026-10-16 |
-| 3. Architecture, ERD & API Planning | | Not started | |
+| 3. Architecture, ERD & API Planning | | In progress | |
 | 4. UI/UX & Figma Design | | Not started | |
 | 5. Backend Core & API Implementation | | Not started | |
 | 6. Frontend Client & Integration | | Not started | |
@@ -55,6 +55,7 @@ Status values: Not started · In progress · Submitted · Rework needed
 | `template/` | Guide and phase templates from the advisor (do not edit) |
 | `context/` | My completed phase documents and evidence |
 | `backend/` | Backend code |
-| `mobile/` | Client app code |
+| `mobile/` | Client app code (Candidate) |
+| `web/` | Web portal code (Employer) |
 | `api-specs/` | API test collection |
 | `AGENTS.md` | Instructions for AI coding assistants |
