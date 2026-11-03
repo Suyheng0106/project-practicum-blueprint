@@ -11,9 +11,16 @@
 - [x] Every box in the diagram has a row in the component table
 - [x] One Must-Have flow is traced from start to finish, including what happens when a step fails
 
+---
+
 ## 1. High-Level Component Map
 
-The diagram below maps all client applications, backend services, persistent storage, and external integrations in SkillBridge. Both candidate and employer clients communicate with a single unified Node.js/Express REST API over HTTP, which connects directly to the PostgreSQL database via Prisma ORM.
+SkillBridge connects students looking for beginner IT jobs with tech recruiters who need qualified candidates. 
+
+- **Students (Candidates)** use a **Flutter mobile app** on their phones to find beginner jobs, see their skill fit score, and apply.
+- **Recruiters (Employers)** use a **React web portal** on their laptops to post jobs with required skill tags and review applicants.
+- **Both clients talk to one Backend REST API** (Node.js + Express), which checks logins, calculates matching skills, and saves data to a **PostgreSQL database**.
+- **Google Gemini API** is an optional external service used only to suggest personalized study roadmaps when students want to learn missing skills.
 
 ![SkillBridge System Architecture](../assets/architecture.png)
 
@@ -21,56 +28,52 @@ The diagram below maps all client applications, backend services, persistent sto
 <summary>Mermaid Diagram Source</summary>
 
 ```mermaid
-flowchart TD
-    subgraph Clients ["Client Layer"]
-        Mobile["Candidate Mobile App<br/>(Flutter / Dart)"]
-        Web["Employer Web Portal<br/>(React / Vite / TypeScript)"]
-    end
+flowchart LR
+    Candidate(["Candidate<br/>(Student)"]) -->|"uses"| Mobile["Candidate Mobile App<br/>(Flutter / Dart)"]
+    Employer(["Employer<br/>(Recruiter)"]) -->|"uses"| Web["Employer Web Portal<br/>(React / TypeScript)"]
 
-    subgraph Server ["Application Layer"]
-        API["Backend REST API<br/>(Node.js / Express / TypeScript)<br/>Port 8000 · Prefix: /api/v1"]
-    end
+    Mobile -->|"HTTP / JWT"| API["Backend REST API<br/>(Node.js / Express :8000)"]
+    Web -->|"HTTP / JWT"| API
 
-    subgraph Data ["Data Layer"]
-        DB[("PostgreSQL 16 Database<br/>(Docker Compose / Prisma ORM)<br/>Port 5432")]
-    end
-
-    subgraph External ["External Services Layer (Optional / Could-Have)"]
-        Gemini["Google Gemini API<br/>(AI Roadmap Generator — F-05)"]
-    end
-
-    Mobile -->|"HTTP / REST (JSON)<br/>Bearer JWT Auth"| API
-    Web -->|"HTTP / REST (JSON)<br/>Bearer JWT Auth"| API
-    API -->|"Prisma Client (TCP :5432)<br/>SQL Queries & Migrations"| DB
-    API -.->|"HTTPS / REST (JSON)<br/>API Key Auth (F-05)"| Gemini
+    API -->|"Prisma / SQL"| DB[("PostgreSQL Database<br/>(Docker :5432)")]
+    API -.->|"HTTPS (Optional)"| Gemini["Google Gemini API<br/>(AI Study Roadmap)"]
 ```
 
 </details>
 
+---
+
 ## 2. Components
+
+Every box in the architecture diagram is described below:
 
 | Component | Responsibility | Technology | Runs when | Talks to |
 |---|---|---|---|---|
-| **Candidate Mobile App** | Candidate client UI for authentication, Student Profile management (skills, projects), browsing curated Job Listings, triggering automated Skill Gap analysis, bookmarking jobs, viewing Preparation Hub guides, and submitting Job Applications. | Flutter (v3.41.x) with Dart | On-demand on candidate mobile device or Android/iOS emulator | Backend REST API (via HTTP/REST) |
-| **Employer Web Portal** | Recruiter desktop UI for employer authentication, company profile management, publishing and managing entry-level Job Listings with explicit skill requirements, and reviewing student applicants with their calculated skill match scores. | React (v18.x) + Vite + TypeScript (v5.x) | On-demand in desktop web browser | Backend REST API (via HTTP/REST) |
-| **Backend REST API** | Central application controller. Handles route dispatching (`/api/v1`), JWT authentication and role-based authorization (`CANDIDATE` vs `EMPLOYER`), input validation, business logic (Skill Gap comparison engine), and database operations. | Node.js (v22.x), Express (v4.x), TypeScript (v5.x) | Continuously as a daemon on port 8000 | PostgreSQL 16 Database (via Prisma ORM), Google Gemini API |
-| **PostgreSQL 16 Database** | Persistent relational storage for user accounts, candidate profiles, skills, company profiles, job listings, bookmarks, and job applications. | PostgreSQL 16 via Docker Compose container | Continuously in Docker background (`docker compose up -d`) on port 5432 | Backend REST API (Prisma Client) |
-| **Google Gemini API** | Generates dynamic, step-by-step AI Learning Roadmaps for students seeking to bridge identified skill gaps (Could-Have feature F-05). | Google AI Studio REST API | Triggered on-demand when student requests an AI roadmap | Backend REST API only |
+| **Candidate Mobile App** | Mobile screen where students create their profile, pick their skills, browse beginner jobs, see their skill match percentage, and tap "Apply". | Flutter (v3.41.x) with Dart | When a student opens the app on their phone or emulator | Backend REST API (HTTP requests) |
+| **Employer Web Portal** | Desktop web dashboard where recruiters log in, create company profiles, post job openings with required skill tags, and review student applicants. | React (v18.x) + Vite + TypeScript | When a recruiter opens the web portal in their browser | Backend REST API (HTTP requests) |
+| **Backend REST API** | The central brain. Validates logins (JWT), checks permissions, calculates skill gaps (comparing student skills vs job requirements), and saves records. | Node.js (v22.x) with Express (v4.x) & TypeScript | Continuously running on port 8000 (`http://localhost:8000/api/v1`) | PostgreSQL Database (via Prisma ORM), Google Gemini API |
+| **PostgreSQL Database** | Stores all app data: user logins, student profiles, company profiles, job listings, skills list, and job applications. | PostgreSQL 16 (via Docker Compose) | Continuously in Docker on port 5432 | Backend REST API only |
+| **Google Gemini API** | Generates step-by-step study recommendations for missing skills (Could-Have feature F-05). | Google AI Studio REST API | Only when a student taps "Generate Study Roadmap" | Backend REST API only (server-to-server) |
 
-### Secrets & Database Access Security Policy
+### Secrets & Database Security Policy
 
-All secrets (including database connection string `DATABASE_URL`, JWT signing key `JWT_SECRET`, port configuration `PORT`, and optional `GEMINI_API_KEY`) reside exclusively in a server-side, git-ignored `.env` file on the backend host. Only the Backend REST API has network access and credentials to directly reach the PostgreSQL database container over port 5432. Neither the Flutter mobile app nor the React web portal has database credentials or direct database connections; every client interaction must authenticate through the backend's `/api/v1` REST endpoints.
+- **Where secrets live:** All sensitive keys (the database password `DATABASE_URL`, token key `JWT_SECRET`, and optional `GEMINI_API_KEY`) live only in a `.env` file on the backend server. This file is git-ignored and never shared with the frontend apps or committed to Git.
+- **Who can reach the database:** Only the Backend REST API can connect directly to PostgreSQL. The Flutter mobile app and React web portal can never touch the database directly; they must send an authorized HTTP request to the backend.
+
+---
 
 ## 3. Flow Trace
 
-Flow traced: **Candidate Applies to a Job with Automated Skill Fit Verification (Serving F-03, F-06, and UJ-07)**
+Flow traced: **Candidate Applies to a Job with Skill Fit Check (Serving F-03, F-06, and UJ-07)**
 
-| Step | Where | What happens |
-|---|---|---|
-| 1 | Candidate Mobile App | Sokha views a Job Listing with matching and missing skills and taps the **"Apply Now"** button. The app reads the stored JWT token and issues an HTTP request: `POST /api/v1/jobs/:id/apply` with header `Authorization: Bearer <token>`. |
-| 2 | Backend REST API (Auth Middleware) | The API intercepts the request, decodes and verifies the JWT signature against `JWT_SECRET`, and verifies that the user role is `CANDIDATE`. *Failure case:* If the token is missing or expired, the API immediately responds with `401 UNAUTHORIZED`. If the user has an `EMPLOYER` role, it responds with `403 FORBIDDEN`. |
-| 3 | Backend REST API (Validation & Duplicate Check) | The API queries the database to ensure the Job Listing exists and is active. It also queries the `JobApplication` table for any existing record with `student_id = current_user.id` and `job_listing_id = :id`. *Failure case:* If the job does not exist, the API returns `404 NOT_FOUND`. If an application already exists, the API returns `409 CONFLICT` (`{"error": {"code": "ALREADY_APPLIED", "message": "You have already applied for this job listing"}}`). |
-| 4 | Backend REST API (Skill Gap Calculation Engine) | The API retrieves the candidate's skills from `StudentProfile` and compares them with the job's required skills from `JobListing`. It computes the matching skill count, missing skill list (Skill Gap), and match score percentage (`match_percentage = (matched_skills / total_required_skills) * 100`). |
-| 5 | PostgreSQL Database (Prisma ORM) | The API opens a transaction and creates a new `JobApplication` record with `student_id`, `job_listing_id`, `match_score`, `status = "SUBMITTED"`, and timestamps. The record is committed. *Failure case:* If the database connection drops or a constraint fails, the transaction rolls back and the API returns `500 SERVER_ERROR`. |
-| 6 | Backend REST API → Mobile App | The API sends an HTTP `201 CREATED` response containing the created application payload: `{"id": "...", "status": "SUBMITTED", "matchScore": 80, "appliedAt": "2026-11-03T..."}`. |
-| 7 | Candidate Mobile App | The Flutter mobile app receives the `201 CREATED` response, updates the job details screen state by switching the "Apply Now" button to a disabled "Applied" state, and presents a success confirmation snackbar to the candidate. *Failure handling:* On network error or any HTTP error status (400, 401, 409, 500), the app displays a clear user-facing error message and leaves the button operable or in its accurate current state. |
+This trace follows what happens from the moment student Sokha taps "Apply Now" on his phone until the application is saved and confirmed.
+
+| Step | Where | What happens | What if something fails? |
+|---|---|---|---|
+| **1. User taps Apply** | Candidate Mobile App | Sokha views a job listing and taps **"Apply Now"**. The app sends an HTTP request: `POST /api/v1/jobs/:id/apply` with his login token (`Authorization: Bearer <token>`). | If phone has no internet: App shows *"No internet connection. Please try again."* Button remains active. |
+| **2. Check Login & Role** | Backend REST API | Express checks the token. It confirms that the token is valid, has not expired, and belongs to a `CANDIDATE` (not an Employer). | • If token missing/expired: Returns `401 UNAUTHORIZED`. App sends student to login screen.<br/>• If user is an Employer: Returns `403 FORBIDDEN`. |
+| **3. Check Job & Duplicate** | Backend REST API | Checks that the job exists and is still open. Then checks if Sokha has already applied to this job before. | • If job not found: Returns `404 NOT_FOUND`.<br/>• If already applied: Returns `409 CONFLICT`. App changes button to *"Already Applied"*. |
+| **4. Calculate Skill Fit** | Backend REST API | Compares Sokha's skills to the job's required skills:<br/>1. Find matching skills (e.g. JavaScript, Git).<br/>2. Find missing skills (Skill Gap, e.g. Docker).<br/>3. Calculate fit score (e.g. 2 out of 3 skills = 66%). | If student has no skills on profile: Returns `400 VALIDATION_ERROR` (*"Please add skills to your profile first"*). |
+| **5. Save Application** | PostgreSQL Database | Backend writes a new row into `job_applications` with `student_id`, `job_id`, `match_score`, and status `"SUBMITTED"`. | If database is down: Transaction cancels, backend returns `500 SERVER_ERROR`. No bad data is saved. |
+| **6. Send Confirmation** | Backend → Mobile App | Backend returns HTTP `201 CREATED` with application details (`id`, `match_score: 66`, `status: "SUBMITTED"`). | Handled by standard HTTP response. |
+| **7. Update Screen** | Candidate Mobile App | The mobile app switches the "Apply Now" button to a disabled **"Applied"** checkmark and shows a green success message: *"Application submitted successfully!"* | If any error occurred, button stays clickable and a friendly error message is shown. |

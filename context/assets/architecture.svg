@@ -1,110 +1,124 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1250" height="610" viewBox="0 0 1250 610">
-  <rect width="1250" height="610" fill="#ffffff"/>
-  <text x="30" y="40" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="22" font-weight="700" fill="#0f172a">SkillBridge System Architecture Map</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1250" height="540" viewBox="0 0 1250 540">
+  <!-- Background -->
+  <rect width="1250" height="540" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="30" y="38" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="22" font-weight="700" fill="#0f172a">SkillBridge System Architecture Map</text>
 
   <!-- Zones -->
-  <rect x="140" y="60" width="810" height="480" rx="14" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
-  <text x="165" y="90" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="14" font-weight="600" fill="#475569">SkillBridge System</text>
+  <!-- Zone 1: SkillBridge System -->
+  <rect x="140" y="60" width="800" height="420" rx="14" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text x="165" y="88" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#475569">SkillBridge System</text>
 
-  <rect x="970" y="60" width="250" height="480" rx="14" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="6,4"/>
-  <text x="995" y="90" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="14" font-weight="600" fill="#475569">External Services (Optional)</text>
+  <!-- Zone 2: External Services -->
+  <rect x="970" y="60" width="250" height="420" rx="14" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="6,4"/>
+  <text x="995" y="88" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#475569">External Services (Optional)</text>
 
-  <!-- People -->
+  <!-- ================= PEOPLE ================= -->
   <!-- Candidate (Sokha) -->
-  <circle cx="75" cy="146" r="10" fill="none" stroke="#334155" stroke-width="2"/>
-  <path d="M57,178 A18,16 0 0 1 93,178" fill="none" stroke="#334155" stroke-width="2"/>
-  <text x="75" y="198" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="13" font-weight="600" fill="#334155" text-anchor="middle">Candidate</text>
-  <text x="75" y="214" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" fill="#64748b" text-anchor="middle">Sokha (Student)</text>
+  <circle cx="75" cy="140" r="11" fill="none" stroke="#334155" stroke-width="2"/>
+  <path d="M56,170 A19,16 0 0 1 94,170" fill="none" stroke="#334155" stroke-width="2"/>
+  <text x="75" y="190" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="13" font-weight="700" fill="#0f172a" text-anchor="middle">Candidate</text>
+  <text x="75" y="206" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" fill="#64748b" text-anchor="middle">Sokha · Student</text>
 
   <!-- Employer (Dara) -->
-  <circle cx="75" cy="306" r="10" fill="none" stroke="#334155" stroke-width="2"/>
-  <path d="M57,338 A18,16 0 0 1 93,338" fill="none" stroke="#334155" stroke-width="2"/>
-  <text x="75" y="358" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="13" font-weight="600" fill="#334155" text-anchor="middle">Employer</text>
-  <text x="75" y="374" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" fill="#64748b" text-anchor="middle">Dara (Recruiter)</text>
+  <circle cx="75" cy="295" r="11" fill="none" stroke="#334155" stroke-width="2"/>
+  <path d="M56,325 A19,16 0 0 1 94,325" fill="none" stroke="#334155" stroke-width="2"/>
+  <text x="75" y="345" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="13" font-weight="700" fill="#0f172a" text-anchor="middle">Employer</text>
+  <text x="75" y="361" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" fill="#64748b" text-anchor="middle">Dara · Recruiter</text>
 
-  <!-- Client Apps -->
-  <rect x="170" y="125" width="220" height="85" rx="10" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5"/>
-  <text x="280" y="153" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="15" font-weight="600" fill="#0f172a" text-anchor="middle">Candidate Mobile App</text>
-  <text x="280" y="173" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" fill="#475569" text-anchor="middle">Flutter (Dart) · iOS &amp; Android</text>
-  <text x="280" y="191" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" fill="#0369a1" text-anchor="middle">profile · job board · fit check · apply</text>
+  <!-- ================= APPS ================= -->
+  <!-- Candidate Mobile App -->
+  <rect x="170" y="120" width="215" height="85" rx="10" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5"/>
+  <text x="277" y="148" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#0369a1" text-anchor="middle">Candidate Mobile App</text>
+  <text x="277" y="169" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" fill="#475569" text-anchor="middle">Flutter (Dart) · Mobile</text>
+  <text x="277" y="188" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" font-weight="600" fill="#0284c7" text-anchor="middle">Browse jobs, check fit &amp; apply</text>
 
-  <rect x="170" y="285" width="220" height="85" rx="10" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5"/>
-  <text x="280" y="313" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="15" font-weight="600" fill="#0f172a" text-anchor="middle">Employer Web Portal</text>
-  <text x="280" y="333" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" fill="#475569" text-anchor="middle">React + Vite + TypeScript (Desktop)</text>
-  <text x="280" y="351" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" fill="#0369a1" text-anchor="middle">post jobs · review applicants</text>
+  <!-- Employer Web Portal -->
+  <rect x="170" y="275" width="215" height="85" rx="10" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5"/>
+  <text x="277" y="303" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#0369a1" text-anchor="middle">Employer Web Portal</text>
+  <text x="277" y="324" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" fill="#475569" text-anchor="middle">React + Vite + TS · Web</text>
+  <text x="277" y="343" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" font-weight="600" fill="#0284c7" text-anchor="middle">Post jobs &amp; review applicants</text>
 
-  <!-- Server Code -->
-  <rect x="450" y="180" width="240" height="110" rx="10" fill="#eef2ff" stroke="#4f46e5" stroke-width="1.5"/>
-  <text x="570" y="210" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="16" font-weight="600" fill="#0f172a" text-anchor="middle">Backend REST API</text>
-  <text x="570" y="232" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" fill="#475569" text-anchor="middle">Node.js · Express · TypeScript</text>
-  <text x="570" y="252" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" fill="#4338ca" text-anchor="middle">Port 8000 · /api/v1 prefix</text>
-  <text x="570" y="272" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" fill="#64748b" text-anchor="middle">JWT auth · skill gap matching engine</text>
+  <!-- ================= SERVER ================= -->
+  <!-- Backend REST API -->
+  <rect x="450" y="185" width="230" height="110" rx="10" fill="#eef2ff" stroke="#4f46e5" stroke-width="1.5"/>
+  <text x="565" y="215" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#312e81" text-anchor="middle">Backend REST API</text>
+  <text x="565" y="236" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12.5" font-weight="600" fill="#4338ca" text-anchor="middle">Node.js + Express (Port 8000)</text>
+  <text x="565" y="258" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" fill="#475569" text-anchor="middle">Handles login &amp; user roles (JWT)</text>
+  <text x="565" y="276" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" fill="#475569" text-anchor="middle">Calculates skill gap &amp; match score</text>
 
-  <!-- Data -->
-  <path d="M750,260 V360 A85,15 0 0 0 920,360 V260" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
-  <ellipse cx="835" cy="260" rx="85" ry="15" fill="#fde68a" stroke="#d97706" stroke-width="1.5"/>
-  <text x="835" y="305" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="15" font-weight="600" fill="#0f172a" text-anchor="middle">PostgreSQL 16 DB</text>
-  <text x="835" y="325" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" fill="#475569" text-anchor="middle">Docker Compose (:5432)</text>
-  <text x="835" y="343" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" fill="#b45309" text-anchor="middle">Prisma ORM · relational schema</text>
+  <!-- ================= DATABASE ================= -->
+  <!-- PostgreSQL Database -->
+  <path d="M745,280 V370 A85,15 0 0 0 915,370 V280" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+  <ellipse cx="830" cy="280" rx="85" ry="15" fill="#fde68a" stroke="#d97706" stroke-width="1.5"/>
+  <text x="830" y="318" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#92400e" text-anchor="middle">PostgreSQL Database</text>
+  <text x="830" y="337" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" font-weight="600" fill="#b45309" text-anchor="middle">Docker (Port 5432)</text>
+  <text x="830" y="356" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" fill="#78350f" text-anchor="middle">Profiles, jobs, skills, applications</text>
 
-  <!-- External Services -->
-  <rect x="990" y="195" width="210" height="85" rx="10" fill="#f3f4f6" stroke="#6b7280" stroke-width="1.5" stroke-dasharray="6,4"/>
-  <text x="1095" y="225" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="15" font-weight="600" fill="#0f172a" text-anchor="middle">Google Gemini API</text>
-  <text x="1095" y="245" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" fill="#475569" text-anchor="middle">Google AI Studio REST API</text>
-  <text x="1095" y="263" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" fill="#4b5563" text-anchor="middle">AI Roadmap Generator (F-05)</text>
+  <!-- ================= EXTERNAL ================= -->
+  <!-- Google Gemini API -->
+  <rect x="995" y="195" width="200" height="90" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6,4"/>
+  <text x="1095" y="225" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#0f172a" text-anchor="middle">Google Gemini API</text>
+  <text x="1095" y="246" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" fill="#475569" text-anchor="middle">AI Roadmap Generator (F-05)</text>
+  <text x="1095" y="267" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" font-weight="600" fill="#059669" text-anchor="middle">Optional · core works offline</text>
 
-  <!-- Arrows & Connectors -->
-  <!-- Person 1 -> App 1 -->
-  <line x1="95" y1="167" x2="162" y2="167" stroke="#475569" stroke-width="1.6"/>
-  <polygon points="162,163 169,167 162,171" fill="#475569"/>
+  <!-- ================= ARROWS ================= -->
+  <!-- Candidate -> Mobile App -->
+  <line x1="95" y1="162" x2="162" y2="162" stroke="#475569" stroke-width="1.6"/>
+  <polygon points="162,158 168,162 162,166" fill="#475569"/>
 
-  <!-- Person 2 -> App 2 -->
-  <line x1="95" y1="327" x2="162" y2="327" stroke="#475569" stroke-width="1.6"/>
-  <polygon points="162,323 169,327 162,331" fill="#475569"/>
+  <!-- Employer -> Web Portal -->
+  <line x1="95" y1="317" x2="162" y2="317" stroke="#475569" stroke-width="1.6"/>
+  <polygon points="162,313 168,317 162,321" fill="#475569"/>
 
-  <!-- App 1 -> Backend API -->
-  <path d="M390,167 H420 V215 H442" fill="none" stroke="#475569" stroke-width="1.6"/>
-  <polygon points="442,211 449,215 442,219" fill="#475569"/>
+  <!-- Mobile App -> Backend API -->
+  <path d="M385,162 L442,215" fill="none" stroke="#475569" stroke-width="1.6"/>
+  <polygon points="436,211 448,220 442,217" fill="#475569"/>
 
-  <!-- App 2 -> Backend API -->
-  <path d="M390,327 H420 V255 H442" fill="none" stroke="#475569" stroke-width="1.6"/>
-  <polygon points="442,251 449,255 442,259" fill="#475569"/>
+  <!-- Web Portal -> Backend API -->
+  <path d="M385,317 L442,265" fill="none" stroke="#475569" stroke-width="1.6"/>
+  <polygon points="442,263 448,260 436,269" fill="#475569"/>
 
   <!-- Backend API -> Database -->
-  <path d="M640,290 V335 H742" fill="none" stroke="#475569" stroke-width="1.6"/>
-  <polygon points="742,331 749,335 742,339" fill="#475569"/>
+  <path d="M635,295 V325 H737" fill="none" stroke="#d97706" stroke-width="1.6"/>
+  <polygon points="737,321 743,325 737,329" fill="#d97706"/>
 
   <!-- Backend API -> External Service -->
-  <line x1="690" y1="237" x2="982" y2="237" stroke="#64748b" stroke-width="1.6" stroke-dasharray="5,4"/>
-  <polygon points="982,233 989,237 982,241" fill="#64748b"/>
+  <line x1="680" y1="240" x2="987" y2="240" stroke="#64748b" stroke-width="1.6" stroke-dasharray="5,4"/>
+  <polygon points="987,236 993,240 987,244" fill="#64748b"/>
 
-  <!-- Badges / Labels on Arrows -->
-  <rect x="360" y="180" width="120" height="20" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
-  <text x="420" y="194" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10.5" font-weight="600" fill="#334155" text-anchor="middle">HTTP / Bearer JWT</text>
+  <!-- ================= LABELS ================= -->
+  <!-- Label 1: Mobile to Backend -->
+  <rect x="375" y="172" width="105" height="20" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+  <text x="427" y="186" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10.5" font-weight="600" fill="#334155" text-anchor="middle">HTTP / JWT</text>
 
-  <rect x="360" y="285" width="120" height="20" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
-  <text x="420" y="299" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10.5" font-weight="600" fill="#334155" text-anchor="middle">HTTP / Bearer JWT</text>
+  <!-- Label 2: Web to Backend -->
+  <rect x="375" y="288" width="105" height="20" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+  <text x="427" y="302" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10.5" font-weight="600" fill="#334155" text-anchor="middle">HTTP / JWT</text>
 
-  <rect x="635" y="340" width="150" height="20" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
-  <text x="710" y="354" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10.5" font-weight="600" fill="#334155" text-anchor="middle">Prisma / SQL (:5432)</text>
+  <!-- Label 3: Backend to Database -->
+  <rect x="645" y="315" width="85" height="20" rx="4" fill="#ffffff" stroke="#fcd34d" stroke-width="1"/>
+  <text x="687" y="329" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10.5" font-weight="700" fill="#b45309" text-anchor="middle">Prisma / SQL</text>
 
-  <rect x="760" y="217" width="150" height="20" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
-  <text x="835" y="231" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10.5" font-weight="600" fill="#475569" text-anchor="middle">HTTPS / REST (API Key)</text>
+  <!-- Label 4: Backend to Gemini -->
+  <rect x="785" y="230" width="135" height="20" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+  <text x="852" y="244" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10.5" font-weight="600" fill="#475569" text-anchor="middle">HTTPS (AI Roadmap)</text>
 
-  <!-- Legend -->
-  <rect x="30" y="566" width="18" height="14" rx="3" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5"/>
-  <text x="56" y="578" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="13" fill="#475569">Client App</text>
+  <!-- ================= LEGEND ================= -->
+  <rect x="30" y="505" width="18" height="14" rx="3" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5"/>
+  <text x="56" y="517" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" fill="#475569">Client App</text>
 
-  <rect x="145" y="566" width="18" height="14" rx="3" fill="#eef2ff" stroke="#4f46e5" stroke-width="1.5"/>
-  <text x="171" y="578" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="13" fill="#475569">Server Code</text>
+  <rect x="150" y="505" width="18" height="14" rx="3" fill="#eef2ff" stroke="#4f46e5" stroke-width="1.5"/>
+  <text x="176" y="517" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" fill="#475569">Backend API</text>
 
-  <rect x="280" y="566" width="18" height="14" rx="3" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
-  <text x="306" y="578" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="13" fill="#475569">Database Storage</text>
+  <rect x="285" y="505" width="18" height="14" rx="3" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+  <text x="311" y="517" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" fill="#475569">Database</text>
 
-  <rect x="440" y="566" width="18" height="14" rx="3" fill="#f3f4f6" stroke="#6b7280" stroke-width="1.5" stroke-dasharray="4,2"/>
-  <text x="466" y="578" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="13" fill="#475569">External Service (Optional)</text>
+  <rect x="405" y="505" width="18" height="14" rx="3" fill="#f8fafc" stroke="#64748b" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <text x="431" y="517" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" fill="#475569">External Service (Optional)</text>
 
-  <line x1="660" y1="573" x2="685" y2="573" stroke="#475569" stroke-width="1.6"/>
-  <polygon points="685,569 692,573 685,577" fill="#475569"/>
-  <text x="702" y="578" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="13" fill="#475569">Arrows point from the component initiating the request</text>
+  <line x1="620" y1="512" x2="645" y2="512" stroke="#475569" stroke-width="1.6"/>
+  <polygon points="645,508 651,512 645,516" fill="#475569"/>
+  <text x="660" y="517" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" fill="#475569">Arrows point from the part that starts the call</text>
 </svg>
