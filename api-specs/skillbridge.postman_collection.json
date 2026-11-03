@@ -1,0 +1,898 @@
+{
+  "info": {
+    "name": "SkillBridge API Test Collection",
+    "_postman_id": "c1f7a28e-89a5-48b2-bcf2-1a4e28659b92",
+    "description": "Comprehensive Postman test collection for SkillBridge Bachelor Capstone API. Covers endpoints EP-01 through EP-23.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8000",
+      "type": "string"
+    },
+    {
+      "key": "candidateToken",
+      "value": "SAMPLE_CANDIDATE_JWT_TOKEN",
+      "type": "string"
+    },
+    {
+      "key": "employerToken",
+      "value": "SAMPLE_EMPLOYER_JWT_TOKEN",
+      "type": "string"
+    },
+    {
+      "key": "sampleJobId",
+      "value": "00000000-0000-0000-0000-000000000001",
+      "type": "string"
+    },
+    {
+      "key": "sampleApplicationId",
+      "value": "00000000-0000-0000-0000-000000000002",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "01 System & Health",
+      "item": [
+        {
+          "name": "EP-01 Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/health",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "health"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Response body contains status ok\", function () {",
+                  "    var json = pm.response.json();",
+                  "    pm.expect(json.status).to.eql(\"ok\");",
+                  "    pm.expect(json).to.have.property(\"timestamp\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "02 Authentication",
+      "item": [
+        {
+          "name": "EP-02 Register Candidate",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"sokha.test@skillbridge.kh\",\n  \"password\": \"Password123!\",\n  \"role\": \"CANDIDATE\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/auth/register",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "auth", "register"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 201\", function () { pm.response.to.have.status(201); });",
+                  "pm.test(\"Returns user id and email\", function () {",
+                  "    var json = pm.response.json();",
+                  "    pm.expect(json).to.have.property(\"id\");",
+                  "    pm.expect(json.email).to.eql(\"sokha.test@skillbridge.kh\");",
+                  "    pm.expect(json.role).to.eql(\"CANDIDATE\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "EP-03 Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"sokha.test@skillbridge.kh\",\n  \"password\": \"Password123!\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/auth/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "auth", "login"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Returns token and user object\", function () {",
+                  "    var json = pm.response.json();",
+                  "    pm.expect(json).to.have.property(\"token\");",
+                  "    pm.expect(json.user).to.have.property(\"role\");",
+                  "    if (json.token) { pm.collectionVariables.set(\"candidateToken\", json.token); }",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "EP-04 Get Current User Profile",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{candidateToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/auth/me",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "auth", "me"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Returns user identity\", function () {",
+                  "    var json = pm.response.json();",
+                  "    pm.expect(json).to.have.property(\"email\");",
+                  "    pm.expect(json).to.have.property(\"role\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "03 Skills Taxonomy",
+      "item": [
+        {
+          "name": "EP-05 List Skills Taxonomy",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/skills",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "skills"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Returns array of skills\", function () {",
+                  "    var json = pm.response.json();",
+                  "    pm.expect(Array.isArray(json)).to.be.true;",
+                  "    if (json.length > 0) {",
+                  "        pm.expect(json[0]).to.have.property(\"id\");",
+                  "        pm.expect(json[0]).to.have.property(\"name\");",
+                  "        pm.expect(json[0]).to.have.property(\"category\");",
+                  "    }",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "04 Candidate Profile & Projects",
+      "item": [
+        {
+          "name": "EP-06 Get Candidate Profile",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{candidateToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/candidate/profile",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "candidate", "profile"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Profile structure valid\", function () {",
+                  "    var json = pm.response.json();",
+                  "    pm.expect(json).to.have.property(\"fullName\");",
+                  "    pm.expect(json).to.have.property(\"skills\");",
+                  "    pm.expect(Array.isArray(json.skills)).to.be.true;",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "EP-07 Update Candidate Profile",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{candidateToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fullName\": \"Sokha Pech\",\n  \"bio\": \"3rd-year IT student passionate about Flutter and backend engineering.\",\n  \"university\": \"Royal University of Phnom Penh\",\n  \"major\": \"Computer Science\",\n  \"yearOfStudy\": 3,\n  \"portfolioUrl\": \"https://github.com/sokhapech\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/candidate/profile",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "candidate", "profile"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Profile updated successfully\", function () {",
+                  "    var json = pm.response.json();",
+                  "    pm.expect(json.fullName).to.eql(\"Sokha Pech\");",
+                  "    pm.expect(json.university).to.eql(\"Royal University of Phnom Penh\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "EP-08 Update Candidate Skills",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{candidateToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"skillIds\": [\n    \"00000000-0000-0000-0000-000000000101\",\n    \"00000000-0000-0000-0000-000000000102\"\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/candidate/skills",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "candidate", "skills"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Skills list updated\", function () {",
+                  "    var json = pm.response.json();",
+                  "    pm.expect(Array.isArray(json.skills)).to.be.true;",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "EP-09 Add Student Project",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{candidateToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"E-Commerce Mobile App\",\n  \"description\": \"Flutter mobile shopping application with product catalog and cart.\",\n  \"projectUrl\": \"https://github.com/sokhapech/ecommerce-flutter\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/candidate/projects",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "candidate", "projects"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 201\", function () { pm.response.to.have.status(201); });",
+                  "pm.test(\"Project created\", function () {",
+                  "    var json = pm.response.json();",
+                  "    pm.expect(json).to.have.property(\"id\");",
+                  "    pm.expect(json.title).to.eql(\"E-Commerce Mobile App\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "05 Job Board & Skill Gap Analysis",
+      "item": [
+        {
+          "name": "EP-10 Browse Beginner Jobs",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/jobs?category=IT%20%2F%20Software&employmentType=INTERNSHIP",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "jobs"],
+              "query": [
+                {
+                  "key": "category",
+                  "value": "IT / Software"
+                },
+                {
+                  "key": "employmentType",
+                  "value": "INTERNSHIP"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Returns paginated jobs array\", function () {",
+                  "    var json = pm.response.json();",
+                  "    pm.expect(json).to.have.property(\"jobs\");",
+                  "    pm.expect(Array.isArray(json.jobs)).to.be.true;",
+                  "    if (json.jobs.length > 0) {",
+                  "        pm.collectionVariables.set(\"sampleJobId\", json.jobs[0].id);",
+                  "    }",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "EP-11 Get Job Details",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/jobs/{{sampleJobId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "jobs", "{{sampleJobId}}"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Job details include company and required skills\", function () {",
+                  "    var json = pm.response.json();",
+                  "    pm.expect(json).to.have.property(\"title\");",
+                  "    pm.expect(json).to.have.property(\"company\");",
+                  "    pm.expect(json).to.have.property(\"requiredSkills\");",
+                  "    pm.expect(Array.isArray(json.requiredSkills)).to.be.true;",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "EP-12 Run Skill Gap Analysis",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{candidateToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/jobs/{{sampleJobId}}/fit",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "jobs", "{{sampleJobId}}", "fit"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Fit calculation contains match and missing skills\", function () {",
+                  "    var json = pm.response.json();",
+                  "    pm.expect(json).to.have.property(\"matchScore\");",
+                  "    pm.expect(json).to.have.property(\"matchingSkills\");",
+                  "    pm.expect(json).to.have.property(\"missingSkills\");",
+                  "    pm.expect(Array.isArray(json.matchingSkills)).to.be.true;",
+                  "    pm.expect(Array.isArray(json.missingSkills)).to.be.true;",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "06 Saved Jobs & Bookmarks",
+      "item": [
+        {
+          "name": "EP-13 List Saved Jobs",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{candidateToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/candidate/saved-jobs",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "candidate", "saved-jobs"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Returns array of saved jobs\", function () {",
+                  "    var json = pm.response.json();",
+                  "    pm.expect(Array.isArray(json)).to.be.true;",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "EP-14 Save Job Listing",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{candidateToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/jobs/{{sampleJobId}}/save",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "jobs", "{{sampleJobId}}", "save"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 201\", function () { pm.response.to.have.status(201); });",
+                  "pm.test(\"Job bookmarked\", function () {",
+                  "    var json = pm.response.json();",
+                  "    pm.expect(json.status).to.eql(\"SAVED\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "EP-15 Unsave Job Listing",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{candidateToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/jobs/{{sampleJobId}}/save",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "jobs", "{{sampleJobId}}", "save"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Bookmark removed\", function () {",
+                  "    var json = pm.response.json();",
+                  "    pm.expect(json.status).to.eql(\"REMOVED\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "07 Direct Job Applications",
+      "item": [
+        {
+          "name": "EP-16 Apply to Job Listing",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{candidateToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/jobs/{{sampleJobId}}/apply",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "jobs", "{{sampleJobId}}", "apply"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 201\", function () { pm.response.to.have.status(201); });",
+                  "pm.test(\"Application submitted with match score\", function () {",
+                  "    var json = pm.response.json();",
+                  "    pm.expect(json).to.have.property(\"id\");",
+                  "    pm.expect(json.status).to.eql(\"SUBMITTED\");",
+                  "    pm.expect(json).to.have.property(\"matchScore\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "EP-17 List Candidate Applications",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{candidateToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/candidate/applications",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "candidate", "applications"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Returns submitted applications\", function () {",
+                  "    var json = pm.response.json();",
+                  "    pm.expect(Array.isArray(json)).to.be.true;",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "08 Employer Web Portal & Job Management",
+      "item": [
+        {
+          "name": "EP-18 Create or Update Company Profile",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{employerToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"TechBridge Solutions\",\n  \"industry\": \"Software Development\",\n  \"location\": \"Phnom Penh, Cambodia\",\n  \"website\": \"https://techbridge.kh\",\n  \"description\": \"Fast-growing IT solution provider empowering youth careers.\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/employer/company",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "employer", "company"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200 or 201\", function () { pm.expect(pm.response.code).to.be.oneOf([200, 201]); });",
+                  "pm.test(\"Company record saved\", function () {",
+                  "    var json = pm.response.json();",
+                  "    pm.expect(json.name).to.eql(\"TechBridge Solutions\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "EP-19 List Employer Job Postings",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{employerToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/employer/jobs",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "employer", "jobs"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Returns array of company jobs\", function () {",
+                  "    var json = pm.response.json();",
+                  "    pm.expect(Array.isArray(json)).to.be.true;",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "EP-20 Publish Entry-Level Job Listing",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{employerToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Junior Flutter Developer Intern\",\n  \"description\": \"Great internship opportunity for IT students to build cross-platform mobile apps using Flutter and Dart.\",\n  \"category\": \"IT / Software\",\n  \"employmentType\": \"INTERNSHIP\",\n  \"location\": \"Phnom Penh\",\n  \"isRemote\": false,\n  \"stipendAmountCents\": 25000,\n  \"requiredSkillIds\": [\n    \"00000000-0000-0000-0000-000000000101\",\n    \"00000000-0000-0000-0000-000000000102\"\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/employer/jobs",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "employer", "jobs"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 201\", function () { pm.response.to.have.status(201); });",
+                  "pm.test(\"Job published with skills\", function () {",
+                  "    var json = pm.response.json();",
+                  "    pm.expect(json).to.have.property(\"id\");",
+                  "    pm.expect(json.title).to.eql(\"Junior Flutter Developer Intern\");",
+                  "    pm.expect(Array.isArray(json.requiredSkills)).to.be.true;",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "EP-21 Review Job Applicants",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{employerToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/employer/jobs/{{sampleJobId}}/applications",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "employer", "jobs", "{{sampleJobId}}", "applications"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Returns applicants array with match percentages\", function () {",
+                  "    var json = pm.response.json();",
+                  "    pm.expect(Array.isArray(json)).to.be.true;",
+                  "    if (json.length > 0) {",
+                  "        pm.expect(json[0]).to.have.property(\"matchScore\");",
+                  "        pm.expect(json[0]).to.have.property(\"studentProfile\");",
+                  "        pm.collectionVariables.set(\"sampleApplicationId\", json[0].id);",
+                  "    }",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "EP-22 Update Applicant Status",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{employerToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"UNDER_REVIEW\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/employer/applications/{{sampleApplicationId}}/status",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "employer", "applications", "{{sampleApplicationId}}", "status"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Applicant status updated\", function () {",
+                  "    var json = pm.response.json();",
+                  "    pm.expect(json.status).to.eql(\"UNDER_REVIEW\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "09 Preparation Hub",
+      "item": [
+        {
+          "name": "EP-23 List Preparation Guides",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/preparation/guides",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "preparation", "guides"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Returns guides array\", function () {",
+                  "    var json = pm.response.json();",
+                  "    pm.expect(Array.isArray(json)).to.be.true;",
+                  "    if (json.length > 0) {",
+                  "        pm.expect(json[0]).to.have.property(\"title\");",
+                  "        pm.expect(json[0]).to.have.property(\"content\");",
+                  "    }",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
