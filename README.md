@@ -19,7 +19,7 @@ Update this section whenever you work on a phase. Your advisor reads it to follo
 |---|---|
 | Now working on | Phase 3 — Architecture, ERD & API Planning |
 | Blockers | None |
-| Last updated | 2026-10-27 |
+| Last updated | 2026-11-03 |
 
 | Phase | Planned due | Status | Submitted on |
 |---|---|---|---| 
