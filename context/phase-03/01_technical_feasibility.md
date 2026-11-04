@@ -2,7 +2,7 @@
 
 **Objective:** Choose a tech stack that fits your Must-Have features and that you can deliver alone, list the external services those features need, and plan for what could go wrong.
 
-**Status:** In Progress · **Last updated:** 2026-10-27
+**Status:** Submitted · **Last updated:** 2026-11-04
 
 ## Done When
 
@@ -40,6 +40,4 @@ Only list services your features really need (e.g. cloud storage, maps, SMS, pay
 | Risk | What you'll do about it |
 |---|---|
 | **I am new to building backends with Node.js and Express.** | TypeScript looks very similar to Dart, which makes it easier to learn. I will pair-program with my AI assistant to build and test each backend endpoint step-by-step before touching the mobile app. |
-| **The Flutter mobile app cannot connect to the backend running on my laptop.** | Phone emulators cannot use "localhost" directly. I will make the server URL easily changeable in Flutter (using `10.0.2.2` for Android emulator or my laptop's Wi-Fi IP for a real phone). |
 | **Managing two client frontends (Mobile & Web) becomes overwhelming.** | The backend API handles the core business logic and database. The Employer Web Portal only needs 3 focused screens (Auth, Post Job, Review Applicants), built with standard React and TypeScript. |
-| **The app looks empty during the defense presentation without enough realistic jobs.** | I will write a database seed script that loads 15+ realistic beginner IT jobs and skills with a single command, ensuring the demo looks authentic even before any new jobs are created live on the web portal. |
