@@ -1,8 +1,8 @@
 {
   "info": {
-    "name": "SkillBridge API Test Collection",
+    "name": "DevPath API Test Collection",
     "_postman_id": "c1f7a28e-89a5-48b2-bcf2-1a4e28659b92",
-    "description": "Comprehensive Postman test collection for SkillBridge Bachelor Capstone API. Covers endpoints EP-01 through EP-23.",
+    "description": "Comprehensive Postman test collection for DevPath Bachelor Capstone API. Covers endpoints EP-01 through EP-23.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "variable": [
@@ -81,7 +81,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"email\": \"sokha.test@skillbridge.kh\",\n  \"password\": \"Password123!\",\n  \"role\": \"CANDIDATE\"\n}"
+              "raw": "{\n  \"email\": \"sokha.test@devpath.kh\",\n  \"password\": \"Password123!\",\n  \"role\": \"CANDIDATE\"\n}"
             },
             "url": {
               "raw": "{{baseUrl}}/api/v1/auth/register",
@@ -98,7 +98,7 @@
                   "pm.test(\"Returns user id and email\", function () {",
                   "    var json = pm.response.json();",
                   "    pm.expect(json).to.have.property(\"id\");",
-                  "    pm.expect(json.email).to.eql(\"sokha.test@skillbridge.kh\");",
+                  "    pm.expect(json.email).to.eql(\"sokha.test@devpath.kh\");",
                   "    pm.expect(json.role).to.eql(\"CANDIDATE\");",
                   "});"
                 ],
@@ -119,7 +119,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"email\": \"sokha.test@skillbridge.kh\",\n  \"password\": \"Password123!\"\n}"
+              "raw": "{\n  \"email\": \"sokha.test@devpath.kh\",\n  \"password\": \"Password123!\"\n}"
             },
             "url": {
               "raw": "{{baseUrl}}/api/v1/auth/login",
@@ -270,7 +270,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"fullName\": \"Sokha Pech\",\n  \"bio\": \"3rd-year IT student passionate about Flutter and backend engineering.\",\n  \"university\": \"Royal University of Phnom Penh\",\n  \"major\": \"Computer Science\",\n  \"yearOfStudy\": 3,\n  \"portfolioUrl\": \"https://github.com/sokhapech\"\n}"
+              "raw": "{\n  \"fullName\": \"Sokha Pech\",\n  \"bio\": \"IT candidate passionate about Flutter and backend engineering.\",\n  \"university\": \"Royal University of Phnom Penh\",\n  \"major\": \"Computer Science\",\n  \"yearOfStudy\": 3,\n  \"portfolioUrl\": \"https://github.com/sokhapech\"\n}"
             },
             "url": {
               "raw": "{{baseUrl}}/api/v1/candidate/profile",
@@ -336,7 +336,7 @@
           ]
         },
         {
-          "name": "EP-09 Add Student Project",
+          "name": "EP-09 Add Candidate Project",
           "request": {
             "method": "POST",
             "header": [
@@ -393,7 +393,7 @@
               "query": [
                 {
                   "key": "category",
-                  "value": "IT / Software"
+                  "value": "Mobile Development"
                 },
                 {
                   "key": "employmentType",
@@ -753,7 +753,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"title\": \"Junior Flutter Developer Intern\",\n  \"description\": \"Great internship opportunity for IT students to build cross-platform mobile apps using Flutter and Dart.\",\n  \"category\": \"IT / Software\",\n  \"employmentType\": \"INTERNSHIP\",\n  \"location\": \"Phnom Penh\",\n  \"isRemote\": false,\n  \"stipendAmountCents\": 25000,\n  \"requiredSkillIds\": [\n    \"00000000-0000-0000-0000-000000000101\",\n    \"00000000-0000-0000-0000-000000000102\"\n  ]\n}"
+              "raw": "{\n  \"title\": \"Junior Flutter Developer Intern\",\n  \"description\": \"Great internship opportunity for IT candidates to build cross-platform mobile apps using Flutter and Dart.\",\n  \"category\": \"Mobile Development\",\n  \"employmentType\": \"INTERNSHIP\",\n  \"location\": \"Phnom Penh\",\n  \"isRemote\": false,\n  \"stipendAmountCents\": 25000,\n  \"requiredSkillIds\": [\n    \"00000000-0000-0000-0000-000000000101\",\n    \"00000000-0000-0000-0000-000000000102\"\n  ]\n}"
             },
             "url": {
               "raw": "{{baseUrl}}/api/v1/employer/jobs",
@@ -806,7 +806,7 @@
                   "    pm.expect(Array.isArray(json)).to.be.true;",
                   "    if (json.length > 0) {",
                   "        pm.expect(json[0]).to.have.property(\"matchScore\");",
-                  "        pm.expect(json[0]).to.have.property(\"studentProfile\");",
+                  "        pm.expect(json[0]).to.have.property(\"candidateProfile\");",
                   "        pm.collectionVariables.set(\"sampleApplicationId\", json[0].id);",
                   "    }",
                   "});"

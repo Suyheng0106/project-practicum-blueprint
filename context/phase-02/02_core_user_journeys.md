@@ -19,7 +19,7 @@
 
 ## 2. Journeys
 
-### UJ-01 — Create a Student Profile
+### UJ-01 — Create a Candidate Profile
 
 | Persona | Trigger | Pre-conditions | Features |
 |---|---|---|---|
@@ -38,7 +38,7 @@ Scenario: Failure or edge case
   Then they see a red warning message saying "Please select at least one skill"
 ```
 
-### UJ-02 — Browse Beginner Jobs
+### UJ-02 — Browse Beginner IT Jobs
 
 | Persona | Trigger | Pre-conditions | Features |
 |---|---|---|---|
@@ -46,14 +46,14 @@ Scenario: Failure or edge case
 
 ```gherkin
 Scenario: Happy path
-  Given the user is on the Job Board screen
-  When they filter the list by "IT / Software"
-  Then they see a list of only IT internships and beginner roles
+  Given the user is on the DevPath Job Board screen
+  When they filter the list by tech specialization (e.g. "Mobile Development")
+  Then they see a list of only beginner roles and internships in that tech field
 
 Scenario: Failure or edge case
-  Given the user is on the Job Board screen
-  When they filter by a category that has no jobs yet
-  Then they see an empty state image and "No jobs found for this category"
+  Given the user is on the DevPath Job Board screen
+  When they filter by a tech specialization that currently has no active listings
+  Then they see an empty state image and "No jobs found for this tech category"
 ```
 
 ### UJ-03 — Run Skill Gap Analysis
@@ -69,7 +69,7 @@ Scenario: Happy path
   Then they see a visual chart showing their matching skills in green and missing skills in red
 
 Scenario: Failure or edge case
-  Given the user has an empty Student Profile
+  Given the user has an empty Candidate Profile
   When they click the "Check My Fit" button
   Then they see a popup asking them to add skills to their profile first
 ```
@@ -121,7 +121,7 @@ Scenario: Happy path
   Given the employer is on the "Post a Job" page on the Web Portal
   When they enter the job title, description, and select required skills
   And they click "Publish Job"
-  Then the job is saved and appears on the employer's active listings and the student job board
+  Then the job is saved and appears on the employer's active listings and the candidate job board
 
 Scenario: Failure or edge case
   Given the employer is on the "Post a Job" page on the Web Portal
@@ -151,16 +151,16 @@ Scenario: Failure or edge case
 
 | Persona | Trigger | Pre-conditions | Features |
 |---|---|---|---|
-| P-02 | Wants to evaluate student candidates who applied | Logged in to Web Portal, viewing a posted job | F-09, F-06 |
+| P-02 | Wants to evaluate candidates who applied | Logged in to Web Portal, viewing a posted job | F-09, F-06 |
 
 ```gherkin
 Scenario: Happy path
   Given candidates have applied to an active job listing
   When the employer opens the "Applicants" tab for that job on the Web Portal
-  Then they see a list of student applicants with their profiles and matching skill percentages
+  Then they see a list of candidates with their profiles and matching skill percentages
 
 Scenario: Failure or edge case
-  Given no students have applied to the job yet
+  Given no candidates have applied to the job yet
   When the employer opens the "Applicants" tab
   Then they see an empty state message saying "No applications received yet"
 ```

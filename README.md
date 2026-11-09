@@ -1,4 +1,4 @@
-# SkillBridge
+# DevPath
 
 Bachelor of Computer Science — Individual Capstone
 
@@ -7,7 +7,7 @@ Bachelor of Computer Science — Individual Capstone
 | Student | [STUDENT INPUT: name and student ID] |
 | Advisor | [STUDENT INPUT] |
 | Term | [STUDENT INPUT] |
-| Pitch | SkillBridge automatically compares a student's skills to a job's needs and only shows jobs meant for students, saving them time and confusion. |
+| Pitch | DevPath connects IT and Computer Science candidates with entry-level tech roles, automatically analyzing their technical skill gaps to match them exclusively with beginner IT and software opportunities. |
 
 First time here? Read the guide: [template/README.md](template/README.md)
 

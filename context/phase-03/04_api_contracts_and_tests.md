@@ -48,10 +48,10 @@
 | **EP-03** | POST | `/api/v1/auth/login` | Login and receive role-based JWT | No | UJ-01, UJ-06 |
 | **EP-04** | GET | `/api/v1/auth/me` | Fetch authenticated user identity and role | Yes | All Journeys |
 | **EP-05** | GET | `/api/v1/skills` | List standardized skill taxonomy | No | UJ-01, UJ-06, F-01 |
-| **EP-06** | GET | `/api/v1/candidate/profile` | Retrieve student profile, skills, and projects | Yes (Candidate) | UJ-01, F-01 |
-| **EP-07** | PUT | `/api/v1/candidate/profile` | Create or update student profile details | Yes (Candidate) | UJ-01, F-01 |
-| **EP-08** | PUT | `/api/v1/candidate/skills` | Update student profile skill associations | Yes (Candidate) | UJ-01, F-01 |
-| **EP-09** | POST | `/api/v1/candidate/projects` | Add a school or side project to student profile | Yes (Candidate) | UJ-01, F-01 |
+| **EP-06** | GET | `/api/v1/candidate/profile` | Retrieve candidate profile, skills, and projects | Yes (Candidate) | UJ-01, F-01 |
+| **EP-07** | PUT | `/api/v1/candidate/profile` | Create or update candidate profile details | Yes (Candidate) | UJ-01, F-01 |
+| **EP-08** | PUT | `/api/v1/candidate/skills` | Update candidate profile skill associations | Yes (Candidate) | UJ-01, F-01 |
+| **EP-09** | POST | `/api/v1/candidate/projects` | Add a coding or side project to candidate profile | Yes (Candidate) | UJ-01, F-01 |
 | **EP-10** | GET | `/api/v1/jobs` | Browse curated beginner jobs with filters | No / Optional | UJ-02, F-02 |
 | **EP-11** | GET | `/api/v1/jobs/:id` | View detailed job description and required skills | No / Optional | UJ-02, F-02 |
 | **EP-12** | GET | `/api/v1/jobs/:id/fit` | Run automated Skill Gap analysis for this job | Yes (Candidate) | UJ-03, F-03 |
@@ -63,7 +63,7 @@
 | **EP-18** | POST | `/api/v1/employer/company` | Create or update company profile | Yes (Employer) | UJ-06, F-09 |
 | **EP-19** | GET | `/api/v1/employer/jobs` | List all job openings posted by recruiter | Yes (Employer) | UJ-06, F-09 |
 | **EP-20** | POST | `/api/v1/employer/jobs` | Publish new entry-level job with required skills | Yes (Employer) | UJ-06, F-09 |
-| **EP-21** | GET | `/api/v1/employer/jobs/:id/applications` | Review student applicants and match percentages | Yes (Employer) | UJ-08, F-09, F-06 |
+| **EP-21** | GET | `/api/v1/employer/jobs/:id/applications` | Review candidate applicants and match percentages | Yes (Employer) | UJ-08, F-09, F-06 |
 | **EP-22** | PATCH | `/api/v1/employer/applications/:id/status` | Update applicant status (UNDER_REVIEW / ACCEPTED) | Yes (Employer) | UJ-08, F-09 |
 | **EP-23** | GET | `/api/v1/preparation/guides` | View IT portfolio and interview guides | No | UJ-05, F-04 |
 
@@ -198,7 +198,7 @@ Success response, `200 OK`:
 {
   "id": "p001-uuid",
   "fullName": "Sokha Pech",
-  "bio": "3rd-year IT student passionate about Flutter and backend engineering.",
+  "bio": "IT candidate passionate about Flutter and backend engineering.",
   "university": "Royal University of Phnom Penh",
   "major": "Computer Science",
   "yearOfStudy": 3,
@@ -211,7 +211,7 @@ Success response, `200 OK`:
     {
       "id": "proj001-uuid",
       "title": "Mobile Shopping App",
-      "description": "Student project built with Flutter and SQLite.",
+      "description": "Candidate project built with Flutter and SQLite.",
       "projectUrl": "https://github.com/sokhapech/shop"
     }
   ]
@@ -233,7 +233,7 @@ Request body:
 ```json
 {
   "fullName": "Sokha Pech",
-  "bio": "3rd-year IT student seeking a summer internship.",
+  "bio": "IT candidate seeking a tech internship.",
   "university": "Royal University of Phnom Penh",
   "major": "Computer Science",
   "yearOfStudy": 3,
@@ -246,7 +246,7 @@ Success response, `200 OK`:
 {
   "id": "p001-uuid",
   "fullName": "Sokha Pech",
-  "bio": "3rd-year IT student seeking a summer internship.",
+  "bio": "IT candidate seeking a tech internship.",
   "university": "Royal University of Phnom Penh",
   "major": "Computer Science",
   "yearOfStudy": 3,
@@ -279,7 +279,7 @@ Request body:
 Success response, `200 OK`:
 ```json
 {
-  "studentProfileId": "p001-uuid",
+  "candidateProfileId": "p001-uuid",
   "skills": [
     { "id": "s001-uuid", "name": "Flutter" },
     { "id": "s003-uuid", "name": "Git" }
@@ -292,7 +292,7 @@ Success response, `200 OK`:
 | `400 VALIDATION_ERROR` | `skillIds` is empty (UJ-01 edge case: must select at least 1 skill) or contains non-existent skill UUIDs. |
 | `401 UNAUTHORIZED` | Missing or invalid candidate JWT. |
 | `403 FORBIDDEN` | User role is not `CANDIDATE`. |
-| `404 NOT_FOUND` | Student profile does not exist yet. |
+| `404 NOT_FOUND` | Candidate profile does not exist yet. |
 
 ---
 
@@ -302,7 +302,7 @@ Request body:
 ```json
 {
   "title": "E-Commerce Mobile App",
-  "description": "Student group capstone project built with Flutter and REST APIs.",
+  "description": "Candidate group capstone project built with Flutter and REST APIs.",
   "projectUrl": "https://github.com/sokhapech/shop"
 }
 ```
@@ -311,9 +311,9 @@ Success response, `201 Created`:
 ```json
 {
   "id": "proj001-uuid",
-  "studentProfileId": "p001-uuid",
+  "candidateProfileId": "p001-uuid",
   "title": "E-Commerce Mobile App",
-  "description": "Student group capstone project built with Flutter and REST APIs.",
+  "description": "Candidate group capstone project built with Flutter and REST APIs.",
   "projectUrl": "https://github.com/sokhapech/shop",
   "createdAt": "2026-11-03T15:00:00.000Z"
 }
@@ -332,7 +332,7 @@ Success response, `201 Created`:
 
 Request body: `none`
 
-Query parameters: `?category=IT%20%2F%20Software&employmentType=INTERNSHIP&search=Flutter`
+Query parameters: `?category=Mobile%20Development&employmentType=INTERNSHIP&search=Flutter`
 
 Success response, `200 OK`:
 ```json
@@ -342,7 +342,7 @@ Success response, `200 OK`:
     {
       "id": "j001-uuid",
       "title": "Junior Flutter Developer Intern",
-      "category": "IT / Software",
+      "category": "Mobile Development",
       "employmentType": "INTERNSHIP",
       "location": "Phnom Penh",
       "isRemote": false,
@@ -380,8 +380,8 @@ Success response, `200 OK`:
 {
   "id": "j001-uuid",
   "title": "Junior Flutter Developer Intern",
-  "description": "Great internship opportunity for IT students to build mobile apps...",
-  "category": "IT / Software",
+  "description": "Great internship opportunity for IT candidates to build mobile apps...",
+  "category": "Mobile Development",
   "employmentType": "INTERNSHIP",
   "location": "Phnom Penh",
   "isRemote": false,
@@ -435,7 +435,7 @@ Success response, `200 OK`:
 
 | Error | When it happens |
 |---|---|
-| `400 VALIDATION_ERROR` | Student profile has 0 skills registered (UJ-03 edge case). |
+| `400 VALIDATION_ERROR` | Candidate profile has 0 skills registered (UJ-03 edge case). |
 | `401 UNAUTHORIZED` | Missing or invalid candidate JWT. |
 | `403 FORBIDDEN` | User role is not `CANDIDATE`. |
 | `404 NOT_FOUND` | Target job listing does not exist. |
@@ -523,7 +523,7 @@ Success response, `201 Created`:
 {
   "id": "app001-uuid",
   "jobListingId": "j001-uuid",
-  "studentProfileId": "p001-uuid",
+  "candidateProfileId": "p001-uuid",
   "matchScore": 67,
   "status": "SUBMITTED",
   "appliedAt": "2026-11-03T16:30:00.000Z"
@@ -637,8 +637,8 @@ Request body:
 ```json
 {
   "title": "Junior Flutter Developer Intern",
-  "description": "Great internship opportunity for students to learn Flutter in a team...",
-  "category": "IT / Software",
+  "description": "Great internship opportunity for candidates to learn Flutter in a team...",
+  "category": "Mobile Development",
   "employmentType": "INTERNSHIP",
   "location": "Phnom Penh",
   "isRemote": false,
@@ -688,7 +688,7 @@ Success response, `200 OK`:
     "matchScore": 67,
     "status": "SUBMITTED",
     "appliedAt": "2026-11-03T16:30:00.000Z",
-    "studentProfile": {
+    "candidateProfile": {
       "fullName": "Sokha Pech",
       "university": "Royal University of Phnom Penh",
       "major": "Computer Science",
@@ -748,7 +748,7 @@ Success response, `200 OK`:
     "id": "g001-uuid",
     "title": "How to Structure an IT Internship Portfolio",
     "category": "Portfolio Guides",
-    "summary": "Step-by-step tips for students showcasing school projects to employers.",
+    "summary": "Step-by-step tips for candidates showcasing coding projects to employers.",
     "content": "## Building Your First Portfolio\nWhen applying for your first software job..."
   }
 ]
@@ -765,7 +765,7 @@ Success response, `200 OK`:
 
 ## 4. Test Collection
 
-The complete Postman collection is committed directly to [`api-specs/skillbridge.postman_collection.json`](../../api-specs/skillbridge.postman_collection.json).
+The complete Postman collection is committed directly to [`api-specs/devpath.postman_collection.json`](../../api-specs/devpath.postman_collection.json).
 
 Each request tests response status codes and body structures using collection variables:
 - `{{baseUrl}}`: `http://localhost:8000`
@@ -782,7 +782,7 @@ Each request tests response status codes and body structures using collection va
 | **EP-06** | `EP-06 Get Candidate Profile` | Status 200; `fullName` exists; `skills` is an Array |
 | **EP-07** | `EP-07 Update Candidate Profile` | Status 200; `fullName` and `university` match payload |
 | **EP-08** | `EP-08 Update Candidate Skills` | Status 200; `skills` is an Array with updated skill IDs |
-| **EP-09** | `EP-09 Add Student Project` | Status 201; `id` exists; `title` matches payload |
+| **EP-09** | `EP-09 Add Candidate Project` | Status 201; `id` exists; `title` matches payload |
 | **EP-10** | `EP-10 Browse Beginner Jobs` | Status 200; `jobs` is an Array; captures sample `sampleJobId` |
 | **EP-11** | `EP-11 Get Job Details` | Status 200; `title`, `company`, and `requiredSkills` exist |
 | **EP-12** | `EP-12 Run Skill Gap Analysis` | Status 200; `matchScore` exists; `matchingSkills` and `missingSkills` are Arrays |
@@ -794,6 +794,6 @@ Each request tests response status codes and body structures using collection va
 | **EP-18** | `EP-18 Create or Update Company Profile` | Status 200 or 201; `name` matches payload |
 | **EP-19** | `EP-19 List Employer Job Postings` | Status 200; response is an Array |
 | **EP-20** | `EP-20 Publish Entry-Level Job Listing` | Status 201; `id` exists; `requiredSkills` is an Array |
-| **EP-21** | `EP-21 Review Job Applicants` | Status 200; response is an Array; items have `matchScore` and `studentProfile` |
+| **EP-21** | `EP-21 Review Job Applicants` | Status 200; response is an Array; items have `matchScore` and `candidateProfile` |
 | **EP-22** | `EP-22 Update Applicant Status` | Status 200; `status` equals `"UNDER_REVIEW"` |
 | **EP-23** | `EP-23 List Preparation Guides` | Status 200; response is an Array; items have `title` and `content` |

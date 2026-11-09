@@ -15,7 +15,7 @@
 
 ## 1. Conventions
 
-- **Naming:** Table names are plural and in `snake_case` (e.g. `job_listings`, `student_skills`).
+- **Naming:** Table names are plural and in `snake_case` (e.g. `job_listings`, `candidate_skills`).
 - **Keys & Timestamps:** Every table has a primary key `id` (UUIDv4) and timestamps `created_at` and `updated_at` (defaulting to current timestamp).
 - **Foreign Keys:** Named `<singular_entity>_id` and indexed for efficient joins.
 - **Monetary Values:** Stored as an integer in the smallest currency unit (e.g. `stipend_amount_cents` in USD cents), never as a float.
@@ -27,17 +27,17 @@
 
 ```mermaid
 erDiagram
-    users ||--o| student_profiles : "has"
+    users ||--o| candidate_profiles : "has"
     users ||--o{ companies : "manages"
-    student_profiles ||--o{ student_skills : "possesses"
-    skills ||--o{ student_skills : "tagged_in"
-    student_profiles ||--o{ student_projects : "showcases"
+    candidate_profiles ||--o{ candidate_skills : "possesses"
+    skills ||--o{ candidate_skills : "tagged_in"
+    candidate_profiles ||--o{ candidate_projects : "showcases"
     companies ||--o{ job_listings : "publishes"
     job_listings ||--o{ job_required_skills : "demands"
     skills ||--o{ job_required_skills : "required_in"
-    student_profiles ||--o{ job_applications : "submits"
+    candidate_profiles ||--o{ job_applications : "submits"
     job_listings ||--o{ job_applications : "receives"
-    student_profiles ||--o{ saved_jobs : "bookmarks"
+    candidate_profiles ||--o{ saved_jobs : "bookmarks"
     job_listings ||--o{ saved_jobs : "saved_as"
 
     users {
@@ -49,7 +49,7 @@ erDiagram
         timestamp updated_at
     }
 
-    student_profiles {
+    candidate_profiles {
         uuid id PK
         uuid user_id FK
         string full_name
@@ -62,9 +62,9 @@ erDiagram
         timestamp updated_at
     }
 
-    student_projects {
+    candidate_projects {
         uuid id PK
-        uuid student_profile_id FK
+        uuid candidate_profile_id FK
         string title
         string description
         string project_url
@@ -80,9 +80,9 @@ erDiagram
         timestamp updated_at
     }
 
-    student_skills {
+    candidate_skills {
         uuid id PK
-        uuid student_profile_id FK
+        uuid candidate_profile_id FK
         uuid skill_id FK
         timestamp created_at
         timestamp updated_at
@@ -127,7 +127,7 @@ erDiagram
     job_applications {
         uuid id PK
         uuid job_listing_id FK
-        uuid student_profile_id FK
+        uuid candidate_profile_id FK
         integer match_score
         string status
         timestamp created_at
@@ -136,7 +136,7 @@ erDiagram
 
     saved_jobs {
         uuid id PK
-        uuid student_profile_id FK
+        uuid candidate_profile_id FK
         uuid job_listing_id FK
         timestamp created_at
         timestamp updated_at
@@ -171,31 +171,31 @@ Stores login credentials and role assignment for all system accounts.
 
 ---
 
-### Table: `student_profiles`
-Stores student information and academic details (1-to-1 with a candidate `users` record).
+### Table: `candidate_profiles`
+Stores candidate information and academic details (1-to-1 with a candidate `users` record).
 
 | Column | Data type | Constraints | Nullable | Description |
 |---|---|---|---|---|
 | `id` | uuid | PRIMARY KEY, DEFAULT gen_random_uuid() | No | Unique profile identifier |
 | `user_id` | uuid | UNIQUE, FK → users(id) ON DELETE CASCADE | No | Associated candidate user account |
-| `full_name` | varchar(100) | None | No | Student's full name |
+| `full_name` | varchar(100) | None | No | Candidate's full name |
 | `bio` | text | None | Yes | Short personal summary or career goal |
 | `university` | varchar(150) | None | Yes | Enrolled educational institution |
-| `major` | varchar(100) | None | Yes | Field of study (e.g. Computer Science, IT) |
+| `major` | varchar(100) | None | Yes | Tech field of study (e.g. Computer Science, Information Technology, Software Engineering) |
 | `year_of_study` | integer | CHECK (year_of_study BETWEEN 1 AND 6) | Yes | Current academic year (e.g. 1 to 4) |
-| `portfolio_url` | varchar(255) | None | Yes | Link to GitHub, LinkedIn, or personal website |
+| `portfolio_url` | varchar(255) | None | Yes | Link to GitHub, GitLab, or personal developer portfolio |
 | `created_at` | timestamp | DEFAULT now() | No | Profile creation timestamp |
 | `updated_at` | timestamp | DEFAULT now() | No | Profile last modified timestamp |
 
 ---
 
-### Table: `student_projects`
-Showcases academic and side projects on a student's profile (serving F-01).
+### Table: `candidate_projects`
+Showcases academic and side projects on a candidate's profile (serving F-01).
 
 | Column | Data type | Constraints | Nullable | Description |
 |---|---|---|---|---|
 | `id` | uuid | PRIMARY KEY, DEFAULT gen_random_uuid() | No | Unique project identifier |
-| `student_profile_id` | uuid | FK → student_profiles(id) ON DELETE CASCADE | No | Parent student profile |
+| `candidate_profile_id` | uuid | FK → candidate_profiles(id) ON DELETE CASCADE | No | Parent candidate profile |
 | `title` | varchar(150) | None | No | Name of the project |
 | `description` | text | None | Yes | Overview of what the project does and tools used |
 | `project_url` | varchar(255) | None | Yes | Public link to code repository or live demo |
@@ -211,24 +211,24 @@ Master catalog of standardized technical skills used for matching.
 |---|---|---|---|---|
 | `id` | uuid | PRIMARY KEY, DEFAULT gen_random_uuid() | No | Unique skill identifier |
 | `name` | varchar(100) | UNIQUE | No | Standard skill name (e.g. "Flutter", "TypeScript") |
-| `category` | varchar(50) | None | No | Skill classification (e.g. "Frontend", "Backend", "Mobile", "Database") |
+| `category` | varchar(50) | None | No | Technical skill classification (e.g. "Frontend", "Backend", "Mobile", "DevOps", "Database", "QA") |
 | `created_at` | timestamp | DEFAULT now() | No | Skill entry creation timestamp |
 | `updated_at` | timestamp | DEFAULT now() | No | Skill entry last modified timestamp |
 
 ---
 
-### Table: `student_skills`
-Associates skills possessed by a student with their profile.
+### Table: `candidate_skills`
+Associates skills possessed by a candidate with their profile.
 
 | Column | Data type | Constraints | Nullable | Description |
 |---|---|---|---|---|
 | `id` | uuid | PRIMARY KEY, DEFAULT gen_random_uuid() | No | Unique association identifier |
-| `student_profile_id` | uuid | FK → student_profiles(id) ON DELETE CASCADE | No | Associated student profile |
+| `candidate_profile_id` | uuid | FK → candidate_profiles(id) ON DELETE CASCADE | No | Associated candidate profile |
 | `skill_id` | uuid | FK → skills(id) ON DELETE RESTRICT | No | Associated technical skill |
 | `created_at` | timestamp | DEFAULT now() | No | Association timestamp |
 | `updated_at` | timestamp | DEFAULT now() | No | Association last modified timestamp |
 
-*Table Constraint:* `UNIQUE (student_profile_id, skill_id)` prevents assigning duplicate skills to the same student profile.
+*Table Constraint:* `UNIQUE (candidate_profile_id, skill_id)` prevents assigning duplicate skills to the same candidate profile.
 
 ---
 
@@ -259,7 +259,7 @@ Stores entry-level jobs and internships posted by employers (serving F-02 and F-
 | `company_id` | uuid | FK → companies(id) ON DELETE CASCADE | No | Publishing company |
 | `title` | varchar(150) | None | No | Job position title (e.g. "Junior Backend Developer") |
 | `description` | text | None | No | Full role overview, responsibilities, and perks |
-| `category` | varchar(100) | None | No | Job department (e.g. "IT / Software", "Mobile Development") |
+| `category` | varchar(100) | None | No | Tech role specialization (e.g. "Software Engineering", "Mobile Development", "Frontend", "Backend", "DevOps & Cloud", "QA & Testing", "Data & AI", "Network & IT Support") |
 | `employment_type` | varchar(50) | CHECK (employment_type IN ('INTERNSHIP', 'ENTRY_LEVEL', 'PART_TIME', 'FULL_TIME')) | No | Work arrangement |
 | `location` | varchar(150) | None | No | Work location |
 | `is_remote` | boolean | DEFAULT false | No | Indicates if remote work is permitted |
@@ -292,13 +292,13 @@ Tracks candidate applications to job openings, including the computed skill fit 
 |---|---|---|---|---|
 | `id` | uuid | PRIMARY KEY, DEFAULT gen_random_uuid() | No | Unique application identifier |
 | `job_listing_id` | uuid | FK → job_listings(id) ON DELETE CASCADE | No | Job opening applied to |
-| `student_profile_id` | uuid | FK → student_profiles(id) ON DELETE CASCADE | No | Applying candidate profile |
-| `match_score` | integer | CHECK (match_score BETWEEN 0 AND 100) | No | Percentage of required skills the student possessed at the time of applying |
+| `candidate_profile_id` | uuid | FK → candidate_profiles(id) ON DELETE CASCADE | No | Applying candidate profile |
+| `match_score` | integer | CHECK (match_score BETWEEN 0 AND 100) | No | Percentage of required skills the candidate possessed at the time of applying |
 | `status` | varchar(20) | CHECK (status IN ('SUBMITTED', 'UNDER_REVIEW', 'ACCEPTED', 'REJECTED')) | No | Recruiter review status |
 | `created_at` | timestamp | DEFAULT now() | No | Application submission timestamp |
 | `updated_at` | timestamp | DEFAULT now() | No | Application status last modified timestamp |
 
-*Table Constraint:* `UNIQUE (job_listing_id, student_profile_id)` guarantees a candidate can only apply to a job once.
+*Table Constraint:* `UNIQUE (job_listing_id, candidate_profile_id)` guarantees a candidate can only apply to a job once.
 
 ---
 
@@ -308,17 +308,17 @@ Stores bookmarked job listings for candidate quick access (serving UJ-04).
 | Column | Data type | Constraints | Nullable | Description |
 |---|---|---|---|---|
 | `id` | uuid | PRIMARY KEY, DEFAULT gen_random_uuid() | No | Unique bookmark identifier |
-| `student_profile_id` | uuid | FK → student_profiles(id) ON DELETE CASCADE | No | Candidate who saved the job |
+| `candidate_profile_id` | uuid | FK → candidate_profiles(id) ON DELETE CASCADE | No | Candidate who saved the job |
 | `job_listing_id` | uuid | FK → job_listings(id) ON DELETE CASCADE | No | Saved job listing |
 | `created_at` | timestamp | DEFAULT now() | No | Bookmark timestamp |
 | `updated_at` | timestamp | DEFAULT now() | No | Bookmark last modified timestamp |
 
-*Table Constraint:* `UNIQUE (student_profile_id, job_listing_id)` prevents saving the same job multiple times.
+*Table Constraint:* `UNIQUE (candidate_profile_id, job_listing_id)` prevents saving the same job multiple times.
 
 ---
 
 ### Table: `preparation_guides`
-Stores curated study guides, project ideas, and interview preparation content for students (serving F-04 and UJ-05).
+Stores curated study guides, project ideas, and interview preparation content for candidates (serving F-04 and UJ-05).
 
 | Column | Data type | Constraints | Nullable | Description |
 |---|---|---|---|---|

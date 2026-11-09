@@ -17,7 +17,7 @@ Guiding questions: What do your Must-Have features need (mobile or web, schedule
 | Layer | Your choice (with version) | Alternative considered | Why this choice |
 |---|---|---|---|
 | **Backend language & framework** | Node.js (v22.x) with Express (v4.x) and TypeScript (v5.x) | Python (v3.13) + FastAPI, Dart Frog | I already know Dart from Flutter, and TypeScript works very similarly (same syntax, async/await, and classes). Express is lightweight and simple, making it easy to build the required `/api/v1` routes without getting slowed down by complicated setup. |
-| **Database** | PostgreSQL 16 (via Docker) with Prisma ORM (v5.x) | SQLite, MongoDB | SkillBridge needs tables linked together (Students, Skills, Jobs, Applications, Companies). PostgreSQL handles these links reliably. Prisma lets me query the database with clean code instead of complex SQL, making it easy to calculate missing skills (F-03) and quickly reset demo data. |
+| **Database** | PostgreSQL 16 (via Docker) with Prisma ORM (v5.x) | SQLite, MongoDB | DevPath needs tables linked together (Candidates, Skills, Jobs, Applications, Companies). PostgreSQL handles these links reliably. Prisma lets me query the database with clean code instead of complex SQL, making it easy to calculate missing skills (F-03) and quickly reset demo data. |
 | **Mobile Client (Candidate)** | Flutter (v3.41.x) with Dart | React Native / Expo | I already know Flutter, so I can build a polished mobile app quickly. Since our candidate persona Sokha searches for jobs on his phone, a mobile app is the most natural fit. |
 | **Web Portal Client (Employer)** | React (v18.x) with Vite and TypeScript (v5.x) | Flutter Web, Next.js | Recruiters work on laptops/desktops where web portals are standard for posting jobs and reviewing applicants. Using React with Vite is lightweight, fast to build, and shares TypeScript with our Node.js backend. |
 | **Authentication** | JSON Web Tokens (JWT) with bcrypt | Firebase Auth, Supabase Auth | It runs completely inside our app without relying on third-party services like Firebase. Supports role-based claims (`CANDIDATE` and `EMPLOYER`) and works 100% offline during my defense presentation with no network risk. |
@@ -33,7 +33,7 @@ Only list services your features really need (e.g. cloud storage, maps, SMS, pay
 | **Google Gemini API** | AI Learning Roadmap Generator (F-05, Could-Have) | Google AI Studio | 15 RPM / 1,500 RPD (Free Tier) | Fallback to static, pre-curated study guides and portfolio tips from the Preparation Hub (F-04). Core features (F-01, F-02, F-03, F-06, F-09) run 100% offline without third-party APIs. |
 
 > **Note on Core Features:**  
-> Features `F-01` (Student Profile), `F-02` (Curated Job Board), `F-03` (Skill Gap Analyzer), `F-06` (Direct Job Application), and `F-09` (Employer Web Portal) operate 100% offline and have zero external API dependencies.
+> Features `F-01` (Candidate Profile), `F-02` (Curated Job Board), `F-03` (Skill Gap Analyzer), `F-06` (Direct Job Application), and `F-09` (Employer Web Portal) operate 100% offline and have zero external API dependencies.
 
 ## 3. Top Risks
 

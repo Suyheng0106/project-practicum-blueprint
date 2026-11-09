@@ -3,12 +3,12 @@
   <rect width="1250" height="540" fill="#ffffff"/>
 
   <!-- Title -->
-  <text x="30" y="38" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="22" font-weight="700" fill="#0f172a">SkillBridge System Architecture Map</text>
+  <text x="30" y="38" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="22" font-weight="700" fill="#0f172a">DevPath System Architecture Map</text>
 
   <!-- Zones -->
-  <!-- Zone 1: SkillBridge System -->
+  <!-- Zone 1: DevPath System -->
   <rect x="140" y="60" width="800" height="420" rx="14" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
-  <text x="165" y="88" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#475569">SkillBridge System</text>
+  <text x="165" y="88" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#475569">DevPath System</text>
 
   <!-- Zone 2: External Services -->
   <rect x="970" y="60" width="250" height="420" rx="14" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="6,4"/>
@@ -19,7 +19,7 @@
   <circle cx="75" cy="140" r="11" fill="none" stroke="#334155" stroke-width="2"/>
   <path d="M56,170 A19,16 0 0 1 94,170" fill="none" stroke="#334155" stroke-width="2"/>
   <text x="75" y="190" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="13" font-weight="700" fill="#0f172a" text-anchor="middle">Candidate</text>
-  <text x="75" y="206" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" fill="#64748b" text-anchor="middle">Sokha · Student</text>
+  <text x="75" y="206" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" fill="#64748b" text-anchor="middle">Sokha · Candidate</text>
 
   <!-- Employer (Dara) -->
   <circle cx="75" cy="295" r="11" fill="none" stroke="#334155" stroke-width="2"/>
