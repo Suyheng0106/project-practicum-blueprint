@@ -25,7 +25,7 @@ This is a solo Bachelor capstone monorepo. The student's planning documents in `
 
 - **Backend:** Node.js (v22.x), Express (v4.x), TypeScript (v5.x), Prisma ORM (v5.x)
 - **Database:** PostgreSQL 16 (via Docker Compose)
-- **Clients:** Flutter (v3.41.x) with Dart (Candidate Mobile) & React (v18.x) + Vite + TypeScript (Employer Web Portal)
+- **Clients:** Flutter (v3.41.x) with Dart (Candidate Mobile) & Next.js (v14.x) + React + TypeScript (Employer Web Portal)
 - **Authentication:** JWT with bcrypt (`Authorization: Bearer <token>`)
 - **API Spec & Testing:** Postman collection in `api-specs/`
 - **Conventions:** API on port 8000, route prefix `/api/v1`, health check `GET /api/v1/health`

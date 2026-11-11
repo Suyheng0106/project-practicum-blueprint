@@ -32,6 +32,8 @@ erDiagram
     candidate_profiles ||--o{ candidate_skills : "possesses"
     skills ||--o{ candidate_skills : "tagged_in"
     candidate_profiles ||--o{ candidate_projects : "showcases"
+    candidate_profiles ||--o{ candidate_experiences : "gains"
+    candidate_profiles ||--o{ candidate_achievements : "earns"
     companies ||--o{ job_listings : "publishes"
     job_listings ||--o{ job_required_skills : "demands"
     skills ||--o{ job_required_skills : "required_in"
@@ -68,6 +70,33 @@ erDiagram
         string title
         string description
         string project_url
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    candidate_experiences {
+        uuid id PK
+        uuid candidate_profile_id FK
+        string title
+        string company_name
+        string employment_type
+        string location
+        boolean is_current
+        date start_date
+        date end_date
+        string description
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    candidate_achievements {
+        uuid id PK
+        uuid candidate_profile_id FK
+        string title
+        string issuer
+        date issue_date
+        string description
+        string certificate_url
         timestamp created_at
         timestamp updated_at
     }
@@ -201,6 +230,43 @@ Showcases academic and side projects on a candidate's profile (serving F-01).
 | `project_url` | varchar(255) | None | Yes | Public link to code repository or live demo |
 | `created_at` | timestamp | DEFAULT now() | No | Project creation timestamp |
 | `updated_at` | timestamp | DEFAULT now() | No | Project last modified timestamp |
+
+---
+
+### Table: `candidate_experiences`
+Stores professional, internship, freelance, or club technical work experience on a candidate profile (serving F-01).
+
+| Column | Data type | Constraints | Nullable | Description |
+|---|---|---|---|---|
+| `id` | uuid | PRIMARY KEY, DEFAULT gen_random_uuid() | No | Unique experience identifier |
+| `candidate_profile_id` | uuid | FK → candidate_profiles(id) ON DELETE CASCADE | No | Associated candidate profile |
+| `title` | varchar(150) | None | No | Job title or role (e.g. "Junior Web Developer Intern", "IT Club Lead") |
+| `company_name` | varchar(150) | None | No | Employing company or organization name |
+| `employment_type` | varchar(50) | CHECK (employment_type IN ('INTERNSHIP', 'PART_TIME', 'FULL_TIME', 'FREELANCE', 'VOLUNTEER')) | Yes | Work arrangement type |
+| `location` | varchar(150) | None | Yes | Office city or work location (e.g. "Phnom Penh", "Remote") |
+| `is_current` | boolean | DEFAULT false | No | Whether the candidate currently works here |
+| `start_date` | date | None | No | Start date of employment |
+| `end_date` | date | None | Yes | End date of employment (null if currently working) |
+| `description` | text | None | Yes | Key responsibilities, accomplishments, and tech used |
+| `created_at` | timestamp | DEFAULT now() | No | Experience record creation timestamp |
+| `updated_at` | timestamp | DEFAULT now() | No | Experience record last modified timestamp |
+
+---
+
+### Table: `candidate_achievements`
+Tracks certifications, hackathon awards, honors, and technical competition achievements (serving F-01).
+
+| Column | Data type | Constraints | Nullable | Description |
+|---|---|---|---|---|
+| `id` | uuid | PRIMARY KEY, DEFAULT gen_random_uuid() | No | Unique achievement identifier |
+| `candidate_profile_id` | uuid | FK → candidate_profiles(id) ON DELETE CASCADE | No | Associated candidate profile |
+| `title` | varchar(150) | None | No | Title of award or certification (e.g. "1st Place - University Hackathon") |
+| `issuer` | varchar(150) | None | No | Issuing organization or platform (e.g. "AWS", "Google", "CADT") |
+| `issue_date` | date | None | Yes | Date awarded or certified |
+| `description` | text | None | Yes | Brief description of the achievement or scope |
+| `certificate_url` | varchar(255) | None | Yes | Public verification URL, badge link, or proof |
+| `created_at` | timestamp | DEFAULT now() | No | Achievement record creation timestamp |
+| `updated_at` | timestamp | DEFAULT now() | No | Achievement record last modified timestamp |
 
 ---
 

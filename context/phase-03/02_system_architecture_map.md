@@ -18,7 +18,7 @@
 DevPath connects IT and Computer Science candidates looking for beginner software roles with tech recruiters who need pre-screened junior talent. 
 
 - **Candidates** use a **Flutter mobile app** on their phones to find beginner IT jobs, see their technical skill fit score, and apply.
-- **Recruiters (Employers)** use a **React web portal** on their laptops to post tech jobs with required skill tags and review applicants.
+- **Recruiters (Employers)** use a **Next.js web portal** on their laptops to post tech jobs with required skill tags and review applicants.
 - **Both clients talk to one Backend REST API** (Node.js + Express), which checks logins, calculates matching skills, and saves data to a **PostgreSQL database**.
 - **Google Gemini API** is an optional external service used only to suggest personalized study roadmaps when candidates want to learn missing skills.
 
@@ -30,7 +30,7 @@ DevPath connects IT and Computer Science candidates looking for beginner softwar
 ```mermaid
 flowchart LR
     Candidate(["Candidate<br/>(Job Seeker)"]) -->|"uses"| Mobile["Candidate Mobile App<br/>(Flutter / Dart)"]
-    Employer(["Employer<br/>(Recruiter)"]) -->|"uses"| Web["Employer Web Portal<br/>(React / TypeScript)"]
+    Employer(["Employer<br/>(Recruiter)"]) -->|"uses"| Web["Employer Web Portal<br/>(Next.js / TypeScript)"]
 
     Mobile -->|"HTTP / JWT"| API["Backend REST API<br/>(Node.js / Express :8000)"]
     Web -->|"HTTP / JWT"| API
@@ -50,7 +50,7 @@ Every box in the architecture diagram is described below:
 | Component | Responsibility | Technology | Runs when | Talks to |
 |---|---|---|---|---|
 | **Candidate Mobile App** | Mobile screen where candidates create their profile, pick their skills, browse beginner jobs, see their skill match percentage, and tap "Apply". | Flutter (v3.41.x) with Dart | When a candidate opens the app on their phone or emulator | Backend REST API (HTTP requests) |
-| **Employer Web Portal** | Desktop web dashboard where recruiters log in, create company profiles, post job openings with required skill tags, and review candidate applicants. | React (v18.x) + Vite + TypeScript | When a recruiter opens the web portal in their browser | Backend REST API (HTTP requests) |
+| **Employer Web Portal** | Desktop web dashboard where recruiters log in, create company profiles, post job openings with required skill tags, and review candidate applicants. | Next.js (v14.x) with React and TypeScript | When a recruiter opens the web portal in their browser | Backend REST API (HTTP requests) |
 | **Backend REST API** | The central brain. Validates logins (JWT), checks permissions, calculates skill gaps (comparing candidate skills vs job requirements), and saves records. | Node.js (v22.x) with Express (v4.x) & TypeScript | Continuously running on port 8000 (`http://localhost:8000/api/v1`) | PostgreSQL Database (via Prisma ORM), Google Gemini API |
 | **PostgreSQL Database** | Stores all app data: user logins, candidate profiles, company profiles, job listings, skills list, and job applications. | PostgreSQL 16 (via Docker Compose) | Continuously in Docker on port 5432 | Backend REST API only |
 | **Google Gemini API** | Generates step-by-step study recommendations for missing skills (Could-Have feature F-05). | Google AI Studio REST API | Only when a candidate taps "Generate Study Roadmap" | Backend REST API only (server-to-server) |
@@ -58,7 +58,7 @@ Every box in the architecture diagram is described below:
 ### Secrets & Database Security Policy
 
 - **Where secrets live:** All sensitive keys (the database password `DATABASE_URL`, token key `JWT_SECRET`, and optional `GEMINI_API_KEY`) live only in a `.env` file on the backend server. This file is git-ignored and never shared with the frontend apps or committed to Git.
-- **Who can reach the database:** Only the Backend REST API can connect directly to PostgreSQL. The Flutter mobile app and React web portal can never touch the database directly; they must send an authorized HTTP request to the backend.
+- **Who can reach the database:** Only the Backend REST API can connect directly to PostgreSQL. The Flutter mobile app and Next.js web portal can never touch the database directly; they must send an authorized HTTP request to the backend.
 
 ---
 

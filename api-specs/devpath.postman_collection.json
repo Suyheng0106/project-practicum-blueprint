@@ -862,14 +862,19 @@
       "name": "09 Preparation Hub",
       "item": [
         {
-          "name": "EP-23 List Preparation Guides",
+          "name": "EP-23 List Preparation Guides for Candidate",
           "request": {
             "method": "GET",
-            "header": [],
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{candidateToken}}"
+              }
+            ],
             "url": {
-              "raw": "{{baseUrl}}/api/v1/preparation/guides",
+              "raw": "{{baseUrl}}/api/v1/candidate/guides",
               "host": ["{{baseUrl}}"],
-              "path": ["api", "v1", "preparation", "guides"]
+              "path": ["api", "v1", "candidate", "guides"]
             }
           },
           "event": [

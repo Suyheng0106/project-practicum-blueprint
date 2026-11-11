@@ -48,7 +48,7 @@
 | **EP-03** | POST | `/api/v1/auth/login` | Login and receive role-based JWT | No | UJ-01, UJ-06 |
 | **EP-04** | GET | `/api/v1/auth/me` | Fetch authenticated user identity and role | Yes | All Journeys |
 | **EP-05** | GET | `/api/v1/skills` | List standardized skill taxonomy | No | UJ-01, UJ-06, F-01 |
-| **EP-06** | GET | `/api/v1/candidate/profile` | Retrieve candidate profile, skills, and projects | Yes (Candidate) | UJ-01, F-01 |
+| **EP-06** | GET | `/api/v1/candidate/profile` | Retrieve candidate profile, skills, projects, experiences, and achievements | Yes (Candidate) | UJ-01, F-01 |
 | **EP-07** | PUT | `/api/v1/candidate/profile` | Create or update candidate profile details | Yes (Candidate) | UJ-01, F-01 |
 | **EP-08** | PUT | `/api/v1/candidate/skills` | Update candidate profile skill associations | Yes (Candidate) | UJ-01, F-01 |
 | **EP-09** | POST | `/api/v1/candidate/projects` | Add a coding or side project to candidate profile | Yes (Candidate) | UJ-01, F-01 |
@@ -65,7 +65,7 @@
 | **EP-20** | POST | `/api/v1/employer/jobs` | Publish new entry-level job with required skills | Yes (Employer) | UJ-06, F-09 |
 | **EP-21** | GET | `/api/v1/employer/jobs/:id/applications` | Review candidate applicants and match percentages | Yes (Employer) | UJ-08, F-09, F-06 |
 | **EP-22** | PATCH | `/api/v1/employer/applications/:id/status` | Update applicant status (UNDER_REVIEW / ACCEPTED) | Yes (Employer) | UJ-08, F-09 |
-| **EP-23** | GET | `/api/v1/preparation/guides` | View IT portfolio and interview guides | No | UJ-05, F-04 |
+| **EP-23** | GET | `/api/v1/candidate/guides` | View IT portfolio and interview guides tailored to candidate | Yes (Candidate) | UJ-05, F-04 |
 
 ---
 
@@ -213,6 +213,29 @@ Success response, `200 OK`:
       "title": "Mobile Shopping App",
       "description": "Candidate project built with Flutter and SQLite.",
       "projectUrl": "https://github.com/sokhapech/shop"
+    }
+  ],
+  "experiences": [
+    {
+      "id": "exp001-uuid",
+      "title": "Junior Web Developer Intern",
+      "companyName": "TechStart Solutions",
+      "employmentType": "INTERNSHIP",
+      "location": "Phnom Penh",
+      "isCurrent": false,
+      "startDate": "2025-06-01",
+      "endDate": "2025-09-01",
+      "description": "Assisted in building responsive frontend modules."
+    }
+  ],
+  "achievements": [
+    {
+      "id": "ach001-uuid",
+      "title": "1st Place - University Hackathon",
+      "issuer": "RUPP Tech Fair",
+      "issueDate": "2025-10-15",
+      "description": "Built an automated student portal in 24 hours.",
+      "certificateUrl": "https://certificates.example.com/ach001"
     }
   ]
 }
@@ -737,7 +760,10 @@ Success response, `200 OK`:
 
 ---
 
-### EP-23 — GET `/api/v1/preparation/guides`
+### EP-23 — GET `/api/v1/candidate/guides`
+
+Headers:
+* `Authorization: Bearer <candidate_jwt>`
 
 Request body: `none`
 
@@ -756,10 +782,9 @@ Success response, `200 OK`:
 
 | Error | When it happens |
 |---|---|
-| `400 VALIDATION_ERROR` | n/a |
-| `401 UNAUTHORIZED` | n/a (publicly accessible). |
-| `403 FORBIDDEN` | n/a |
-| `404 NOT_FOUND` | n/a |
+| `401 UNAUTHORIZED` | Missing or invalid candidate JWT. |
+| `403 FORBIDDEN` | User role is not `CANDIDATE`. |
+| `404 NOT_FOUND` | Candidate profile does not exist. |
 
 ---
 
@@ -796,4 +821,4 @@ Each request tests response status codes and body structures using collection va
 | **EP-20** | `EP-20 Publish Entry-Level Job Listing` | Status 201; `id` exists; `requiredSkills` is an Array |
 | **EP-21** | `EP-21 Review Job Applicants` | Status 200; response is an Array; items have `matchScore` and `candidateProfile` |
 | **EP-22** | `EP-22 Update Applicant Status` | Status 200; `status` equals `"UNDER_REVIEW"` |
-| **EP-23** | `EP-23 List Preparation Guides` | Status 200; response is an Array; items have `title` and `content` |
+| **EP-23** | `EP-23 List Preparation Guides for Candidate` | Status 200; response is an Array; items have `title` and `content` |
