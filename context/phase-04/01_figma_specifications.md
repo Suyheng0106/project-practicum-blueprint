@@ -135,5 +135,6 @@ Recruiter desktop interface displaying active job postings, applicant counts, an
 ![SCR-10 Employer Dashboard](../assets/figma/SCR-10_employer_dashboard.png)
 
 ### SCR-12 — Employer Web Portal: Review Applicants & Skill Match
-Recruiter evaluation view ranking candidates by match percentage with detailed skill gap breakdown and status management dropdown.
+Recruiter evaluation view ranking candidates by match percentage with detailed skill gap breakdown, status management, and calm Linear/Vercel styling (Desktop 1440px & Mobile 390px):
 ![SCR-12 Employer Review Applicants](../assets/figma/SCR-12_employer_applicants.png)
+![SCR-12 Employer Review Applicants Mobile](../assets/figma/SCR-12_employer_applicants_mobile.png)

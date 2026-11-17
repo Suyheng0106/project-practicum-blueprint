@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SCR-12 Candidate Applicants Redesign (Linear / Vercel Style)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    background: #0F172A;
+    color: #F8FAFC;
+    padding: 60px 40px;
+    width: 2100px;
+  }
+  .board-header {
+    margin-bottom: 40px;
+  }
+  .board-header h1 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #FFFFFF;
+    letter-spacing: -0.02em;
+  }
+  .board-header p {
+    font-size: 15px;
+    color: #94A3B8;
+    margin-top: 6px;
+  }
+  .canvas-flex {
+    display: flex;
+    gap: 60px;
+    align-items: flex-start;
+  }
+  .artboard-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .artboard-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #818CF8;
+    letter-spacing: 0.02em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .desktop-artboard {
+    width: 1440px;
+    background: #F7F8FA;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+    border: 1px solid #334155;
+  }
+  .mobile-artboard {
+    width: 390px;
+    background: #F7F8FA;
+    border-radius: 36px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+    border: 8px solid #334155;
+  }
+</style>
+</head>
+<body>
+  <div class="board-header">
+    <h1>SCR-12 — Candidate Applicants (Linear / Vercel Aesthetic)</h1>
+    <p>Redesigned with calm neutrals, subtle tints, clear 4-zone card hierarchy, and restrained typography.</p>
+  </div>
+
+  <div class="canvas-flex">
+    <div class="artboard-container">
+      <div class="artboard-title">
+        <span>🖥️ Desktop Version (1440px)</span>
+        <span style="font-size: 11px; background: #312E81; color: #C7D2FE; padding: 2px 8px; border-radius: 6px;">Default, Selected, and Hover States</span>
+      </div>
+      <div class="desktop-artboard">
+        <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440, initial-scale=1.0">
+<title>Candidate Applicants — DevPath</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    width: 1440px;
+    min-height: 900px;
+    background: #F7F8FA;
+    color: #0F172A;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Top Navbar */
+  .navbar {
+    height: 64px;
+    background: #FFFFFF;
+    border-bottom: 1px solid #E8EAF0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+  }
+  .nav-left {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+  }
+  .brand-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+  .brand-icon {
+    width: 32px;
+    height: 32px;
+    background: #4F46E5;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 6px rgba(79, 70, 229, 0.25);
+  }
+  .brand-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #0F172A;
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .brand-badge {
+    font-size: 11px;
+    font-weight: 500;
+    color: #4F46E5;
+    background: #EEF2FF;
+    border: 1px solid #E0E7FF;
+    padding: 2px 7px;
+    border-radius: 6px;
+  }
+  .nav-links {
+    display: flex;
+    gap: 20px;
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .nav-link {
+    color: #64748B;
+    text-decoration: none;
+    padding: 20px 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .nav-link.active {
+    color: #4F46E5;
+    font-weight: 600;
+    border-bottom: 2px solid #4F46E5;
+  }
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .user-profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .user-avatar {
+    width: 34px;
+    height: 34px;
+    background: #EEF2FF;
+    border: 1px solid #E0E7FF;
+    color: #4F46E5;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  /* Main Container */
+  .container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 32px auto 48px auto;
+    padding: 0 40px;
+  }
+
+  /* Breadcrumb */
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: #94A3B8;
+    margin-bottom: 12px;
+  }
+  .breadcrumb a {
+    color: #94A3B8;
+    text-decoration: none;
+  }
+  .breadcrumb .current {
+    color: #0F172A;
+    font-weight: 500;
+  }
+
+  /* Page Header */
+  .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+  }
+  .header-left {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .title-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .page-title {
+    font-size: 28px;
+    font-weight: 600;
+    color: #0F172A;
+    letter-spacing: -0.02em;
+  }
+  .ep-tag {
+    font-size: 11px;
+    font-weight: 500;
+    color: #64748B;
+    background: #F1F5F9;
+    border: 1px solid #E2E8F0;
+    padding: 2px 7px;
+    border-radius: 6px;
+    letter-spacing: 0.02em;
+  }
+  .subtitle-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: #64748B;
+  }
+  .chip-neutral {
+    font-size: 12px;
+    font-weight: 500;
+    color: #334155;
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    padding: 2px 8px;
+    border-radius: 9999px;
+  }
+
+  /* Right Header Controls */
+  .header-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .filter-pill {
+    height: 36px;
+    background: #FFFFFF;
+    border: 1px solid #E8EAF0;
+    border-radius: 10px;
+    padding: 0 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #334155;
+    cursor: pointer;
+    box-shadow: 0 1px 2px rgba(16,24,40,0.02);
+  }
+
+  /* Summary Strip */
+  .summary-strip {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: #64748B;
+    background: transparent;
+    padding: 4px 0 16px 0;
+    margin-bottom: 8px;
+    border-bottom: 1px solid #E8EAF0;
+  }
+  .summary-dot {
+    color: #CBD5E1;
+  }
+
+  /* Cards List */
+  .cards-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  /* Candidate Row Card */
+  .candidate-card {
+    background: #FFFFFF;
+    border: 1px solid #E8EAF0;
+    border-radius: 16px;
+    padding: 20px 24px;
+    box-shadow: 0 1px 2px rgba(16,24,40,0.04);
+    display: grid;
+    grid-template-columns: 310px 140px 1fr 210px;
+    align-items: center;
+    gap: 24px;
+    transition: all 0.15s ease;
+    position: relative;
+  }
+  .candidate-card.hovered {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(16,24,40,0.06);
+    border-color: #D1D5DB;
+  }
+  .candidate-card.selected {
+    background: #FDFEFE;
+    box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2), 0 4px 12px rgba(79, 70, 229, 0.06);
+    border-color: #C7D2FE;
+  }
+
+  /* Zone 1: Identity */
+  .identity-col {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    overflow: hidden;
+  }
+  .avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+  .avatar-emerald { background: #ECFDF5; color: #059669; }
+  .avatar-indigo { background: #EEF2FF; color: #4F46E5; }
+  .avatar-slate { background: #F1F5F9; color: #475569; }
+
+  .identity-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    overflow: hidden;
+  }
+  .name-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .name-text {
+    font-size: 15px;
+    font-weight: 600;
+    color: #0F172A;
+    letter-spacing: -0.01em;
+  }
+  .tag-pill {
+    font-size: 11px;
+    font-weight: 500;
+    background: #EEF2FF;
+    color: #4F46E5;
+    border: 1px solid #E0E7FF;
+    padding: 1px 6px;
+    border-radius: 6px;
+  }
+  .edu-text {
+    font-size: 12px;
+    color: #64748B;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .github-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    color: #4F46E5;
+    text-decoration: none;
+    margin-top: 2px;
+    font-weight: 500;
+  }
+  .github-link svg {
+    color: #6366F1;
+  }
+
+  /* Zone 2: Match Score */
+  .score-col {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .score-ring {
+    width: 38px;
+    height: 38px;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .score-ring svg {
+    transform: rotate(-90deg);
+  }
+  .score-info {
+    display: flex;
+    flex-direction: column;
+  }
+  .score-percent {
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .score-percent.emerald { color: #059669; }
+  .score-percent.indigo { color: #4F46E5; }
+  .score-percent.slate { color: #64748B; }
+  .score-label {
+    font-size: 11px;
+    color: #94A3B8;
+  }
+
+  /* Zone 3: Skills */
+  .skills-col {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .skill-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 3px 10px;
+    border-radius: 9999px;
+  }
+  .skill-match {
+    background: #ECFDF5;
+    border: 1px solid #A7F3D0;
+    color: #065F46;
+  }
+  .skill-missing {
+    background: #FAFAFA;
+    border: 1px dashed #E2E8F0;
+    color: #64748B;
+  }
+
+  /* Zone 4: Status + Actions */
+  .action-col {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+  .status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 4px 10px;
+    border-radius: 9999px;
+  }
+  .status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+  }
+  .status-accepted {
+    background: #F0FDF4;
+    border: 1px solid #DCFCE7;
+    color: #166534;
+  }
+  .status-accepted .status-dot { background: #16A34A; }
+  .status-review {
+    background: #FFFBEB;
+    border: 1px solid #FEF3C7;
+    color: #92400E;
+  }
+  .status-review .status-dot { background: #D97706; }
+  .status-submitted {
+    background: #F8FAFC;
+    border: 1px solid #E2E8F0;
+    color: #334155;
+  }
+  .status-submitted .status-dot { background: #64748B; }
+
+  /* Buttons */
+  .btn-primary {
+    height: 36px;
+    background: #4F46E5;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 10px;
+    padding: 0 14px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(79, 70, 229, 0.25);
+    white-space: nowrap;
+  }
+  .btn-secondary {
+    height: 36px;
+    background: #FFFFFF;
+    color: #334155;
+    border: 1px solid #E2E8F0;
+    border-radius: 10px;
+    padding: 0 14px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .btn-kebab {
+    width: 32px;
+    height: 32px;
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+    color: #94A3B8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="nav-left">
+      <div class="brand-group">
+        <div class="brand-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 18l6-6-6-6"/><path d="M8 6l-6 6 6 6"/></svg>
+        </div>
+        <div class="brand-title">
+          DevPath
+          <span class="brand-badge">Recruiter</span>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <span class="nav-link">Dashboard</span>
+        <span class="nav-link active">Job Postings</span>
+        <span class="nav-link">Candidate Search</span>
+        <span class="nav-link">Company Profile</span>
+      </nav>
+    </div>
+
+    <div class="nav-right">
+      <div class="user-profile">
+        <div style="text-align: right;">
+          <div style="font-size: 13px; font-weight: 600; color: #0F172A;">Dara Chem</div>
+          <div style="font-size: 11px; color: #64748B;">TechBridge Solutions</div>
+        </div>
+        <div class="user-avatar">DC</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Content Container -->
+  <main class="container">
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+      <span>Job Postings</span>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      <span>Junior Flutter Developer Intern</span>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      <span class="current">Applicants</span>
+    </div>
+
+    <!-- Page Title Row -->
+    <div class="page-header">
+      <div class="header-left">
+        <div class="title-row">
+          <h1 class="page-title">Candidate Applicants</h1>
+          <span class="ep-tag">EP-21</span>
+        </div>
+        <div class="subtitle-row">
+          <span>Required skills:</span>
+          <span class="chip-neutral">Flutter</span>
+          <span class="chip-neutral">Git</span>
+          <span class="chip-neutral">Docker</span>
+        </div>
+      </div>
+
+      <!-- Filter Controls -->
+      <div class="header-controls">
+        <button class="filter-pill">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#64748B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M7 12h10M10 18h4"/></svg>
+          <span>Rank by: Highest match</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <button class="filter-pill">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#64748B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z"/></svg>
+          <span>Status: All statuses</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Summary Strip -->
+    <div class="summary-strip">
+      <span>3 applicants</span>
+      <span class="summary-dot">·</span>
+      <span style="color: #059669; font-weight: 500;">1 accepted</span>
+      <span class="summary-dot">·</span>
+      <span style="color: #D97706; font-weight: 500;">1 under review</span>
+      <span class="summary-dot">·</span>
+      <span style="color: #475569;">1 submitted</span>
+    </div>
+
+    <!-- Candidate Rows List -->
+    <div class="cards-list">
+
+      <!-- Candidate 1: Chan Vutha (Default State) -->
+      <div class="candidate-card">
+        <!-- Identity -->
+        <div class="identity-col">
+          <div class="avatar avatar-emerald">CV</div>
+          <div class="identity-info">
+            <div class="name-row">
+              <span class="name-text">Chan Vutha</span>
+            </div>
+            <div class="edu-text">Institute of Technology of Cambodia · Year 4</div>
+            <a href="#" class="github-link">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+              <span>github.com/chanvutha</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Match Score -->
+        <div class="score-col">
+          <div class="score-ring">
+            <svg width="38" height="38" viewBox="0 0 38 38">
+              <circle cx="19" cy="19" r="15" fill="none" stroke="#E2E8F0" stroke-width="3"/>
+              <circle cx="19" cy="19" r="15" fill="none" stroke="#10B981" stroke-width="3" stroke-dasharray="94.2" stroke-dashoffset="0" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="score-info">
+            <span class="score-percent emerald">100%</span>
+            <span class="score-label">3 of 3 skills</span>
+          </div>
+        </div>
+
+        <!-- Skills -->
+        <div class="skills-col">
+          <span class="skill-chip skill-match">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            Flutter
+          </span>
+          <span class="skill-chip skill-match">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            Git
+          </span>
+          <span class="skill-chip skill-match">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            Docker
+          </span>
+        </div>
+
+        <!-- Status & Actions -->
+        <div class="action-col">
+          <span class="status-pill status-accepted">
+            <span class="status-dot"></span>
+            Accepted
+          </span>
+          <button class="btn-secondary">View profile</button>
+          <button class="btn-kebab">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Candidate 2: Sokha Pech (Selected State) -->
+      <div class="candidate-card selected">
+        <!-- Identity -->
+        <div class="identity-col">
+          <div class="avatar avatar-indigo">SP</div>
+          <div class="identity-info">
+            <div class="name-row">
+              <span class="name-text">Sokha Pech</span>
+              <span class="tag-pill">Applicant</span>
+            </div>
+            <div class="edu-text">Royal University of Phnom Penh · Year 3</div>
+            <a href="#" class="github-link">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+              <span>github.com/sokhapech</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Match Score -->
+        <div class="score-col">
+          <div class="score-ring">
+            <svg width="38" height="38" viewBox="0 0 38 38">
+              <circle cx="19" cy="19" r="15" fill="none" stroke="#E2E8F0" stroke-width="3"/>
+              <circle cx="19" cy="19" r="15" fill="none" stroke="#4F46E5" stroke-width="3" stroke-dasharray="94.2" stroke-dashoffset="31.08" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="score-info">
+            <span class="score-percent indigo">67%</span>
+            <span class="score-label">2 of 3 skills</span>
+          </div>
+        </div>
+
+        <!-- Skills -->
+        <div class="skills-col">
+          <span class="skill-chip skill-match">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            Flutter
+          </span>
+          <span class="skill-chip skill-match">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            Git
+          </span>
+          <span class="skill-chip skill-missing">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            Docker
+          </span>
+        </div>
+
+        <!-- Status & Actions -->
+        <div class="action-col">
+          <span class="status-pill status-review">
+            <span class="status-dot"></span>
+            Under review
+          </span>
+          <button class="btn-primary">Review candidate</button>
+          <button class="btn-kebab">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Candidate 3: Bopha Chea (Hovered State) -->
+      <div class="candidate-card hovered">
+        <!-- Identity -->
+        <div class="identity-col">
+          <div class="avatar avatar-slate">BC</div>
+          <div class="identity-info">
+            <div class="name-row">
+              <span class="name-text">Bopha Chea</span>
+            </div>
+            <div class="edu-text">CADT · Year 2</div>
+            <a href="#" class="github-link">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+              <span>github.com/bophachea</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Match Score -->
+        <div class="score-col">
+          <div class="score-ring">
+            <svg width="38" height="38" viewBox="0 0 38 38">
+              <circle cx="19" cy="19" r="15" fill="none" stroke="#E2E8F0" stroke-width="3"/>
+              <circle cx="19" cy="19" r="15" fill="none" stroke="#94A3B8" stroke-width="3" stroke-dasharray="94.2" stroke-dashoffset="63.1" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="score-info">
+            <span class="score-percent slate">33%</span>
+            <span class="score-label">1 of 3 skills</span>
+          </div>
+        </div>
+
+        <!-- Skills -->
+        <div class="skills-col">
+          <span class="skill-chip skill-match">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            Git
+          </span>
+          <span class="skill-chip skill-missing">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            Flutter
+          </span>
+          <span class="skill-chip skill-missing">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            Docker
+          </span>
+        </div>
+
+        <!-- Status & Actions -->
+        <div class="action-col">
+          <span class="status-pill status-submitted">
+            <span class="status-dot"></span>
+            Submitted
+          </span>
+          <button class="btn-secondary">View profile</button>
+          <button class="btn-kebab">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</body>
+</html>
+
+      </div>
+    </div>
+
+    <div class="artboard-container">
+      <div class="artboard-title">
+        <span>📱 Mobile Version (390px)</span>
+        <span style="font-size: 11px; background: #312E81; color: #C7D2FE; padding: 2px 8px; border-radius: 6px;">Stacked Cards</span>
+      </div>
+      <div class="mobile-artboard">
+        <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=390, initial-scale=1.0">
+<title>Candidate Applicants — DevPath Mobile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    width: 390px;
+    min-height: 844px;
+    background: #F7F8FA;
+    color: #0F172A;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 30px;
+  }
+
+  /* Status Bar */
+  .status-bar {
+    height: 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 24px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .dynamic-island {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 35px;
+    background: #000000;
+    border-radius: 20px;
+  }
+
+  /* Mobile Header */
+  .header {
+    padding: 12px 20px 16px 20px;
+  }
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    color: #94A3B8;
+    margin-bottom: 8px;
+  }
+  .title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 6px;
+  }
+  .page-title {
+    font-size: 22px;
+    font-weight: 600;
+    color: #0F172A;
+    letter-spacing: -0.02em;
+  }
+  .ep-tag {
+    font-size: 10px;
+    font-weight: 500;
+    color: #64748B;
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    padding: 2px 6px;
+    border-radius: 6px;
+  }
+  .subtitle-chips {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 14px;
+    font-size: 12px;
+    color: #64748B;
+  }
+  .chip-neutral {
+    font-size: 11px;
+    font-weight: 500;
+    color: #334155;
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    padding: 2px 7px;
+    border-radius: 9999px;
+  }
+
+  /* Controls */
+  .controls-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  .filter-pill {
+    flex: 1;
+    height: 34px;
+    background: #FFFFFF;
+    border: 1px solid #E8EAF0;
+    border-radius: 10px;
+    padding: 0 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+    font-weight: 500;
+    color: #334155;
+  }
+
+  /* Summary Strip */
+  .summary-strip {
+    font-size: 11px;
+    color: #64748B;
+    padding: 4px 0 12px 0;
+    border-bottom: 1px solid #E8EAF0;
+    display: flex;
+    gap: 6px;
+    align-items: center;
+  }
+
+  /* Cards List */
+  .cards-list {
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  /* Stacked Card */
+  .card {
+    background: #FFFFFF;
+    border: 1px solid #E8EAF0;
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: 0 1px 2px rgba(16,24,40,0.04);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .card.selected {
+    border-color: #C7D2FE;
+    box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2);
+    background: #FDFEFE;
+  }
+
+  .card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .identity-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .avatar-emerald { background: #ECFDF5; color: #059669; }
+  .avatar-indigo { background: #EEF2FF; color: #4F46E5; }
+  .avatar-slate { background: #F1F5F9; color: #475569; }
+
+  .identity-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+  .name-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: #0F172A;
+  }
+  .edu-text {
+    font-size: 11px;
+    color: #64748B;
+  }
+
+  /* Status Pill */
+  .status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 3px 8px;
+    border-radius: 9999px;
+  }
+  .status-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+  }
+  .status-accepted { background: #F0FDF4; border: 1px solid #DCFCE7; color: #166534; }
+  .status-accepted .status-dot { background: #16A34A; }
+  .status-review { background: #FFFBEB; border: 1px solid #FEF3C7; color: #92400E; }
+  .status-review .status-dot { background: #D97706; }
+  .status-submitted { background: #F8FAFC; border: 1px solid #E2E8F0; color: #334155; }
+  .status-submitted .status-dot { background: #64748B; }
+
+  /* Match score bar */
+  .score-section {
+    background: #F8FAFC;
+    border-radius: 10px;
+    padding: 10px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .score-val {
+    font-size: 15px;
+    font-weight: 700;
+  }
+  .score-val.emerald { color: #059669; }
+  .score-val.indigo { color: #4F46E5; }
+  .score-val.slate { color: #64748B; }
+  .score-sub {
+    font-size: 11px;
+    color: #64748B;
+  }
+
+  /* Skills row */
+  .skills-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .skill-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 3px 8px;
+    border-radius: 9999px;
+  }
+  .skill-match { background: #ECFDF5; border: 1px solid #A7F3D0; color: #065F46; }
+  .skill-missing { background: #FAFAFA; border: 1px dashed #E2E8F0; color: #64748B; }
+
+  /* Card footer */
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #F1F5F9;
+    padding-top: 10px;
+    margin-top: 2px;
+  }
+  .github-link {
+    font-size: 11px;
+    color: #4F46E5;
+    text-decoration: none;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .btn-primary {
+    height: 32px;
+    background: #4F46E5;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 8px;
+    padding: 0 12px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  .btn-secondary {
+    height: 32px;
+    background: #FFFFFF;
+    color: #334155;
+    border: 1px solid #E2E8F0;
+    border-radius: 8px;
+    padding: 0 12px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+</style>
+</head>
+<body>
+  <div class="dynamic-island"></div>
+  <div class="status-bar">
+    <span>9:41</span>
+    <div style="display: flex; gap: 6px;">
+      <svg width="17" height="11" viewBox="0 0 17 11" fill="none"><path d="M1 9.5C1 9.5 3.5 6.5 8.5 6.5C13.5 6.5 16 9.5 16 9.5" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"/><circle cx="8.5" cy="9.5" r="1" fill="#0F172A"/></svg>
+      <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="#0F172A"/><rect x="2" y="2" width="16" height="8" rx="2" fill="#0F172A"/></svg>
+    </div>
+  </div>
+
+  <div class="header">
+    <div class="breadcrumb">
+      <span>Postings</span>
+      <span>›</span>
+      <span>Junior Flutter...</span>
+      <span>›</span>
+      <span style="color: #0F172A; font-weight: 500;">Applicants</span>
+    </div>
+
+    <div class="title-row">
+      <h1 class="page-title">Candidate Applicants</h1>
+      <span class="ep-tag">EP-21</span>
+    </div>
+
+    <div class="subtitle-chips">
+      <span>Skills:</span>
+      <span class="chip-neutral">Flutter</span>
+      <span class="chip-neutral">Git</span>
+      <span class="chip-neutral">Docker</span>
+    </div>
+
+    <div class="controls-row">
+      <div class="filter-pill">
+        <span>Rank: Match</span>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="filter-pill">
+        <span>Status: All</span>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+    </div>
+
+    <div class="summary-strip">
+      <span>3 applicants</span>
+      <span>·</span>
+      <span style="color: #059669;">1 accepted</span>
+      <span>·</span>
+      <span style="color: #D97706;">1 review</span>
+      <span>·</span>
+      <span>1 submitted</span>
+    </div>
+  </div>
+
+  <div class="cards-list">
+    <!-- Card 1: Chan Vutha (Default) -->
+    <div class="card">
+      <div class="card-top">
+        <div class="identity-left">
+          <div class="avatar avatar-emerald">CV</div>
+          <div class="identity-info">
+            <span class="name-text">Chan Vutha</span>
+            <span class="edu-text">ITC · Year 4</span>
+          </div>
+        </div>
+        <span class="status-pill status-accepted">
+          <span class="status-dot"></span>
+          Accepted
+        </span>
+      </div>
+
+      <div class="score-section">
+        <span class="score-sub">Skill match</span>
+        <span class="score-val emerald">100% <span style="font-size: 11px; font-weight: 500; color: #64748B;">(3/3)</span></span>
+      </div>
+
+      <div class="skills-row">
+        <span class="skill-chip skill-match">✓ Flutter</span>
+        <span class="skill-chip skill-match">✓ Git</span>
+        <span class="skill-chip skill-match">✓ Docker</span>
+      </div>
+
+      <div class="card-footer">
+        <a href="#" class="github-link">github.com/chanvutha</a>
+        <button class="btn-secondary">View</button>
+      </div>
+    </div>
+
+    <!-- Card 2: Sokha Pech (Selected) -->
+    <div class="card selected">
+      <div class="card-top">
+        <div class="identity-left">
+          <div class="avatar avatar-indigo">SP</div>
+          <div class="identity-info">
+            <div style="display: flex; align-items: center; gap: 6px;">
+              <span class="name-text">Sokha Pech</span>
+              <span style="font-size: 9px; background: #EEF2FF; color: #4F46E5; padding: 1px 4px; border-radius: 4px;">Applicant</span>
+            </div>
+            <span class="edu-text">RUPP · Year 3</span>
+          </div>
+        </div>
+        <span class="status-pill status-review">
+          <span class="status-dot"></span>
+          Under review
+        </span>
+      </div>
+
+      <div class="score-section">
+        <span class="score-sub">Skill match</span>
+        <span class="score-val indigo">67% <span style="font-size: 11px; font-weight: 500; color: #64748B;">(2/3)</span></span>
+      </div>
+
+      <div class="skills-row">
+        <span class="skill-chip skill-match">✓ Flutter</span>
+        <span class="skill-chip skill-match">✓ Git</span>
+        <span class="skill-chip skill-missing">✕ Docker</span>
+      </div>
+
+      <div class="card-footer">
+        <a href="#" class="github-link">github.com/sokhapech</a>
+        <button class="btn-primary">Review candidate</button>
+      </div>
+    </div>
+
+    <!-- Card 3: Bopha Chea -->
+    <div class="card">
+      <div class="card-top">
+        <div class="identity-left">
+          <div class="avatar avatar-slate">BC</div>
+          <div class="identity-info">
+            <span class="name-text">Bopha Chea</span>
+            <span class="edu-text">CADT · Year 2</span>
+          </div>
+        </div>
+        <span class="status-pill status-submitted">
+          <span class="status-dot"></span>
+          Submitted
+        </span>
+      </div>
+
+      <div class="score-section">
+        <span class="score-sub">Skill match</span>
+        <span class="score-val slate">33% <span style="font-size: 11px; font-weight: 500; color: #64748B;">(1/3)</span></span>
+      </div>
+
+      <div class="skills-row">
+        <span class="skill-chip skill-match">✓ Git</span>
+        <span class="skill-chip skill-missing">✕ Flutter</span>
+        <span class="skill-chip skill-missing">✕ Docker</span>
+      </div>
+
+      <div class="card-footer">
+        <a href="#" class="github-link">github.com/bophachea</a>
+        <button class="btn-secondary">View</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+
+      </div>
+    </div>
+  </div>
+</body>
+</html>

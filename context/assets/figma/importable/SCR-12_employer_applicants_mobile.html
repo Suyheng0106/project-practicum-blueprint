@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=390, initial-scale=1.0">
+<title>Candidate Applicants — DevPath Mobile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    width: 390px;
+    min-height: 844px;
+    background: #F7F8FA;
+    color: #0F172A;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 30px;
+  }
+
+  /* Status Bar */
+  .status-bar {
+    height: 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 24px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .dynamic-island {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 35px;
+    background: #000000;
+    border-radius: 20px;
+  }
+
+  /* Mobile Header */
+  .header {
+    padding: 12px 20px 16px 20px;
+  }
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    color: #94A3B8;
+    margin-bottom: 8px;
+  }
+  .title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 6px;
+  }
+  .page-title {
+    font-size: 22px;
+    font-weight: 600;
+    color: #0F172A;
+    letter-spacing: -0.02em;
+  }
+  .ep-tag {
+    font-size: 10px;
+    font-weight: 500;
+    color: #64748B;
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    padding: 2px 6px;
+    border-radius: 6px;
+  }
+  .subtitle-chips {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 14px;
+    font-size: 12px;
+    color: #64748B;
+  }
+  .chip-neutral {
+    font-size: 11px;
+    font-weight: 500;
+    color: #334155;
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    padding: 2px 7px;
+    border-radius: 9999px;
+  }
+
+  /* Controls */
+  .controls-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  .filter-pill {
+    flex: 1;
+    height: 34px;
+    background: #FFFFFF;
+    border: 1px solid #E8EAF0;
+    border-radius: 10px;
+    padding: 0 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+    font-weight: 500;
+    color: #334155;
+  }
+
+  /* Summary Strip */
+  .summary-strip {
+    font-size: 11px;
+    color: #64748B;
+    padding: 4px 0 12px 0;
+    border-bottom: 1px solid #E8EAF0;
+    display: flex;
+    gap: 6px;
+    align-items: center;
+  }
+
+  /* Cards List */
+  .cards-list {
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  /* Stacked Card */
+  .card {
+    background: #FFFFFF;
+    border: 1px solid #E8EAF0;
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: 0 1px 2px rgba(16,24,40,0.04);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .card.selected {
+    border-color: #C7D2FE;
+    box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2);
+    background: #FDFEFE;
+  }
+
+  .card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .identity-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .avatar-emerald { background: #ECFDF5; color: #059669; }
+  .avatar-indigo { background: #EEF2FF; color: #4F46E5; }
+  .avatar-slate { background: #F1F5F9; color: #475569; }
+
+  .identity-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+  .name-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: #0F172A;
+  }
+  .edu-text {
+    font-size: 11px;
+    color: #64748B;
+  }
+
+  /* Status Pill */
+  .status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 3px 8px;
+    border-radius: 9999px;
+  }
+  .status-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+  }
+  .status-accepted { background: #F0FDF4; border: 1px solid #DCFCE7; color: #166534; }
+  .status-accepted .status-dot { background: #16A34A; }
+  .status-review { background: #FFFBEB; border: 1px solid #FEF3C7; color: #92400E; }
+  .status-review .status-dot { background: #D97706; }
+  .status-submitted { background: #F8FAFC; border: 1px solid #E2E8F0; color: #334155; }
+  .status-submitted .status-dot { background: #64748B; }
+
+  /* Match score bar */
+  .score-section {
+    background: #F8FAFC;
+    border-radius: 10px;
+    padding: 10px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .score-val {
+    font-size: 15px;
+    font-weight: 700;
+  }
+  .score-val.emerald { color: #059669; }
+  .score-val.indigo { color: #4F46E5; }
+  .score-val.slate { color: #64748B; }
+  .score-sub {
+    font-size: 11px;
+    color: #64748B;
+  }
+
+  /* Skills row */
+  .skills-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .skill-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 3px 8px;
+    border-radius: 9999px;
+  }
+  .skill-match { background: #ECFDF5; border: 1px solid #A7F3D0; color: #065F46; }
+  .skill-missing { background: #FAFAFA; border: 1px dashed #E2E8F0; color: #64748B; }
+
+  /* Card footer */
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #F1F5F9;
+    padding-top: 10px;
+    margin-top: 2px;
+  }
+  .github-link {
+    font-size: 11px;
+    color: #4F46E5;
+    text-decoration: none;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .btn-primary {
+    height: 32px;
+    background: #4F46E5;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 8px;
+    padding: 0 12px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  .btn-secondary {
+    height: 32px;
+    background: #FFFFFF;
+    color: #334155;
+    border: 1px solid #E2E8F0;
+    border-radius: 8px;
+    padding: 0 12px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+</style>
+</head>
+<body>
+  <div class="dynamic-island"></div>
+  <div class="status-bar">
+    <span>9:41</span>
+    <div style="display: flex; gap: 6px;">
+      <svg width="17" height="11" viewBox="0 0 17 11" fill="none"><path d="M1 9.5C1 9.5 3.5 6.5 8.5 6.5C13.5 6.5 16 9.5 16 9.5" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"/><circle cx="8.5" cy="9.5" r="1" fill="#0F172A"/></svg>
+      <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="#0F172A"/><rect x="2" y="2" width="16" height="8" rx="2" fill="#0F172A"/></svg>
+    </div>
+  </div>
+
+  <div class="header">
+    <div class="breadcrumb">
+      <span>Postings</span>
+      <span>›</span>
+      <span>Junior Flutter...</span>
+      <span>›</span>
+      <span style="color: #0F172A; font-weight: 500;">Applicants</span>
+    </div>
+
+    <div class="title-row">
+      <h1 class="page-title">Candidate Applicants</h1>
+      <span class="ep-tag">EP-21</span>
+    </div>
+
+    <div class="subtitle-chips">
+      <span>Skills:</span>
+      <span class="chip-neutral">Flutter</span>
+      <span class="chip-neutral">Git</span>
+      <span class="chip-neutral">Docker</span>
+    </div>
+
+    <div class="controls-row">
+      <div class="filter-pill">
+        <span>Rank: Match</span>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="filter-pill">
+        <span>Status: All</span>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+    </div>
+
+    <div class="summary-strip">
+      <span>3 applicants</span>
+      <span>·</span>
+      <span style="color: #059669;">1 accepted</span>
+      <span>·</span>
+      <span style="color: #D97706;">1 review</span>
+      <span>·</span>
+      <span>1 submitted</span>
+    </div>
+  </div>
+
+  <div class="cards-list">
+    <!-- Card 1: Chan Vutha (Default) -->
+    <div class="card">
+      <div class="card-top">
+        <div class="identity-left">
+          <div class="avatar avatar-emerald">CV</div>
+          <div class="identity-info">
+            <span class="name-text">Chan Vutha</span>
+            <span class="edu-text">ITC · Year 4</span>
+          </div>
+        </div>
+        <span class="status-pill status-accepted">
+          <span class="status-dot"></span>
+          Accepted
+        </span>
+      </div>
+
+      <div class="score-section">
+        <span class="score-sub">Skill match</span>
+        <span class="score-val emerald">100% <span style="font-size: 11px; font-weight: 500; color: #64748B;">(3/3)</span></span>
+      </div>
+
+      <div class="skills-row">
+        <span class="skill-chip skill-match">✓ Flutter</span>
+        <span class="skill-chip skill-match">✓ Git</span>
+        <span class="skill-chip skill-match">✓ Docker</span>
+      </div>
+
+      <div class="card-footer">
+        <a href="#" class="github-link">github.com/chanvutha</a>
+        <button class="btn-secondary">View</button>
+      </div>
+    </div>
+
+    <!-- Card 2: Sokha Pech (Selected) -->
+    <div class="card selected">
+      <div class="card-top">
+        <div class="identity-left">
+          <div class="avatar avatar-indigo">SP</div>
+          <div class="identity-info">
+            <div style="display: flex; align-items: center; gap: 6px;">
+              <span class="name-text">Sokha Pech</span>
+              <span style="font-size: 9px; background: #EEF2FF; color: #4F46E5; padding: 1px 4px; border-radius: 4px;">Applicant</span>
+            </div>
+            <span class="edu-text">RUPP · Year 3</span>
+          </div>
+        </div>
+        <span class="status-pill status-review">
+          <span class="status-dot"></span>
+          Under review
+        </span>
+      </div>
+
+      <div class="score-section">
+        <span class="score-sub">Skill match</span>
+        <span class="score-val indigo">67% <span style="font-size: 11px; font-weight: 500; color: #64748B;">(2/3)</span></span>
+      </div>
+
+      <div class="skills-row">
+        <span class="skill-chip skill-match">✓ Flutter</span>
+        <span class="skill-chip skill-match">✓ Git</span>
+        <span class="skill-chip skill-missing">✕ Docker</span>
+      </div>
+
+      <div class="card-footer">
+        <a href="#" class="github-link">github.com/sokhapech</a>
+        <button class="btn-primary">Review candidate</button>
+      </div>
+    </div>
+
+    <!-- Card 3: Bopha Chea -->
+    <div class="card">
+      <div class="card-top">
+        <div class="identity-left">
+          <div class="avatar avatar-slate">BC</div>
+          <div class="identity-info">
+            <span class="name-text">Bopha Chea</span>
+            <span class="edu-text">CADT · Year 2</span>
+          </div>
+        </div>
+        <span class="status-pill status-submitted">
+          <span class="status-dot"></span>
+          Submitted
+        </span>
+      </div>
+
+      <div class="score-section">
+        <span class="score-sub">Skill match</span>
+        <span class="score-val slate">33% <span style="font-size: 11px; font-weight: 500; color: #64748B;">(1/3)</span></span>
+      </div>
+
+      <div class="skills-row">
+        <span class="skill-chip skill-match">✓ Git</span>
+        <span class="skill-chip skill-missing">✕ Flutter</span>
+        <span class="skill-chip skill-missing">✕ Docker</span>
+      </div>
+
+      <div class="card-footer">
+        <a href="#" class="github-link">github.com/bophachea</a>
+        <button class="btn-secondary">View</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
