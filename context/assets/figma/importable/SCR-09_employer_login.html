@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440, height=900">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Khmer:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Plus Jakarta Sans', 'Noto Sans Khmer', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    background: #FAFAFA;
+    color: #0B1220;
+    margin: 0;
+    padding: 0;
+  }
+  .card-shadow {
+    box-shadow: 0 8px 24px rgba(11, 18, 32, 0.06);
+  }
+  .hairline {
+    border: 1px solid #F0F1F3;
+  }
+  .border-subtle {
+    border: 1px solid #E5E7EB;
+  }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 28px;
+    padding: 0 10px;
+    border-radius: 9999px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  .chip-neutral {
+    background: #F1F5F9;
+    color: #475569;
+  }
+  .chip-matched {
+    background: #ECFDF5;
+    color: #047857;
+  }
+  .chip-missing {
+    background: #FFF1F2;
+    color: #BE123C;
+    border: 1px dashed #FECDD3;
+  }
+  .chip-selected {
+    background: #F0F9FF;
+    color: #0369A1;
+    border: 1.5px solid #0EA5E9;
+    font-weight: 600;
+  }
+  .status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 24px;
+    padding: 0 10px;
+    border-radius: 9999px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+  }
+  .status-under-review {
+    background: #FFFBEB;
+    color: #B45309;
+  }
+  .status-under-review .status-dot {
+    background: #D97706;
+  }
+  .status-submitted {
+    background: #F1F5F9;
+    color: #475569;
+  }
+  .status-submitted .status-dot {
+    background: #64748B;
+  }
+  .status-accepted {
+    background: #ECFDF5;
+    color: #047857;
+  }
+  .status-accepted .status-dot {
+    background: #10B981;
+  }
+  .status-rejected {
+    background: #FFF1F2;
+    color: #BE123C;
+  }
+  .status-rejected .status-dot {
+    background: #F43F5E;
+  }
+  .btn-ink {
+    background: #0B1220;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 14px;
+    height: 48px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 4px 12px rgba(11, 18, 32, 0.12);
+  }
+  .btn-secondary {
+    background: #FFFFFF;
+    color: #0B1220;
+    border: 1px solid #E5E7EB;
+    border-radius: 14px;
+    height: 48px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .input-filled {
+    height: 52px;
+    border-radius: 14px;
+    background: #F5F6F8;
+    border: 2px solid transparent;
+    padding: 0 16px;
+    font-size: 14px;
+    color: #0B1220;
+    width: 100%;
+    outline: none;
+    transition: all 0.15s ease;
+  }
+  .input-filled:focus {
+    background: #FFFFFF;
+    border-color: #0EA5E9;
+    box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.15);
+  }
+
+  body {
+    width: 1440px;
+    height: 900px;
+    background: #FAFAFA;
+    display: flex;
+    overflow: hidden;
+  }
+  .split-left {
+    width: 480px;
+    background: #0B1220;
+    color: #FFFFFF;
+    padding: 64px 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+  }
+  .split-right {
+    flex: 1;
+    overflow-y: auto;
+    padding: 64px 80px;
+    background: #FAFAFA;
+  }
+</style>
+</head>
+<body>
+  <!-- Left Brand Column -->
+  <div class="split-left">
+    <!-- Glow -->
+    <div style="position: absolute; top: -100px; left: -100px; width: 350px; height: 350px; background: radial-gradient(circle, rgba(14, 165, 233, 0.25) 0%, rgba(11, 18, 32, 0) 70%); border-radius: 50%;"></div>
+    
+    <div>
+      <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 48px;">
+        <div style="width: 36px; height: 36px; background: #FFFFFF; border-radius: 10px; display: flex; align-items: center; justify-content: center;">
+          <div style="width: 12px; height: 12px; background: #0EA5E9; border-radius: 3px;"></div>
+        </div>
+        <span style="font-size: 20px; font-weight: 800; letter-spacing: -0.02em;">DevPath <span style="font-weight: 400; opacity: 0.7;">Recruiter</span></span>
+      </div>
+
+      <h1 style="font-size: 36px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 20px;">
+        Hire pre-screened junior tech talent with verified skill matches.
+      </h1>
+      <p style="font-size: 15px; color: #94A3B8; line-height: 1.6; margin-bottom: 40px;">
+        DevPath connects local software companies in Cambodia directly with motivated IT students ranked by technical readiness.
+      </p>
+
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <div style="display: flex; align-items: center; gap: 12px; font-size: 14px; color: #E2E8F0;">
+          <div style="width: 24px; height: 24px; border-radius: 50%; background: rgba(14, 165, 233, 0.2); color: #0EA5E9; display: flex; align-items: center; justify-content: center;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+          <span>Automated 0-100% technical skill fit matching</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px; font-size: 14px; color: #E2E8F0;">
+          <div style="width: 24px; height: 24px; border-radius: 50%; background: rgba(14, 165, 233, 0.2); color: #0EA5E9; display: flex; align-items: center; justify-content: center;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+          <span>Strictly beginner IT and software engineering roles</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px; font-size: 14px; color: #E2E8F0;">
+          <div style="width: 24px; height: 24px; border-radius: 50%; background: rgba(14, 165, 233, 0.2); color: #0EA5E9; display: flex; align-items: center; justify-content: center;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+          <span>Zero generic resume clutter</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="font-size: 13px; color: #64748B;">
+      DevPath Monorepo • Capstone Practicum Blueprint
+    </div>
+  </div>
+
+  <!-- Right Form Column -->
+  <div class="split-right">
+    <div style="max-width: 620px;">
+      <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+        <span class="status-pill status-accepted">Verified Recruiter Access</span>
+      </div>
+      <h2 style="font-size: 28px; font-weight: 700; color: #0B1220; letter-spacing: -0.02em; margin-bottom: 8px;">
+        Company profile setup
+      </h2>
+      <p style="font-size: 14px; color: #4B5563; margin-bottom: 32px;">
+        Welcome back, <strong>Dara Chem</strong>. Complete your company profile to manage entry-level listings.
+      </p>
+
+      <div style="background: #FFFFFF; border-radius: 20px; padding: 32px; border: 1px solid #F0F1F3; box-shadow: 0 8px 24px rgba(11,18,32,0.06); display: flex; flex-direction: column; gap: 20px;">
+        <div>
+          <label style="display: block; font-size: 13px; font-weight: 600; color: #0B1220; margin-bottom: 6px;">Company name</label>
+          <input type="text" class="input-filled" value="TechBridge Solutions">
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+          <div>
+            <label style="display: block; font-size: 13px; font-weight: 600; color: #0B1220; margin-bottom: 6px;">Industry</label>
+            <input type="text" class="input-filled" value="Fintech & Software Solutions">
+          </div>
+          <div>
+            <label style="display: block; font-size: 13px; font-weight: 600; color: #0B1220; margin-bottom: 6px;">Office city / location</label>
+            <input type="text" class="input-filled" value="Phnom Penh, Cambodia">
+          </div>
+        </div>
+
+        <div>
+          <label style="display: block; font-size: 13px; font-weight: 600; color: #0B1220; margin-bottom: 6px;">Official website URL</label>
+          <input type="text" class="input-filled" value="https://techbridgesolutions.kh">
+        </div>
+
+        <div>
+          <label style="display: block; font-size: 13px; font-weight: 600; color: #0B1220; margin-bottom: 6px;">Company description</label>
+          <textarea class="input-filled" style="height: 100px; padding-top: 12px; resize: none;">Leading Cambodian software development studio building high-performance fintech solutions and mentoring emerging developer talent.</textarea>
+        </div>
+
+        <button class="btn-ink" style="width: 100%; height: 50px; margin-top: 8px;">
+          <span>Save profile & launch recruitment dashboard</span>
+          <span style="display: flex; align-items: center;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

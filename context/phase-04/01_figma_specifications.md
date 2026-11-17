@@ -1,6 +1,6 @@
 # Phase 4.1 — Figma Specifications
 
-**Objective:** Design every screen before you build it: a small design system, your screens and a clickable prototype of your core journeys.
+**Objective:** Design every screen before you build it: a complete design system, screens covering all user journeys, and a clickable prototype of your core flows.
 
 **Status:** Submitted · **Last updated:** 2026-11-17
 
@@ -19,15 +19,20 @@ Set both links to "Anyone with the link can view" and test them in a private bro
 - [x] Every screen has an ID (SCR-01, SCR-02, …) and a Figma frame with the same name
 - [x] Every journey step from Phase 2.2 has a screen
 - [x] 6–10 key screens are exported as PNG into `context/assets/figma/` and display in this file on GitHub
+- [x] 100% strict alignment verified across Phase 1 (Problem & Personas), Phase 2 (MoSCoW & Journeys), and Phase 3 (Architecture, ERD & APIs)
 
 ---
 
 ## 1. Visual Identity & Brand Feeling
 
-DevPath’s visual identity is inspired by the clean, quiet, and highly confident craft of modern tools like **Linear, Vercel, Arc, and Apple**:
-- **Brand Mood:** Confident, quiet, fresh. Dominated by generous white space and deep black ink, with electric sky blue (`#0EA5E9`) used sparingly as a single spark of energy.
-- **Surfaces:** Candidate Mobile App (393 × 852 px, iPhone 15) and Employer Web Portal (1440 × 900 px Desktop).
-- **Sentence Case Everywhere:** No raw enum identifiers (`UNDER_REVIEW` $\rightarrow$ `Under review`, `SUBMITTED` $\rightarrow$ `Submitted`).
+DevPath’s visual identity is crafted to deliver a modern, quiet, confident, and premium experience inspired by tools like **Linear, Vercel, Arc, and Apple’s newer apps**:
+- **Brand Mood:** Confident, quiet, fresh. Dominated by generous white space and deep ink black (`#0B1220`), with electric sky blue (`#0EA5E9`) used sparingly as a single spark of energy (focus rings, match rings, active tab indicators, progress bars).
+- **Surfaces:**
+  - **Candidate Mobile App:** 393 × 852 px (iPhone 15 resolution, 2x retina `786 × 1704 px`).
+  - **Employer Web Portal:** 1440 × 900 px (Desktop desktop resolution, 2x retina `2880 × 1800 px`).
+- **Primary Ink Black Actions:** Primary CTA buttons are solid ink black (`#0B1220`) with white text and 14px radius, rather than solid colored buttons.
+- **Semantic Soft Tints:** Statuses, skills, and match alerts always use soft, light background tints paired with high-contrast dark text—never aggressive solid fills.
+- **Sentence Case Everywhere:** Zero raw uppercase database enum codes (e.g. `UNDER_REVIEW` is formatted cleanly as `Under review`, `SUBMITTED` as `Submitted`, `INTERNSHIP` as `Internship`).
 - **Iconography:** Strict Lucide / Phosphor 1.5px stroke geometry. Zero emoji or raw text glyphs.
 
 ---
@@ -36,7 +41,7 @@ DevPath’s visual identity is inspired by the clean, quiet, and highly confiden
 
 ### Color System
 
-Text must maintain a contrast ratio of at least 4.5:1 against its background (WCAG AA compliant).
+All text and UI controls maintain a contrast ratio of at least 4.5:1 against their backgrounds, strictly satisfying **WCAG AA** accessibility standards.
 
 | Token | Hex | Role / Used For | Contrast Ratio |
 |---|---|---|---|
@@ -56,7 +61,7 @@ Text must maintain a contrast ratio of at least 4.5:1 against its background (WC
 | Semantic Role | Background | Text Color | Usage |
 |---|---|---|---|
 | **Match / Success** | `#ECFDF5` | `#047857` | Matched technical skills, high fit scores (80%+), accepted badges |
-| **Skill Gap / Error** | `#FFF1F2` | `#BE123C` (dashed border) | Missing technical skills (Skill gap), input errors |
+| **Skill Gap / Error** | `#FFF1F2` | `#BE123C` (dashed border `#FECDD3`) | Missing technical skills (Skill gap), input validation errors |
 | **Under Review / Warning** | `#FFFBEB` | `#B45309` | In-review applicant status pill, warning tips |
 | **Submitted / Neutral** | `#F1F5F9` | `#475569` | Initial submission status, neutral tech stack chips |
 
@@ -69,7 +74,7 @@ Text must maintain a contrast ratio of at least 4.5:1 against its background (WC
 
 ### Typography
 
-Set in **Plus Jakarta Sans** for Latin characters and numerical displays, paired with **Noto Sans Khmer** for full Cambodian localization fallback.
+Set in **Plus Jakarta Sans** for Latin characters, headings, and numerical displays, paired with **Noto Sans Khmer** for Cambodian localization.
 
 | Level | Size / Weight | Line Height | Tracking | Purpose |
 |---|---|---|---|---|
@@ -83,9 +88,9 @@ Set in **Plus Jakarta Sans** for Latin characters and numerical displays, paired
 
 ### Shape, Depth & Radii
 
-- **14px Radius:** Interactive controls, text inputs, buttons.
-- **20px Radius:** Standard cards, job cards, dashboard KPI widgets.
-- **28px Radius:** Bottom sheets, hero containers, large dialogs.
+- **14px Radius:** Interactive controls, text inputs, primary and secondary buttons.
+- **20px Radius:** Standard cards, job cards, dashboard KPI bento widgets.
+- **28px Radius:** Bottom sheets, hero containers, large modal dialogs.
 - **Fully Round (9999px):** Skill chips, status pills, avatars, floating bottom tab bar.
 - **Depth & Shadows:** Soft, diffuse shadow `0 8px 24px rgba(11, 18, 32, 0.06)` with 1px hairline borders (`#F0F1F3`). No heavy outlines or dark skeuomorphic drops.
 
@@ -109,26 +114,28 @@ Set in **Plus Jakarta Sans** for Latin characters and numerical displays, paired
 
 ## 3. Screen-by-Screen Catalog
 
-| Screen ID | Screen name | Purpose | Figma frame | User journey | Endpoint |
-|---|---|---|---|---|---|
-| **SCR-01** | Candidate Login & Welcome | Bold hero headline "Match your skills with your first tech job." with soft sky glow, sliding segmented control, filled inputs, ink-black Sign In, and real GitHub button. | `SCR-01 / Candidate Login` | UJ-01 | EP-03, EP-04 |
-| **SCR-02** | Registration & Skills Selection | Segmented progress bar, "What do you build with?" heading, search input, category skill pills (selected with sky tint + check), and sticky bottom bar. | `SCR-02 / Candidate Registration & Skills` | UJ-01 | EP-02, EP-05, EP-08 |
-| **SCR-03** | Candidate Job Board & Search | "Hi Sokha" greeting with avatar and bell icon, integrated search & filter, ink category chips, job cards with compact match ring, and floating bottom nav. | `SCR-03 / Candidate Job Board` | UJ-02 | EP-10 |
-| **SCR-04** | Job Details & Skill Fit Analyzer | Hero card with large 96px match ring, "You match 2 of 3 required skills", matched vs missing chip groups, sky Preparation Hub tip, and sticky bottom bar. | `SCR-04 / Job Details & Skill Fit` | UJ-03, UJ-04, UJ-07 | EP-11, EP-12, EP-14, EP-16 |
-| **SCR-05** | Saved Jobs | Candidate bookmarked opportunities with quick removal and direct fit check. | `SCR-05 / Saved Jobs` | UJ-04 | EP-13, EP-15 |
-| **SCR-06** | Candidate Applications Tracker | Pill-style tab switcher, application cards, and modern horizontal stepper with pulsing current-stage ring. | `SCR-06 / Candidate Applications` | UJ-07 | EP-17 |
-| **SCR-07** | Preparation Hub & Guides | Curated portfolio guides and interview tips tailored to close identified skill gaps. | `SCR-07 / Preparation Hub & Guides` | UJ-05 | EP-23 |
-| **SCR-08** | Candidate Profile & Portfolio | Centred avatar header with GitHub and portfolio pill links, followed by bento cards for Skills, Projects, and Achievements. | `SCR-08 / Candidate Profile` | UJ-01 | EP-06, EP-07, EP-08, EP-09 |
-| **SCR-09** | Employer Login & Company Setup | Web portal recruiter authentication and company profile management. | `SCR-09 / Employer Login & Company Setup` | UJ-06 | EP-03, EP-18 |
-| **SCR-10** | Employer Recruitment Dashboard | Left sidebar layout with bento row of 4 KPI cards (delta chips), and clean spacious job posting rows with mini high-fit progress bars. | `SCR-10 / Employer Job Dashboard` | UJ-06 | EP-19 |
-| **SCR-11** | Employer Post a New IT Job | Form to publish junior tech openings with description, stipend, and required skill chips. | `SCR-11 / Employer Post a Job` | UJ-06 | EP-05, EP-20 |
-| **SCR-12** | Employer Review Applicants | Spacious candidate row cards with match rings, matched/missing chips, status pills, and selected candidate variant (sky ring + sky tint). | `SCR-12 / Employer Review Applicants` | UJ-08 | EP-21, EP-22 |
+The system provides 12 distinct screens covering both user surfaces (Candidate Mobile App & Employer Web Portal):
+
+| Screen ID | Screen name | Surface | Purpose | User journey | Endpoint | Feature |
+|---|---|---|---|---|---|---|
+| **SCR-01** | Candidate Login & Welcome | Mobile | Bold hero headline "Match your skills with your first tech job." with soft sky glow, sliding segmented control, filled inputs, ink-black Sign In, and real GitHub button. | UJ-01 | EP-03, EP-04 | Baseline |
+| **SCR-02** | Registration & Skills Selection | Mobile | Segmented progress bar, "What do you build with?" heading, search input, category skill pills (selected with sky tint + check), and sticky bottom bar. | UJ-01 | EP-02, EP-05, EP-08 | F-01 |
+| **SCR-03** | Candidate Job Board & Search | Mobile | "Hi Sokha" greeting with avatar and bell icon, integrated search & filter, ink category chips, job cards with compact match ring, and floating bottom nav. | UJ-02 | EP-10 | F-02, F-03 |
+| **SCR-04** | Job Details & Skill Fit Analyzer | Mobile | Hero card with large 96px match ring, "You match 2 of 3 required skills", matched vs missing chip groups, sky Preparation Hub tip, and sticky bottom bar. | UJ-03, UJ-04, UJ-07 | EP-11, EP-12, EP-14, EP-16 | F-02, F-03, F-06 |
+| **SCR-05** | Saved Jobs | Mobile | Candidate bookmarked opportunities with quick unsave and direct skill fit indicators. | UJ-04 | EP-13, EP-15 | F-02 |
+| **SCR-06** | Candidate Applications Tracker | Mobile | Pill-style tab switcher, application cards, and modern horizontal stepper with pulsing current-stage ring. | UJ-07 | EP-17 | F-06 |
+| **SCR-07** | Preparation Hub & Guides | Mobile | Curated portfolio guides, interview tips, and targeted AI roadmap callout tailored to close identified skill gaps. | UJ-05 | EP-23 | F-04, F-05 |
+| **SCR-08** | Candidate Profile & Portfolio | Mobile | Centred avatar header with GitHub and portfolio pill links, followed by bento cards for Skills, Projects, and Achievements. | UJ-01 | EP-06, EP-07, EP-08, EP-09 | F-01 |
+| **SCR-09** | Employer Login & Company Setup | Desktop | Recruiter authentication and company profile management with high-trust split layout. | UJ-06 | EP-03, EP-18 | F-09 |
+| **SCR-10** | Employer Recruitment Dashboard | Desktop | Left sidebar layout with bento row of 4 KPI cards (delta chips), and clean spacious job posting rows with mini high-fit progress bars. | UJ-06 | EP-19 | F-09 |
+| **SCR-11** | Employer Post a New IT Job | Desktop | Form to publish junior tech openings with description, stipend ($250/mo), and mandatory required skill chips. | UJ-06 | EP-05, EP-20 | F-09, F-03 |
+| **SCR-12** | Employer Review Applicants | Desktop | Spacious candidate row cards with match rings, matched/missing chips, status pills, and selected candidate variant (sky ring + sky tint). | UJ-08 | EP-21, EP-22 | F-09, F-06 |
 
 ---
 
 ## 4. Offline Asset Archive
 
-Exported high-fidelity 2x resolution PNG screens archived in `context/assets/figma/`:
+All screens are rendered at 2x retina resolution into `context/assets/figma/` and preserved as standalone importable templates in `context/assets/figma/importable/`:
 
 ### 01 — Visual Foundations & Tokens
 Design tokens, color palette, semantic tints, typography scales, radii, and iconography.
@@ -150,14 +157,59 @@ Buttons, skill chips, signature match rings, status pills, and text inputs acros
 ### SCR-04 — Job Details & Signature Skill Fit Analyzer
 ![SCR-04 Skill Fit Analyzer](../assets/figma/SCR-04_skill_fit_analyzer.png)
 
+### SCR-05 — Saved Jobs
+![SCR-05 Saved Jobs](../assets/figma/SCR-05_saved_jobs.png)
+
 ### SCR-06 — Candidate Applications Tracker & Stepper
 ![SCR-06 Candidate Applications](../assets/figma/SCR-06_applications.png)
+
+### SCR-07 — Preparation Hub & Guides
+![SCR-07 Preparation Hub](../assets/figma/SCR-07_prep_hub.png)
 
 ### SCR-08 — Candidate Profile & Bento Portfolio
 ![SCR-08 Candidate Profile](../assets/figma/SCR-08_candidate_profile.png)
 
+### SCR-09 — Employer Login & Company Setup (1440 Desktop)
+![SCR-09 Employer Login](../assets/figma/SCR-09_employer_login.png)
+
 ### SCR-10 — Employer Web Portal: Recruitment Dashboard (1440 Desktop)
 ![SCR-10 Employer Dashboard](../assets/figma/SCR-10_employer_dashboard.png)
 
+### SCR-11 — Employer Web Portal: Post a New IT Job (1440 Desktop)
+![SCR-11 Employer Post Job](../assets/figma/SCR-11_post_job.png)
+
 ### SCR-12 — Employer Web Portal: Review Applicants (1440 Desktop)
 ![SCR-12 Employer Review Applicants](../assets/figma/SCR-12_employer_applicants.png)
+
+---
+
+## 5. End-to-End Traceability & Consistency Matrix (Phases 1, 2, 3 $\rightarrow$ Phase 4)
+
+Every single screen, component, and interaction in Phase 4 maps directly to requirements from Phase 1, Phase 2, and Phase 3:
+
+| Phase 1 Pain Point & Persona | Phase 2 Feature & Priority | Phase 2 User Journey | Phase 3 Database Entity & Field | Phase 3 API Endpoint | Phase 4 Screen & Visual Element | Edge Case Handled in UI |
+|---|---|---|---|---|---|---|
+| **PP-04**, **P-01** (Sokha) | **F-01** (Profile Creation, Must-Have) | **UJ-01** (Create Profile) | `candidate_profiles`, `skills`, `candidate_skills` | `EP-02`, `EP-05`, `EP-08` | **SCR-02** (Selectable skill chips, progress bar, sticky Save) | Submit with 0 skills $\rightarrow$ warning banner *"Please select at least one skill"* |
+| **PP-02**, **P-01** (Sokha) | **F-02** (Beginner Job Board, Must-Have) | **UJ-02** (Browse Jobs) | `job_listings`, `companies` | `EP-10` | **SCR-03** (Role cards, category filter pills, compact match ring) | Filter category with 0 jobs $\rightarrow$ empty state with *"No jobs found for this tech category"* |
+| **PP-01**, **PP-04**, **P-01** (Sokha) | **F-03** (Skill Gap Analyzer, Must-Have) | **UJ-03** (Skill Fit Analysis) | `job_required_skills`, `skills` | `EP-11`, `EP-12` | **SCR-04** (Hero 96px match ring, matched vs missing chip groups) | Empty profile $\rightarrow$ modal prompting candidate to add skills before checking fit |
+| **PP-02**, **P-01** (Sokha) | **F-02** (Beginner Job Board, Must-Have) | **UJ-04** (Save Job) | `saved_jobs` | `EP-13`, `EP-14`, `EP-15` | **SCR-05** (Bookmarked listings, solid sky bookmark icon, quick apply) | Untoggle bookmark $\rightarrow$ immediate removal, empty state *"No saved jobs yet"* |
+| **PP-03**, **P-01** (Sokha) | **F-04** (Preparation Hub, Should-Have) & **F-05** (AI Roadmap, Could-Have) | **UJ-05** (Prep Hub) | `preparation_guides` | `EP-23` | **SCR-07** (Docker Skill Gap callout, AI roadmap generator button, portfolio guides) | Guide maintenance $\rightarrow$ *"Content coming soon"* placeholder banner |
+| **PP-04**, **P-01** (Sokha) | **F-06** (Direct Job Applications, Must-Have) | **UJ-07** (Candidate Applies) | `job_applications` (`status: 'SUBMITTED'`, `match_score`) | `EP-16`, `EP-17` | **SCR-04** (Sticky Apply CTA), **SCR-06** (Application status pill & horizontal stepper) | Duplicate submission $\rightarrow$ button disabled and displays *"Already Applied"* |
+| **PP-05**, **PP-06**, **P-02** (Dara) | **F-09** (Employer Web Portal, Must-Have) | **UJ-06** (Employer Posts Job) | `companies`, `job_listings`, `job_required_skills` | `EP-03`, `EP-18`, `EP-19`, `EP-20` | **SCR-09** (Company setup), **SCR-10** (KPI bento row), **SCR-11** (Skill tag selector, $250 stipend) | Submit with 0 skills $\rightarrow$ validation error *"Please select at least one required skill"* |
+| **PP-05**, **PP-06**, **P-02** (Dara) | **F-09** & **F-06** (Must-Have) | **UJ-08** (Review Applicants) | `job_applications` (`status: 'UNDER_REVIEW'`, `'ACCEPTED'`), `candidate_profiles` | `EP-21`, `EP-22` | **SCR-12** (Applicant row cards, match rings, matched/missing skill chips, status update) | Zero applications received $\rightarrow$ empty state *"No applications received yet"* |
+
+### Verification of Out-of-Scope Boundaries (Won't-Haves)
+- **F-07 (Live Chat with Employers):** Strictly excluded from all designs, navigation menus, and screens. No chat bubbles or messaging features exist.
+- **F-08 (Auto-generate PDF Resumes):** Strictly excluded. Candidate evaluation is conducted exclusively via live `candidate_profiles` and calculated `match_score` percentages.
+
+### Verification of Domain Terms (Phase 1.1)
+- **Skill Gap:** Exclusively used in `SCR-04` and `SCR-12` to denote missing required skills (never "weakness").
+- **Job Listing:** Used consistently across mobile and web interfaces (never "gig" or "bid").
+- **Candidate Profile:** Used on mobile `SCR-08` and employer review `SCR-12` (never "CV" or "resume").
+- **Employer:** Used on recruiter portal `SCR-09`, `SCR-10`, `SCR-11`, `SCR-12` (never "boss" or "admin").
+- **Job Application:** Used on candidate tracker `SCR-06` and employer review `SCR-12` (never "bid" or "pitch").
+
+### Verification of Data Types & Monetary Conventions (Phase 3.3)
+- **Stipend Currency:** Stored as integer cents in database `stipend_amount_cents` (`25000` cents = $250.00). Displayed consistently across `SCR-03`, `SCR-04`, `SCR-05`, `SCR-10`, and `SCR-11` as `$250 / mo`.
+- **Application Statuses:** Stored as enum `'SUBMITTED'`, `'UNDER_REVIEW'`, `'ACCEPTED'`, `'REJECTED'`. Rendered in sentence case in `SCR-06`, `SCR-10`, `SCR-12`: `Submitted` (`#F1F5F9`), `Under review` (`#FFFBEB`), `Accepted` (`#ECFDF5`), `Rejected` (`#FFF1F2`).
+- **Job Status:** Stored as `'OPEN'`, `'CLOSED'`. Rendered in `SCR-10` and `SCR-11` as `Open`.
