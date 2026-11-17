@@ -1,0 +1,2045 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>DevPath Visual Redesign Board</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Khmer:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Plus Jakarta Sans', 'Noto Sans Khmer', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    background: #FAFAFA;
+    color: #0B1220;
+    margin: 0;
+    padding: 0;
+  }
+  .card-shadow {
+    box-shadow: 0 8px 24px rgba(11, 18, 32, 0.06);
+  }
+  .hairline {
+    border: 1px solid #F0F1F3;
+  }
+  .border-subtle {
+    border: 1px solid #E5E7EB;
+  }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 28px;
+    padding: 0 10px;
+    border-radius: 9999px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  .chip-neutral {
+    background: #F1F5F9;
+    color: #475569;
+  }
+  .chip-matched {
+    background: #ECFDF5;
+    color: #047857;
+  }
+  .chip-missing {
+    background: #FFF1F2;
+    color: #BE123C;
+    border: 1px dashed #FECDD3;
+  }
+  .chip-selected {
+    background: #F0F9FF;
+    color: #0369A1;
+    border: 1.5px solid #0EA5E9;
+    font-weight: 600;
+  }
+  .status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 24px;
+    padding: 0 10px;
+    border-radius: 9999px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+  }
+  .status-under-review {
+    background: #FFFBEB;
+    color: #B45309;
+  }
+  .status-under-review .status-dot {
+    background: #D97706;
+  }
+  .status-submitted {
+    background: #F1F5F9;
+    color: #475569;
+  }
+  .status-submitted .status-dot {
+    background: #64748B;
+  }
+  .status-accepted {
+    background: #ECFDF5;
+    color: #047857;
+  }
+  .status-accepted .status-dot {
+    background: #10B981;
+  }
+  .status-rejected {
+    background: #FFF1F2;
+    color: #BE123C;
+  }
+  .status-rejected .status-dot {
+    background: #F43F5E;
+  }
+  .btn-ink {
+    background: #0B1220;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 14px;
+    height: 48px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 4px 12px rgba(11, 18, 32, 0.12);
+  }
+  .btn-secondary {
+    background: #FFFFFF;
+    color: #0B1220;
+    border: 1px solid #E5E7EB;
+    border-radius: 14px;
+    height: 48px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .input-filled {
+    height: 52px;
+    border-radius: 14px;
+    background: #F5F6F8;
+    border: 2px solid transparent;
+    padding: 0 16px;
+    font-size: 14px;
+    color: #0B1220;
+    width: 100%;
+    outline: none;
+    transition: all 0.15s ease;
+  }
+  .input-filled:focus {
+    background: #FFFFFF;
+    border-color: #0EA5E9;
+    box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.15);
+  }
+
+  body {
+    background: #F4F5F7;
+    padding: 60px;
+    width: 3400px;
+  }
+  .board-section-title {
+    font-size: 26px;
+    font-weight: 800;
+    color: #0B1220;
+    letter-spacing: -0.02em;
+    margin: 60px 0 24px 0;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #E5E7EB;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .row-flex {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+  }
+</style>
+</head>
+<body>
+  <!-- Title Header -->
+  <div style="margin-bottom: 48px;">
+    <div style="display: inline-flex; align-items: center; gap: 8px; background: #0B1220; color: #FFFFFF; padding: 6px 14px; border-radius: 9999px; font-size: 12px; font-weight: 700; margin-bottom: 12px;">
+      <span style="color: #0EA5E9;">●</span> DevPath 2.0 Design System
+    </div>
+    <h1 style="font-size: 40px; font-weight: 800; color: #0B1220; letter-spacing: -0.03em;">
+      DevPath — Complete Visual Redesign
+    </h1>
+    <p style="font-size: 16px; color: #4B5563; margin-top: 6px;">
+      Confident, quiet, fresh. White space, black ink, sky blue spark (#0EA5E9). Plus Jakarta Sans &amp; Noto Sans Khmer.
+    </p>
+  </div>
+
+  <!-- Deliverable 1: Visual Foundations -->
+  <div class="board-section-title">
+    <span>01</span> Design Foundations &amp; Tokens
+  </div>
+  <div style="width: 1440px; margin-bottom: 40px;">
+    
+  <div style="margin-bottom: 32px;">
+    <h1 style="font-size: 32px; font-weight: 700; color: #0B1220; letter-spacing: -0.02em;">DevPath — Visual Foundations</h1>
+    <p style="font-size: 14px; color: #4B5563; margin-top: 4px;">Brand feeling: Confident, quiet, fresh. White space, black ink, sky blue spark.</p>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
+    <!-- Color System -->
+    <div class="token-card" style="grid-column: span 2;">
+      <h2 style="font-size: 18px; font-weight: 700; color: #0B1220; margin-bottom: 16px;">Color Palette &amp; Semantics</h2>
+      
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 20px;">
+        <div style="background: #0B1220; color: #FFFFFF; padding: 14px; border-radius: 14px;">
+          <div style="font-size: 11px; opacity: 0.8; text-transform: uppercase;">Ink (Primary)</div>
+          <div style="font-size: 16px; font-weight: 700; margin-top: 4px;">#0B1220</div>
+          <div style="font-size: 10px; opacity: 0.7; margin-top: 2px;">Primary text &amp; CTA</div>
+        </div>
+        <div style="background: #0EA5E9; color: #FFFFFF; padding: 14px; border-radius: 14px;">
+          <div style="font-size: 11px; opacity: 0.8; text-transform: uppercase;">Sky Accent</div>
+          <div style="font-size: 16px; font-weight: 700; margin-top: 4px;">#0EA5E9</div>
+          <div style="font-size: 10px; opacity: 0.7; margin-top: 2px;">Fills, progress, rings</div>
+        </div>
+        <div style="background: #4B5563; color: #FFFFFF; padding: 14px; border-radius: 14px;">
+          <div style="font-size: 11px; opacity: 0.8; text-transform: uppercase;">Secondary Text</div>
+          <div style="font-size: 16px; font-weight: 700; margin-top: 4px;">#4B5563</div>
+          <div style="font-size: 10px; opacity: 0.7; margin-top: 2px;">Subtitles &amp; body</div>
+        </div>
+        <div style="background: #6B7280; color: #FFFFFF; padding: 14px; border-radius: 14px;">
+          <div style="font-size: 11px; opacity: 0.8; text-transform: uppercase;">Muted Text</div>
+          <div style="font-size: 16px; font-weight: 700; margin-top: 4px;">#6B7280</div>
+          <div style="font-size: 10px; opacity: 0.7; margin-top: 2px;">Meta &amp; hints</div>
+        </div>
+      </div>
+
+      <div style="font-size: 13px; font-weight: 600; color: #0B1220; margin-bottom: 10px;">Semantic Soft Tints (Never solid fills)</div>
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px;">
+        <div style="background: #ECFDF5; color: #047857; border: 1px solid #A7F3D0; padding: 12px; border-radius: 12px;">
+          <div style="font-size: 11px; font-weight: 700;">Matched / Success</div>
+          <div style="font-size: 12px; margin-top: 2px;">bg #ECFDF5 • text #047857</div>
+        </div>
+        <div style="background: #FFF1F2; color: #BE123C; border: 1px dashed #FECDD3; padding: 12px; border-radius: 12px;">
+          <div style="font-size: 11px; font-weight: 700;">Skill Gap / Error</div>
+          <div style="font-size: 12px; margin-top: 2px;">bg #FFF1F2 • text #BE123C</div>
+        </div>
+        <div style="background: #FFFBEB; color: #B45309; border: 1px solid #FDE68A; padding: 12px; border-radius: 12px;">
+          <div style="font-size: 11px; font-weight: 700;">Under Review / Warning</div>
+          <div style="font-size: 12px; margin-top: 2px;">bg #FFFBEB • text #B45309</div>
+        </div>
+        <div style="background: #F1F5F9; color: #475569; border: 1px solid #E2E8F0; padding: 12px; border-radius: 12px;">
+          <div style="font-size: 11px; font-weight: 700;">Submitted / Neutral</div>
+          <div style="font-size: 12px; margin-top: 2px;">bg #F1F5F9 • text #475569</div>
+        </div>
+      </div>
+
+      <div style="font-size: 13px; font-weight: 600; color: #0B1220; margin-bottom: 10px;">Optional Dark Mode Tokens</div>
+      <div style="display: flex; gap: 12px;">
+        <div style="background: #0B0F17; color: #FFFFFF; padding: 10px 16px; border-radius: 10px; font-size: 12px; border: 1px solid #1F2937;">
+          Dark Canvas: #0B0F17
+        </div>
+        <div style="background: #121826; color: #FFFFFF; padding: 10px 16px; border-radius: 10px; font-size: 12px; border: 1px solid #1F2937;">
+          Dark Surface: #121826
+        </div>
+        <div style="background: #1F2937; color: #FFFFFF; padding: 10px 16px; border-radius: 10px; font-size: 12px;">
+          Dark Border: #1F2937
+        </div>
+      </div>
+    </div>
+
+    <!-- Typography Scale -->
+    <div class="token-card">
+      <h2 style="font-size: 18px; font-weight: 700; color: #0B1220; margin-bottom: 16px;">Typography Scale</h2>
+      <div style="display: flex; flex-direction: column; gap: 14px;">
+        <div>
+          <div style="font-size: 11px; color: #6B7280; font-weight: 600;">PAGE TITLE (32px Bold / -0.02em)</div>
+          <div style="font-size: 26px; font-weight: 700; color: #0B1220; letter-spacing: -0.02em;">What do you build with?</div>
+        </div>
+        <div>
+          <div style="font-size: 11px; color: #6B7280; font-weight: 600;">SECTION TITLE (20px SemiBold)</div>
+          <div style="font-size: 18px; font-weight: 600; color: #0B1220;">Active job postings</div>
+        </div>
+        <div>
+          <div style="font-size: 11px; color: #6B7280; font-weight: 600;">CARD TITLE (16px SemiBold)</div>
+          <div style="font-size: 15px; font-weight: 600; color: #0B1220;">Junior Flutter Developer Intern</div>
+        </div>
+        <div>
+          <div style="font-size: 11px; color: #6B7280; font-weight: 600;">BODY TEXT (14px Regular)</div>
+          <div style="font-size: 13px; color: #4B5563; line-height: 1.5;">Match your programming skills with junior IT roles.</div>
+        </div>
+        <div>
+          <div style="font-size: 11px; color: #6B7280; font-weight: 600;">META &amp; LABELS (12px Medium)</div>
+          <div style="font-size: 12px; color: #6B7280; font-weight: 500;">Posted 2 days ago • 4 applicants</div>
+        </div>
+        <div style="padding-top: 8px; border-top: 1px solid #F0F1F3;">
+          <div style="font-size: 11px; color: #6B7280; font-weight: 600;">KHMER FALLBACK (Noto Sans Khmer)</div>
+          <div style="font-size: 14px; color: #0B1220; margin-top: 2px;">ស្វែងរកការងារ និងកម្មសិក្សាផ្នែកព័ត៌មានវិទ្យា</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Radii, Depth & Shadows -->
+    <div class="token-card">
+      <h2 style="font-size: 18px; font-weight: 700; color: #0B1220; margin-bottom: 16px;">Shape, Radii &amp; Depth</h2>
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <span style="font-size: 13px; color: #4B5563;">14px Controls &amp; Inputs</span>
+          <div style="width: 80px; height: 32px; background: #F5F6F8; border-radius: 14px; border: 1px solid #E5E7EB;"></div>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <span style="font-size: 13px; color: #4B5563;">20px Standard Cards</span>
+          <div style="width: 80px; height: 36px; background: #FFFFFF; border-radius: 20px; border: 1px solid #F0F1F3; box-shadow: 0 4px 12px rgba(11,18,32,0.06);"></div>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <span style="font-size: 13px; color: #4B5563;">28px Bottom Sheets</span>
+          <div style="width: 80px; height: 36px; background: #FFFFFF; border-radius: 28px; border: 1px solid #E5E7EB;"></div>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <span style="font-size: 13px; color: #4B5563;">Pill / Fully Round</span>
+          <div style="width: 80px; height: 28px; background: #0B1220; border-radius: 9999px;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Iconography Showcase -->
+    <div class="token-card" style="grid-column: span 2;">
+      <h2 style="font-size: 18px; font-weight: 700; color: #0B1220; margin-bottom: 12px;">Iconography (Lucide 1.5px Stroke, 0 Emoji)</h2>
+      <p style="font-size: 13px; color: #4B5563; margin-bottom: 16px;">All text glyphs and emojis are eliminated in favor of clean 1.5px vector icons.</p>
+      <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+        <div style="display: flex; align-items: center; gap: 8px; font-size: 12px; color: #0B1220;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg> Search</div>
+        <div style="display: flex; align-items: center; gap: 8px; font-size: 12px; color: #0B1220;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="7" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg> Briefcase</div>
+        <div style="display: flex; align-items: center; gap: 8px; font-size: 12px; color: #0B1220;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg> Bookmark</div>
+        <div style="display: flex; align-items: center; gap: 8px; font-size: 12px; color: #0B1220;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg> Document</div>
+        <div style="display: flex; align-items: center; gap: 8px; font-size: 12px; color: #0B1220;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> Profile</div>
+        <div style="display: flex; align-items: center; gap: 8px; font-size: 12px; color: #0B1220;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg> Notification</div>
+        <div style="display: flex; align-items: center; gap: 8px; font-size: 12px; color: #0B1220;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Check</div>
+        <div style="display: flex; align-items: center; gap: 8px; font-size: 12px; color: #0B1220;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></svg> Minus</div>
+        <div style="display: flex; align-items: center; gap: 8px; font-size: 12px; color: #0B1220;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg> Tip</div>
+        <div style="display: flex; align-items: center; gap: 8px; font-size: 12px; color: #0B1220;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg> Award</div>
+      </div>
+    </div>
+  </div>
+
+  </div>
+
+  <!-- Deliverable 2: Component State Sheet -->
+  <div class="board-section-title">
+    <span>02</span> Shared Component Inventory &amp; States
+  </div>
+  <div style="width: 1440px; margin-bottom: 40px;">
+    
+  <div style="margin-bottom: 32px;">
+    <h1 style="font-size: 32px; font-weight: 700; color: #0B1220; letter-spacing: -0.02em;">DevPath — Component State Sheet</h1>
+    <p style="font-size: 14px; color: #4B5563; margin-top: 4px;">Universal reusable design components in every required interactive state.</p>
+  </div>
+
+  <!-- Primary & Secondary Buttons -->
+  <div class="component-card">
+    <h2 style="font-size: 18px; font-weight: 700; color: #0B1220; margin-bottom: 16px;">Buttons</h2>
+    <div style="display: flex; gap: 32px;">
+      <div class="state-col">
+        <span class="state-label">Primary (Default)</span>
+        <button class="btn-ink" style="padding: 0 24px;">Sign in</button>
+      </div>
+      <div class="state-col">
+        <span class="state-label">Primary (Hover)</span>
+        <button class="btn-ink" style="padding: 0 24px; background: #1E293B;">Sign in</button>
+      </div>
+      <div class="state-col">
+        <span class="state-label">Primary (Focus)</span>
+        <button class="btn-ink" style="padding: 0 24px; box-shadow: 0 0 0 4px rgba(14,165,233,0.3);">Sign in</button>
+      </div>
+      <div class="state-col">
+        <span class="state-label">Primary (Disabled)</span>
+        <button class="btn-ink" style="padding: 0 24px; background: #E5E7EB; color: #9CA3AF; box-shadow: none; cursor: not-allowed;">Sign in</button>
+      </div>
+      <div class="state-col">
+        <span class="state-label">Secondary (White/Hairline)</span>
+        <button class="btn-secondary" style="padding: 0 24px;">Review applicants</button>
+      </div>
+      <div class="state-col">
+        <span class="state-label">Tertiary (Text Only)</span>
+        <button style="background: none; border: none; font-size: 13px; font-weight: 600; color: #0369A1; cursor: pointer; padding: 12px 8px;">Skip for now</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Skill Chips & Status Pills -->
+  <div class="component-card">
+    <h2 style="font-size: 18px; font-weight: 700; color: #0B1220; margin-bottom: 16px;">Skill Chips &amp; Status Pills</h2>
+    <div style="display: flex; gap: 40px; align-items: flex-start;">
+      <div>
+        <div style="font-size: 12px; font-weight: 600; color: #6B7280; margin-bottom: 10px;">Skill Chips (28px Pill)</div>
+        <div style="display: flex; gap: 10px;">
+          <div class="chip chip-matched"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> Flutter (Matched)</div>
+          <div class="chip chip-missing"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></svg></span> Docker (Missing)</div>
+          <div class="chip chip-selected"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> Dart (Selected)</div>
+          <div class="chip chip-neutral">PostgreSQL (Neutral)</div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size: 12px; font-weight: 600; color: #6B7280; margin-bottom: 10px;">Status Pills (Sentence Case + Colored Dot)</div>
+        <div style="display: flex; gap: 10px;">
+          <div class="status-pill status-accepted"><span class="status-dot"></span> Accepted</div>
+          <div class="status-pill status-under-review"><span class="status-dot"></span> Under review</div>
+          <div class="status-pill status-submitted"><span class="status-dot"></span> Submitted</div>
+          <div class="status-pill status-rejected"><span class="status-dot"></span> Rejected</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Signature Match Rings -->
+  <div class="component-card">
+    <h2 style="font-size: 18px; font-weight: 700; color: #0B1220; margin-bottom: 16px;">Signature Match Rings (Core Brand Element)</h2>
+    <div style="display: flex; gap: 40px; align-items: center;">
+      <div style="text-align: center;">
+        <span class="state-label" style="display: block; margin-bottom: 8px;">High Fit (80%+ Green)</span>
+        <div style="position: relative; width: 52px; height: 52px; display: inline-flex; align-items: center; justify-content: center;">
+      <svg width="52" height="52" style="transform: rotate(-90deg);">
+        <circle cx="26.0" cy="26.0" r="23.5" fill="none" stroke="#F0F1F3" stroke-width="5" />
+        <circle cx="26.0" cy="26.0" r="23.5" fill="none" stroke="#10B981" stroke-width="5"
+                stroke-dasharray="147.65473" stroke-dashoffset="0.0" stroke-linecap="round" />
+      </svg>
+      <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 13px; color: #047857;">
+        100%
+      </div>
+    </div>
+      </div>
+      <div style="text-align: center;">
+        <span class="state-label" style="display: block; margin-bottom: 8px;">Standard Fit (Sky Blue)</span>
+        <div style="position: relative; width: 52px; height: 52px; display: inline-flex; align-items: center; justify-content: center;">
+      <svg width="52" height="52" style="transform: rotate(-90deg);">
+        <circle cx="26.0" cy="26.0" r="23.5" fill="none" stroke="#F0F1F3" stroke-width="5" />
+        <circle cx="26.0" cy="26.0" r="23.5" fill="none" stroke="#0EA5E9" stroke-width="5"
+                stroke-dasharray="147.65473" stroke-dashoffset="48.72606089999999" stroke-linecap="round" />
+      </svg>
+      <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 13px; color: #0369A1;">
+        67%
+      </div>
+    </div>
+      </div>
+      <div style="text-align: center;">
+        <span class="state-label" style="display: block; margin-bottom: 8px;">Low Fit (&lt;40% Grey)</span>
+        <div style="position: relative; width: 52px; height: 52px; display: inline-flex; align-items: center; justify-content: center;">
+      <svg width="52" height="52" style="transform: rotate(-90deg);">
+        <circle cx="26.0" cy="26.0" r="23.5" fill="none" stroke="#F0F1F3" stroke-width="5" />
+        <circle cx="26.0" cy="26.0" r="23.5" fill="none" stroke="#9CA3AF" stroke-width="5"
+                stroke-dasharray="147.65473" stroke-dashoffset="98.9286691" stroke-linecap="round" />
+      </svg>
+      <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 13px; color: #4B5563;">
+        33%
+      </div>
+    </div>
+      </div>
+      <div style="text-align: center; border-left: 1px solid #E5E7EB; padding-left: 40px;">
+        <span class="state-label" style="display: block; margin-bottom: 8px;">Large Hero Ring (96px, 8px Stroke)</span>
+        <div style="position: relative; width: 96px; height: 96px; display: inline-flex; align-items: center; justify-content: center;">
+      <svg width="96" height="96" style="transform: rotate(-90deg);">
+        <circle cx="48.0" cy="48.0" r="44.0" fill="none" stroke="#F0F1F3" stroke-width="8" />
+        <circle cx="48.0" cy="48.0" r="44.0" fill="none" stroke="#0EA5E9" stroke-width="8"
+                stroke-dasharray="276.45992" stroke-dashoffset="91.2317736" stroke-linecap="round" />
+      </svg>
+      <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 24px; color: #0369A1;">
+        67%
+      </div>
+    </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Text Input States -->
+  <div class="component-card">
+    <h2 style="font-size: 18px; font-weight: 700; color: #0B1220; margin-bottom: 16px;">Text Inputs (52px Tall, 14px Radius)</h2>
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;">
+      <div>
+        <span class="state-label">Default (Filled #F5F6F8)</span>
+        <input type="text" class="input-filled" placeholder="Enter full name" style="margin-top: 6px;">
+      </div>
+      <div>
+        <span class="state-label">Filled Text</span>
+        <input type="text" class="input-filled" value="sokha.pech@it.edu.kh" style="margin-top: 6px;">
+      </div>
+      <div>
+        <span class="state-label">Focused (2px Sky Ring)</span>
+        <input type="text" class="input-filled" value="Flutter" style="margin-top: 6px; border-color: #0EA5E9; box-shadow: 0 0 0 4px rgba(14,165,233,0.15); background: #FFFFFF;">
+      </div>
+      <div>
+        <span class="state-label">Disabled</span>
+        <input type="text" class="input-filled" value="readonly@it.edu.kh" disabled style="margin-top: 6px; opacity: 0.6; cursor: not-allowed;">
+      </div>
+    </div>
+  </div>
+
+  </div>
+
+  <!-- Deliverable 3: Candidate Mobile App (393 × 852) -->
+  <div class="board-section-title">
+    <span>03</span> Candidate Mobile App Screens (iPhone 15 — 393 &times; 852)
+  </div>
+  <div class="row-flex" style="margin-bottom: 60px;">
+    
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <div style="font-size: 14px; font-weight: 700; color: #0B1220; letter-spacing: 0.02em;">SCR-01 / Login & Welcome</div>
+      <div style="width: 393px; height: 852px; background: #FAFAFA; border-radius: 36px; border: 8px solid #0B1220; box-shadow: 0 20px 40px rgba(11,18,32,0.12); overflow: hidden; position: relative; display: flex; flex-direction: column;">
+        <div style="position: absolute; top: 10px; left: 50%; transform: translateX(-50%); width: 120px; height: 34px; background: #0B1220; border-radius: 20px; z-index: 45;"></div>
+        <div style="height: 44px; min-height: 44px; display: flex; justify-content: space-between; align-items: center; padding: 0 24px; font-size: 14px; font-weight: 600; color: #0B1220; z-index: 40;">
+          <span>9:41</span>
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <svg width="17" height="11" viewBox="0 0 17 11" fill="none"><path d="M1 9.5C1 9.5 3.5 6.5 8.5 6.5C13.5 6.5 16 9.5 16 9.5" stroke="#0B1220" stroke-width="1.5" stroke-linecap="round"/><path d="M3.5 7C3.5 7 5.5 4.5 8.5 4.5C11.5 4.5 13.5 7 13.5 7" stroke="#0B1220" stroke-width="1.5" stroke-linecap="round"/><circle cx="8.5" cy="9.5" r="1" fill="#0B1220"/></svg>
+            <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="#0B1220"/><rect x="2" y="2" width="16" height="8" rx="2" fill="#0B1220"/><path d="M23 4C23.5 4.5 24 5.2 24 6C24 6.8 23.5 7.5 23 8" stroke="#0B1220" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+        </div>
+        <div style="flex: 1; overflow-y: auto; padding: 8px 20px 24px 20px;">
+          
+<div style="display: flex; flex-direction: column; justify-content: center; min-height: 720px; padding: 12px 0;">
+  <!-- Logo with soft sky glow -->
+  <div style="position: relative; width: 80px; height: 80px; margin: 0 auto 24px auto; display: flex; align-items: center; justify-content: center;">
+    <div style="position: absolute; inset: -16px; background: radial-gradient(circle, rgba(14, 165, 233, 0.22) 0%, rgba(250, 250, 250, 0) 70%); border-radius: 50%;"></div>
+    <div style="width: 56px; height: 56px; background: #0B1220; border-radius: 16px; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 24px rgba(11, 18, 32, 0.15); position: relative; z-index: 2;">
+      <div style="width: 16px; height: 16px; background: #0EA5E9; border-radius: 4px;"></div>
+    </div>
+  </div>
+
+  <!-- Big Bold Headline -->
+  <h1 style="font-size: 30px; font-weight: 700; color: #0B1220; text-align: center; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 8px;">
+    Match your skills with your first tech job.
+  </h1>
+  <p style="font-size: 14px; color: #4B5563; text-align: center; margin-bottom: 28px;">
+    Connecting Cambodian IT students with junior tech roles.
+  </p>
+
+  <!-- Segmented Control with sliding thumb -->
+  <div style="background: #F1F5F9; border-radius: 9999px; padding: 4px; display: flex; margin-bottom: 24px;">
+    <div style="flex: 1; text-align: center; padding: 10px; font-size: 13px; font-weight: 600; background: #FFFFFF; color: #0B1220; border-radius: 9999px; box-shadow: 0 2px 8px rgba(11, 18, 32, 0.06);">
+      Candidate
+    </div>
+    <div style="flex: 1; text-align: center; padding: 10px; font-size: 13px; font-weight: 500; color: #6B7280; cursor: pointer;">
+      Employer
+    </div>
+  </div>
+
+  <!-- Form Fields -->
+  <div style="display: flex; flex-direction: column; gap: 14px; margin-bottom: 20px;">
+    <div>
+      <label style="display: block; font-size: 12px; font-weight: 600; color: #0B1220; margin-bottom: 6px;">Email address</label>
+      <input type="text" class="input-filled" value="sokha.pech@it.edu.kh">
+    </div>
+    <div>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+        <label style="font-size: 12px; font-weight: 600; color: #0B1220;">Password</label>
+        <span style="font-size: 12px; color: #0369A1; font-weight: 500; cursor: pointer;">Forgot password?</span>
+      </div>
+      <input type="password" class="input-filled" value="••••••••••••">
+    </div>
+    <button class="btn-ink" style="width: 100%; margin-top: 6px;">
+      <span>Sign in</span>
+      <span style="display: flex; align-items: center;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+    </button>
+  </div>
+
+  <!-- Quiet "or" divider -->
+  <div style="display: flex; align-items: center; gap: 16px; margin: 12px 0 20px 0;">
+    <div style="flex: 1; height: 1px; background: #F0F1F3;"></div>
+    <span style="font-size: 12px; color: #6B7280;">or</span>
+    <div style="flex: 1; height: 1px; background: #F0F1F3;"></div>
+  </div>
+
+  <!-- GitHub Button with Real Octocat Logo -->
+  <button class="btn-secondary" style="width: 100%;">
+    <span style="display: flex; align-items: center; color: #0B1220;"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg></span>
+    <span>Continue with GitHub</span>
+  </button>
+
+  <div style="text-align: center; margin-top: 24px; font-size: 13px; color: #4B5563;">
+    Don't have an account? <span style="color: #0369A1; font-weight: 600; cursor: pointer;">Sign up</span>
+  </div>
+</div>
+
+        </div>
+        
+        <div style="position: absolute; bottom: 6px; left: 50%; transform: translateX(-50%); width: 134px; height: 4px; background: #0B1220; border-radius: 2px; opacity: 0.2; z-index: 60;"></div>
+      </div>
+    </div>
+    
+    
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <div style="font-size: 14px; font-weight: 700; color: #0B1220; letter-spacing: 0.02em;">SCR-02 / Registration & Skills Selection</div>
+      <div style="width: 393px; height: 852px; background: #FAFAFA; border-radius: 36px; border: 8px solid #0B1220; box-shadow: 0 20px 40px rgba(11,18,32,0.12); overflow: hidden; position: relative; display: flex; flex-direction: column;">
+        <div style="position: absolute; top: 10px; left: 50%; transform: translateX(-50%); width: 120px; height: 34px; background: #0B1220; border-radius: 20px; z-index: 45;"></div>
+        <div style="height: 44px; min-height: 44px; display: flex; justify-content: space-between; align-items: center; padding: 0 24px; font-size: 14px; font-weight: 600; color: #0B1220; z-index: 40;">
+          <span>9:41</span>
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <svg width="17" height="11" viewBox="0 0 17 11" fill="none"><path d="M1 9.5C1 9.5 3.5 6.5 8.5 6.5C13.5 6.5 16 9.5 16 9.5" stroke="#0B1220" stroke-width="1.5" stroke-linecap="round"/><path d="M3.5 7C3.5 7 5.5 4.5 8.5 4.5C11.5 4.5 13.5 7 13.5 7" stroke="#0B1220" stroke-width="1.5" stroke-linecap="round"/><circle cx="8.5" cy="9.5" r="1" fill="#0B1220"/></svg>
+            <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="#0B1220"/><rect x="2" y="2" width="16" height="8" rx="2" fill="#0B1220"/><path d="M23 4C23.5 4.5 24 5.2 24 6C24 6.8 23.5 7.5 23 8" stroke="#0B1220" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+        </div>
+        <div style="flex: 1; overflow-y: auto; padding: 8px 20px 24px 20px;">
+          
+<!-- Segmented Progress Bar -->
+<div style="display: flex; gap: 6px; margin: 8px 0 20px 0;">
+  <div style="flex: 1; height: 4px; background: #0B1220; border-radius: 9999px;"></div>
+  <div style="flex: 1; height: 4px; background: #0EA5E9; border-radius: 9999px;"></div>
+</div>
+
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+  <span style="font-size: 12px; font-weight: 600; color: #0369A1; background: #F0F9FF; padding: 4px 10px; border-radius: 9999px;">Step 2 of 2</span>
+  <span style="font-size: 13px; color: #6B7280; font-weight: 500; cursor: pointer;">Skip for now</span>
+</div>
+
+<h1 style="font-size: 32px; font-weight: 700; color: #0B1220; letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 6px;">
+  What do you build with?
+</h1>
+<p style="font-size: 14px; color: #4B5563; margin-bottom: 20px;">
+  Select the technologies you know. We'll match them against real job requirements.
+</p>
+
+<!-- Search Field -->
+<div style="position: relative; margin-bottom: 24px;">
+  <input type="text" class="input-filled" placeholder="Search skills (e.g. Flutter, React, SQL)..." style="padding-left: 44px;">
+  <div style="position: absolute; left: 16px; top: 16px; color: #6B7280;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></div>
+</div>
+
+<!-- Category 1: Mobile -->
+<div style="margin-bottom: 22px;">
+  <div style="font-size: 13px; font-weight: 600; color: #4B5563; margin-bottom: 10px;">Mobile development</div>
+  <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+    <div class="chip chip-selected"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> Flutter</div>
+    <div class="chip chip-selected"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> Dart</div>
+    <div class="chip chip-neutral" style="cursor: pointer;">React Native</div>
+    <div class="chip chip-neutral" style="cursor: pointer;">Kotlin</div>
+    <div class="chip chip-neutral" style="cursor: pointer;">Swift</div>
+  </div>
+</div>
+
+<!-- Category 2: Frontend -->
+<div style="margin-bottom: 22px;">
+  <div style="font-size: 13px; font-weight: 600; color: #4B5563; margin-bottom: 10px;">Frontend & web</div>
+  <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+    <div class="chip chip-selected"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> TypeScript</div>
+    <div class="chip chip-neutral" style="cursor: pointer;">React</div>
+    <div class="chip chip-neutral" style="cursor: pointer;">Tailwind CSS</div>
+    <div class="chip chip-neutral" style="cursor: pointer;">Next.js</div>
+    <div class="chip chip-neutral" style="cursor: pointer;">HTML & CSS</div>
+  </div>
+</div>
+
+<!-- Category 3: Backend & Database -->
+<div style="margin-bottom: 32px;">
+  <div style="font-size: 13px; font-weight: 600; color: #4B5563; margin-bottom: 10px;">Backend & database</div>
+  <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+    <div class="chip chip-selected"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> Node.js</div>
+    <div class="chip chip-selected"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> Git</div>
+    <div class="chip chip-neutral" style="cursor: pointer;">PostgreSQL</div>
+    <div class="chip chip-neutral" style="cursor: pointer;">Docker</div>
+    <div class="chip chip-neutral" style="cursor: pointer;">Python</div>
+  </div>
+</div>
+
+<!-- Sticky Bottom Bar -->
+<div style="background: #FFFFFF; border-top: 1px solid #E5E7EB; margin: 0 -20px -24px -20px; padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 -4px 16px rgba(11,18,32,0.04);">
+  <div>
+    <span style="font-size: 11px; color: #6B7280; font-weight: 500; display: block;">Selected</span>
+    <span style="font-size: 15px; font-weight: 700; color: #0B1220;">5 skills</span>
+  </div>
+  <button class="btn-ink" style="padding: 0 24px;">
+    <span>Save & continue</span>
+    <span style="display: flex; align-items: center;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+  </button>
+</div>
+
+        </div>
+        
+        <div style="position: absolute; bottom: 6px; left: 50%; transform: translateX(-50%); width: 134px; height: 4px; background: #0B1220; border-radius: 2px; opacity: 0.2; z-index: 60;"></div>
+      </div>
+    </div>
+    
+    
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <div style="font-size: 14px; font-weight: 700; color: #0B1220; letter-spacing: 0.02em;">SCR-03 / Job Board</div>
+      <div style="width: 393px; height: 852px; background: #FAFAFA; border-radius: 36px; border: 8px solid #0B1220; box-shadow: 0 20px 40px rgba(11,18,32,0.12); overflow: hidden; position: relative; display: flex; flex-direction: column;">
+        <div style="position: absolute; top: 10px; left: 50%; transform: translateX(-50%); width: 120px; height: 34px; background: #0B1220; border-radius: 20px; z-index: 45;"></div>
+        <div style="height: 44px; min-height: 44px; display: flex; justify-content: space-between; align-items: center; padding: 0 24px; font-size: 14px; font-weight: 600; color: #0B1220; z-index: 40;">
+          <span>9:41</span>
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <svg width="17" height="11" viewBox="0 0 17 11" fill="none"><path d="M1 9.5C1 9.5 3.5 6.5 8.5 6.5C13.5 6.5 16 9.5 16 9.5" stroke="#0B1220" stroke-width="1.5" stroke-linecap="round"/><path d="M3.5 7C3.5 7 5.5 4.5 8.5 4.5C11.5 4.5 13.5 7 13.5 7" stroke="#0B1220" stroke-width="1.5" stroke-linecap="round"/><circle cx="8.5" cy="9.5" r="1" fill="#0B1220"/></svg>
+            <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="#0B1220"/><rect x="2" y="2" width="16" height="8" rx="2" fill="#0B1220"/><path d="M23 4C23.5 4.5 24 5.2 24 6C24 6.8 23.5 7.5 23 8" stroke="#0B1220" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+        </div>
+        <div style="flex: 1; overflow-y: auto; padding: 8px 20px 90px 20px;">
+          
+<!-- Greeting & Header -->
+<div style="display: flex; justify-content: space-between; align-items: center; margin: 8px 0 18px 0;">
+  <div>
+    <h1 style="font-size: 32px; font-weight: 700; color: #0B1220; letter-spacing: -0.02em; line-height: 1.1;">Hi Sokha</h1>
+    <p style="font-size: 13px; color: #4B5563; margin-top: 2px;">Find beginner tech internships</p>
+  </div>
+  <div style="display: flex; align-items: center; gap: 10px;">
+    <div style="width: 40px; height: 40px; border-radius: 9999px; background: #FFFFFF; border: 1px solid #E5E7EB; display: flex; align-items: center; justify-content: center; color: #0B1220; cursor: pointer; position: relative;">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+      <div style="position: absolute; top: 10px; right: 10px; width: 6px; height: 6px; background: #0EA5E9; border-radius: 50%;"></div>
+    </div>
+    <div style="width: 40px; height: 40px; border-radius: 9999px; background: #0B1220; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700;">
+      SP
+    </div>
+  </div>
+</div>
+
+<!-- Search Field with Integrated Filter Button -->
+<div style="position: relative; margin-bottom: 16px;">
+  <input type="text" class="input-filled" placeholder="Search roles, tools, or companies..." style="padding-left: 44px; padding-right: 50px;">
+  <div style="position: absolute; left: 16px; top: 16px; color: #6B7280;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></div>
+  <button style="position: absolute; right: 8px; top: 8px; width: 36px; height: 36px; border-radius: 10px; background: #FFFFFF; border: 1px solid #E5E7EB; display: flex; align-items: center; justify-content: center; color: #0B1220; cursor: pointer;">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="4" y1="21" y2="14"/><line x1="4" x2="4" y1="10" y2="3"/><line x1="12" x2="12" y1="21" y2="12"/><line x1="12" x2="12" y1="8" y2="3"/><line x1="20" x2="20" y1="21" y2="16"/><line x1="20" x2="20" y1="12" y2="3"/><line x1="1" x2="7" y1="14" y2="14"/><line x1="9" x2="15" y1="8" y2="8"/><line x1="17" x2="23" y1="16" y2="16"/></svg>
+  </button>
+</div>
+
+<!-- Category Chips (Active = Ink filled) -->
+<div style="display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; margin-bottom: 22px;">
+  <div style="background: #0B1220; color: #FFFFFF; padding: 7px 16px; border-radius: 9999px; font-size: 12px; font-weight: 600; white-space: nowrap; cursor: pointer;">
+    All roles (14)
+  </div>
+  <div style="background: #FFFFFF; color: #4B5563; border: 1px solid #E5E7EB; padding: 7px 16px; border-radius: 9999px; font-size: 12px; font-weight: 500; white-space: nowrap; cursor: pointer;">
+    Mobile dev
+  </div>
+  <div style="background: #FFFFFF; color: #4B5563; border: 1px solid #E5E7EB; padding: 7px 16px; border-radius: 9999px; font-size: 12px; font-weight: 500; white-space: nowrap; cursor: pointer;">
+    Frontend
+  </div>
+  <div style="background: #FFFFFF; color: #4B5563; border: 1px solid #E5E7EB; padding: 7px 16px; border-radius: 9999px; font-size: 12px; font-weight: 500; white-space: nowrap; cursor: pointer;">
+    Backend
+  </div>
+</div>
+
+<div style="font-size: 13px; font-weight: 600; color: #6B7280; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 12px;">
+  Recommended for you
+</div>
+
+<!-- Job Card 1 -->
+<div style="background: #FFFFFF; border-radius: 20px; padding: 20px; border: 1px solid #F0F1F3; margin-bottom: 16px; box-shadow: 0 8px 24px rgba(11,18,32,0.06);">
+  <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px;">
+    <div style="display: flex; gap: 12px;">
+      <div style="width: 44px; height: 44px; background: #F0F9FF; border: 1px solid #BAE6FD; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700; color: #0369A1;">
+        TB
+      </div>
+      <div>
+        <h2 style="font-size: 16px; font-weight: 600; color: #0B1220; margin-bottom: 2px;">Junior Flutter Developer Intern</h2>
+        <span style="font-size: 13px; color: #4B5563;">TechBridge Solutions • Phnom Penh</span>
+      </div>
+    </div>
+    <!-- Compact Match Ring -->
+    <div style="position: relative; width: 46px; height: 46px; display: inline-flex; align-items: center; justify-content: center;">
+      <svg width="46" height="46" style="transform: rotate(-90deg);">
+        <circle cx="23.0" cy="23.0" r="21.0" fill="none" stroke="#F0F1F3" stroke-width="4" />
+        <circle cx="23.0" cy="23.0" r="21.0" fill="none" stroke="#0EA5E9" stroke-width="4"
+                stroke-dasharray="131.94678" stroke-dashoffset="43.54243739999999" stroke-linecap="round" />
+      </svg>
+      <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 12px; color: #0369A1;">
+        67%
+      </div>
+    </div>
+  </div>
+
+  <!-- Tiny Neutral Chips -->
+  <div style="display: flex; gap: 6px; margin-bottom: 14px;">
+    <span class="chip chip-neutral" style="height: 24px; font-size: 11px;">Internship</span>
+    <span class="chip chip-neutral" style="height: 24px; font-size: 11px;">On-site</span>
+    <span class="chip chip-neutral" style="height: 24px; font-size: 11px;">$250 / mo</span>
+  </div>
+
+  <!-- Matching and Missing Skills as Mini Chips -->
+  <div style="display: flex; flex-wrap: wrap; gap: 6px; padding: 12px; background: #FAFAFA; border-radius: 14px; margin-bottom: 12px;">
+    <div class="chip chip-matched" style="height: 24px; font-size: 11px;"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> Flutter</div>
+    <div class="chip chip-matched" style="height: 24px; font-size: 11px;"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> Git</div>
+    <div class="chip chip-missing" style="height: 24px; font-size: 11px;"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></svg></span> Docker</div>
+  </div>
+
+  <!-- Footer Line -->
+  <div style="display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: #6B7280; padding-top: 4px;">
+    <span>Posted 2 days ago • 4 applicants</span>
+    <span style="color: #0369A1; font-weight: 600; cursor: pointer;">View details &rarr;</span>
+  </div>
+</div>
+
+<!-- Job Card 2 -->
+<div style="background: #FFFFFF; border-radius: 20px; padding: 20px; border: 1px solid #F0F1F3; margin-bottom: 16px; box-shadow: 0 8px 24px rgba(11,18,32,0.06);">
+  <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px;">
+    <div style="display: flex; gap: 12px;">
+      <div style="width: 44px; height: 44px; background: #ECFDF5; border: 1px solid #A7F3D0; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700; color: #047857;">
+        ND
+      </div>
+      <div>
+        <h2 style="font-size: 16px; font-weight: 600; color: #0B1220; margin-bottom: 2px;">Junior Backend Developer</h2>
+        <span style="font-size: 13px; color: #4B5563;">NextGen Digital • Remote</span>
+      </div>
+    </div>
+    <!-- Compact Match Ring (80% green) -->
+    <div style="position: relative; width: 46px; height: 46px; display: inline-flex; align-items: center; justify-content: center;">
+      <svg width="46" height="46" style="transform: rotate(-90deg);">
+        <circle cx="23.0" cy="23.0" r="21.0" fill="none" stroke="#F0F1F3" stroke-width="4" />
+        <circle cx="23.0" cy="23.0" r="21.0" fill="none" stroke="#10B981" stroke-width="4"
+                stroke-dasharray="131.94678" stroke-dashoffset="26.389355999999992" stroke-linecap="round" />
+      </svg>
+      <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 12px; color: #047857;">
+        80%
+      </div>
+    </div>
+  </div>
+
+  <div style="display: flex; gap: 6px; margin-bottom: 14px;">
+    <span class="chip chip-neutral" style="height: 24px; font-size: 11px;">Entry-level</span>
+    <span class="chip chip-neutral" style="height: 24px; font-size: 11px;">Remote</span>
+    <span class="chip chip-neutral" style="height: 24px; font-size: 11px;">$350 / mo</span>
+  </div>
+
+  <div style="display: flex; flex-wrap: wrap; gap: 6px; padding: 12px; background: #FAFAFA; border-radius: 14px; margin-bottom: 12px;">
+    <div class="chip chip-matched" style="height: 24px; font-size: 11px;"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> Node.js</div>
+    <div class="chip chip-matched" style="height: 24px; font-size: 11px;"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> TypeScript</div>
+    <div class="chip chip-matched" style="height: 24px; font-size: 11px;"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> Git</div>
+    <div class="chip chip-missing" style="height: 24px; font-size: 11px;"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></svg></span> Docker</div>
+  </div>
+
+  <div style="display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: #6B7280; padding-top: 4px;">
+    <span>Posted yesterday • 8 applicants</span>
+    <span style="color: #0369A1; font-weight: 600; cursor: pointer;">View details &rarr;</span>
+  </div>
+</div>
+
+        </div>
+        
+        <div style="position: absolute; bottom: 18px; left: 16px; right: 16px; height: 60px; background: rgba(255, 255, 255, 0.94); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid #E5E7EB; border-radius: 9999px; box-shadow: 0 12px 32px rgba(11, 18, 32, 0.08); display: flex; align-items: center; justify-content: space-around; z-index: 50; padding: 0 6px;">
+          
+                <div style="background: #0B1220; color: #FFFFFF; border-radius: 9999px; padding: 8px 16px; display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600;">
+                  <span style="display: flex; align-items: center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></span>
+                  <span>Jobs</span>
+                </div>
+                
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 3px; color: #6B7280; font-size: 11px; font-weight: 500; padding: 6px 12px;">
+                  <span style="display: flex; align-items: center; opacity: 0.85;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg></span>
+                  <span>Saved</span>
+                </div>
+                
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 3px; color: #6B7280; font-size: 11px; font-weight: 500; padding: 6px 12px;">
+                  <span style="display: flex; align-items: center; opacity: 0.85;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg></span>
+                  <span>Applied</span>
+                </div>
+                
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 3px; color: #6B7280; font-size: 11px; font-weight: 500; padding: 6px 12px;">
+                  <span style="display: flex; align-items: center; opacity: 0.85;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+                  <span>Profile</span>
+                </div>
+                
+        </div>
+        
+        <div style="position: absolute; bottom: 6px; left: 50%; transform: translateX(-50%); width: 134px; height: 4px; background: #0B1220; border-radius: 2px; opacity: 0.2; z-index: 60;"></div>
+      </div>
+    </div>
+    
+    
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <div style="font-size: 14px; font-weight: 700; color: #0B1220; letter-spacing: 0.02em;">SCR-04 / Job Details & Skill Fit Analyzer</div>
+      <div style="width: 393px; height: 852px; background: #FAFAFA; border-radius: 36px; border: 8px solid #0B1220; box-shadow: 0 20px 40px rgba(11,18,32,0.12); overflow: hidden; position: relative; display: flex; flex-direction: column;">
+        <div style="position: absolute; top: 10px; left: 50%; transform: translateX(-50%); width: 120px; height: 34px; background: #0B1220; border-radius: 20px; z-index: 45;"></div>
+        <div style="height: 44px; min-height: 44px; display: flex; justify-content: space-between; align-items: center; padding: 0 24px; font-size: 14px; font-weight: 600; color: #0B1220; z-index: 40;">
+          <span>9:41</span>
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <svg width="17" height="11" viewBox="0 0 17 11" fill="none"><path d="M1 9.5C1 9.5 3.5 6.5 8.5 6.5C13.5 6.5 16 9.5 16 9.5" stroke="#0B1220" stroke-width="1.5" stroke-linecap="round"/><path d="M3.5 7C3.5 7 5.5 4.5 8.5 4.5C11.5 4.5 13.5 7 13.5 7" stroke="#0B1220" stroke-width="1.5" stroke-linecap="round"/><circle cx="8.5" cy="9.5" r="1" fill="#0B1220"/></svg>
+            <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="#0B1220"/><rect x="2" y="2" width="16" height="8" rx="2" fill="#0B1220"/><path d="M23 4C23.5 4.5 24 5.2 24 6C24 6.8 23.5 7.5 23 8" stroke="#0B1220" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+        </div>
+        <div style="flex: 1; overflow-y: auto; padding: 8px 20px 24px 20px;">
+          
+<!-- Top Bar Navigation -->
+<div style="display: flex; justify-content: space-between; align-items: center; margin: 4px 0 16px 0;">
+  <button style="width: 40px; height: 40px; border-radius: 9999px; background: #FFFFFF; border: 1px solid #E5E7EB; display: flex; align-items: center; justify-content: center; color: #0B1220; cursor: pointer;">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+  </button>
+  <span style="font-size: 14px; font-weight: 600; color: #0B1220;">Role details</span>
+  <button style="width: 40px; height: 40px; border-radius: 9999px; background: #FFFFFF; border: 1px solid #E5E7EB; display: flex; align-items: center; justify-content: center; color: #0B1220; cursor: pointer;">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>
+  </button>
+</div>
+
+<!-- Company Header -->
+<div style="display: flex; gap: 14px; align-items: center; margin-bottom: 20px;">
+  <div style="width: 52px; height: 52px; background: #F0F9FF; border: 1px solid #BAE6FD; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 800; color: #0369A1;">
+    TB
+  </div>
+  <div>
+    <h1 style="font-size: 20px; font-weight: 700; color: #0B1220; letter-spacing: -0.01em;">Junior Flutter Developer Intern</h1>
+    <div style="font-size: 13px; color: #4B5563; margin-top: 2px;">TechBridge Solutions • Phnom Penh • $250 / mo</div>
+  </div>
+</div>
+
+<!-- HERO CARD: Large Match Ring & Breakdown -->
+<div style="background: #FFFFFF; border-radius: 24px; padding: 24px; border: 1px solid #F0F1F3; margin-bottom: 20px; box-shadow: 0 8px 24px rgba(11,18,32,0.06); text-align: center;">
+  <!-- Large 96px Match Ring -->
+  <div style="display: flex; justify-content: center; margin-bottom: 14px;">
+    <div style="position: relative; width: 96px; height: 96px; display: inline-flex; align-items: center; justify-content: center;">
+      <svg width="96" height="96" style="transform: rotate(-90deg);">
+        <circle cx="48.0" cy="48.0" r="44.0" fill="none" stroke="#F0F1F3" stroke-width="8" />
+        <circle cx="48.0" cy="48.0" r="44.0" fill="none" stroke="#0EA5E9" stroke-width="8"
+                stroke-dasharray="276.45992" stroke-dashoffset="91.2317736" stroke-linecap="round" />
+      </svg>
+      <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 24px; color: #0369A1;">
+        67%
+      </div>
+    </div>
+  </div>
+
+  <h2 style="font-size: 18px; font-weight: 700; color: #0B1220; margin-bottom: 6px;">
+    You match 2 of 3 required skills
+  </h2>
+  <p style="font-size: 13px; color: #4B5563; margin-bottom: 20px;">
+    Based on your verified candidate profile.
+  </p>
+
+  <!-- Matched Skills Group -->
+  <div style="text-align: left; margin-bottom: 14px;">
+    <div style="font-size: 11px; font-weight: 600; color: #047857; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 8px;">Matched skills (2)</div>
+    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+      <div class="chip chip-matched"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> Flutter</div>
+      <div class="chip chip-matched"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> Git</div>
+    </div>
+  </div>
+
+  <!-- Missing Skills Group -->
+  <div style="text-align: left; margin-bottom: 20px;">
+    <div style="font-size: 11px; font-weight: 600; color: #BE123C; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 8px;">Skill gap (1)</div>
+    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+      <div class="chip chip-missing"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></svg></span> Docker</div>
+    </div>
+  </div>
+
+  <!-- Soft Sky Callout for Prep Hub -->
+  <div style="background: #F0F9FF; border: 1px solid #BAE6FD; border-radius: 14px; padding: 14px; display: flex; gap: 12px; text-align: left;">
+    <div style="color: #0369A1; flex-shrink: 0; margin-top: 1px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg></div>
+    <div style="font-size: 12px; color: #0369A1; line-height: 1.45;">
+      <strong>Preparation Hub Tip:</strong> Review the <span style="text-decoration: underline; font-weight: 600; cursor: pointer;">Docker Starter Guide</span> to close this gap before your interview.
+    </div>
+  </div>
+</div>
+
+<!-- Typographic Role Overview -->
+<div style="background: #FFFFFF; border-radius: 20px; padding: 20px; border: 1px solid #F0F1F3; margin-bottom: 16px;">
+  <h3 style="font-size: 16px; font-weight: 600; color: #0B1220; margin-bottom: 10px;">Role overview</h3>
+  <p style="font-size: 14px; color: #4B5563; line-height: 1.6; margin-bottom: 16px;">
+    We are seeking a motivated IT student or recent graduate looking for hands-on experience in cross-platform mobile apps. You will collaborate closely with senior engineers to build user-facing screens and connect backend services.
+  </p>
+
+  <h3 style="font-size: 16px; font-weight: 600; color: #0B1220; margin-bottom: 10px;">Responsibilities</h3>
+  <div style="display: flex; flex-direction: column; gap: 10px;">
+    <div style="display: flex; gap: 10px; font-size: 13px; color: #4B5563; line-height: 1.5;">
+      <div style="width: 5px; height: 5px; background: #0EA5E9; border-radius: 50%; margin-top: 7px; flex-shrink: 0;"></div>
+      <div>Build and test performant Flutter mobile views for iOS and Android.</div>
+    </div>
+    <div style="display: flex; gap: 10px; font-size: 13px; color: #4B5563; line-height: 1.5;">
+      <div style="width: 5px; height: 5px; background: #0EA5E9; border-radius: 50%; margin-top: 7px; flex-shrink: 0;"></div>
+      <div>Manage feature branches and code reviews using Git and GitHub.</div>
+    </div>
+    <div style="display: flex; gap: 10px; font-size: 13px; color: #4B5563; line-height: 1.5;">
+      <div style="width: 5px; height: 5px; background: #0EA5E9; border-radius: 50%; margin-top: 7px; flex-shrink: 0;"></div>
+      <div>Participate in weekly sprint reviews in our Phnom Penh engineering office.</div>
+    </div>
+  </div>
+</div>
+
+<!-- Sticky Bottom Bar -->
+<div style="background: #FFFFFF; border-top: 1px solid #E5E7EB; margin: 0 -20px -24px -20px; padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 -4px 16px rgba(11,18,32,0.04);">
+  <div>
+    <span style="font-size: 11px; color: #6B7280; font-weight: 500; display: block;">Readiness</span>
+    <span style="font-size: 16px; font-weight: 700; color: #0369A1;">67% match</span>
+  </div>
+  <button class="btn-ink" style="padding: 0 28px;">
+    <span>Apply now</span>
+    <span style="display: flex; align-items: center;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+  </button>
+</div>
+
+        </div>
+        
+        <div style="position: absolute; bottom: 6px; left: 50%; transform: translateX(-50%); width: 134px; height: 4px; background: #0B1220; border-radius: 2px; opacity: 0.2; z-index: 60;"></div>
+      </div>
+    </div>
+    
+    
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <div style="font-size: 14px; font-weight: 700; color: #0B1220; letter-spacing: 0.02em;">SCR-06 / Applications Tracker</div>
+      <div style="width: 393px; height: 852px; background: #FAFAFA; border-radius: 36px; border: 8px solid #0B1220; box-shadow: 0 20px 40px rgba(11,18,32,0.12); overflow: hidden; position: relative; display: flex; flex-direction: column;">
+        <div style="position: absolute; top: 10px; left: 50%; transform: translateX(-50%); width: 120px; height: 34px; background: #0B1220; border-radius: 20px; z-index: 45;"></div>
+        <div style="height: 44px; min-height: 44px; display: flex; justify-content: space-between; align-items: center; padding: 0 24px; font-size: 14px; font-weight: 600; color: #0B1220; z-index: 40;">
+          <span>9:41</span>
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <svg width="17" height="11" viewBox="0 0 17 11" fill="none"><path d="M1 9.5C1 9.5 3.5 6.5 8.5 6.5C13.5 6.5 16 9.5 16 9.5" stroke="#0B1220" stroke-width="1.5" stroke-linecap="round"/><path d="M3.5 7C3.5 7 5.5 4.5 8.5 4.5C11.5 4.5 13.5 7 13.5 7" stroke="#0B1220" stroke-width="1.5" stroke-linecap="round"/><circle cx="8.5" cy="9.5" r="1" fill="#0B1220"/></svg>
+            <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="#0B1220"/><rect x="2" y="2" width="16" height="8" rx="2" fill="#0B1220"/><path d="M23 4C23.5 4.5 24 5.2 24 6C24 6.8 23.5 7.5 23 8" stroke="#0B1220" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+        </div>
+        <div style="flex: 1; overflow-y: auto; padding: 8px 20px 90px 20px;">
+          
+<div style="margin: 8px 0 20px 0;">
+  <h1 style="font-size: 32px; font-weight: 700; color: #0B1220; letter-spacing: -0.02em; line-height: 1.1;">Applications</h1>
+  <p style="font-size: 13px; color: #4B5563; margin-top: 2px;">Track your submissions and hiring stages</p>
+</div>
+
+<!-- Pill-style Tab Switcher -->
+<div style="display: flex; gap: 8px; margin-bottom: 20px;">
+  <div style="background: #0B1220; color: #FFFFFF; padding: 7px 16px; border-radius: 9999px; font-size: 12px; font-weight: 600; cursor: pointer;">
+    All (2)
+  </div>
+  <div style="background: #FFFFFF; color: #4B5563; border: 1px solid #E5E7EB; padding: 7px 16px; border-radius: 9999px; font-size: 12px; font-weight: 500; cursor: pointer;">
+    Under review (1)
+  </div>
+  <div style="background: #FFFFFF; color: #4B5563; border: 1px solid #E5E7EB; padding: 7px 16px; border-radius: 9999px; font-size: 12px; font-weight: 500; cursor: pointer;">
+    Submitted (1)
+  </div>
+</div>
+
+<!-- Application Card 1 -->
+<div style="background: #FFFFFF; border-radius: 20px; padding: 20px; border: 1px solid #F0F1F3; margin-bottom: 16px; box-shadow: 0 8px 24px rgba(11,18,32,0.06);">
+  <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+    <div>
+      <h2 style="font-size: 16px; font-weight: 600; color: #0B1220; margin-bottom: 2px;">Junior Flutter Developer Intern</h2>
+      <span style="font-size: 13px; color: #4B5563;">TechBridge Solutions</span>
+    </div>
+    <div class="status-pill status-under-review">
+      <div class="status-dot"></div>
+      <span>Under review</span>
+    </div>
+  </div>
+
+  <div style="display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: #6B7280; margin-bottom: 18px;">
+    <span>Applied Nov 3, 2026</span>
+    <span style="font-weight: 700; color: #0369A1;">67% match score</span>
+  </div>
+
+  <!-- Modern Horizontal Stepper -->
+  <div style="position: relative; margin: 10px 10px 6px 10px;">
+    <!-- Connecting line -->
+    <div style="position: absolute; top: 12px; left: 16px; right: 16px; height: 2px; background: #E5E7EB; z-index: 1;"></div>
+    <div style="position: absolute; top: 12px; left: 16px; width: 50%; height: 2px; background: #0EA5E9; z-index: 2;"></div>
+
+    <div style="display: flex; justify-content: space-between; position: relative; z-index: 3;">
+      <!-- Step 1: Completed -->
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
+        <div style="width: 24px; height: 24px; background: #0EA5E9; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #FFFFFF;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+        </div>
+        <span style="font-size: 11px; font-weight: 600; color: #0B1220;">Submitted</span>
+      </div>
+
+      <!-- Step 2: Current (Pulsing ring) -->
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
+        <div style="width: 24px; height: 24px; background: #FFFFFF; border: 2px solid #0EA5E9; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.2);">
+          <div style="width: 8px; height: 8px; background: #0EA5E9; border-radius: 50%;"></div>
+        </div>
+        <span style="font-size: 11px; font-weight: 700; color: #0EA5E9;">Under review</span>
+      </div>
+
+      <!-- Step 3: Future -->
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
+        <div style="width: 24px; height: 24px; background: #FFFFFF; border: 2px solid #E5E7EB; border-radius: 50%;"></div>
+        <span style="font-size: 11px; font-weight: 500; color: #9CA3AF;">Decision</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Application Card 2 -->
+<div style="background: #FFFFFF; border-radius: 20px; padding: 20px; border: 1px solid #F0F1F3; margin-bottom: 16px; box-shadow: 0 8px 24px rgba(11,18,32,0.06);">
+  <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+    <div>
+      <h2 style="font-size: 16px; font-weight: 600; color: #0B1220; margin-bottom: 2px;">Junior Frontend Engineer</h2>
+      <span style="font-size: 13px; color: #4B5563;">Sabay Digital Labs</span>
+    </div>
+    <div class="status-pill status-submitted">
+      <div class="status-dot"></div>
+      <span>Submitted</span>
+    </div>
+  </div>
+
+  <div style="display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: #6B7280; margin-bottom: 18px;">
+    <span>Applied Oct 28, 2026</span>
+    <span style="font-weight: 700; color: #047857;">75% match score</span>
+  </div>
+
+  <div style="position: relative; margin: 10px 10px 6px 10px;">
+    <div style="position: absolute; top: 12px; left: 16px; right: 16px; height: 2px; background: #E5E7EB; z-index: 1;"></div>
+    <div style="display: flex; justify-content: space-between; position: relative; z-index: 3;">
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
+        <div style="width: 24px; height: 24px; background: #0EA5E9; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #FFFFFF;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+        </div>
+        <span style="font-size: 11px; font-weight: 600; color: #0B1220;">Submitted</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
+        <div style="width: 24px; height: 24px; background: #FFFFFF; border: 2px solid #E5E7EB; border-radius: 50%;"></div>
+        <span style="font-size: 11px; font-weight: 500; color: #9CA3AF;">Under review</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
+        <div style="width: 24px; height: 24px; background: #FFFFFF; border: 2px solid #E5E7EB; border-radius: 50%;"></div>
+        <span style="font-size: 11px; font-weight: 500; color: #9CA3AF;">Decision</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+        </div>
+        
+        <div style="position: absolute; bottom: 18px; left: 16px; right: 16px; height: 60px; background: rgba(255, 255, 255, 0.94); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid #E5E7EB; border-radius: 9999px; box-shadow: 0 12px 32px rgba(11, 18, 32, 0.08); display: flex; align-items: center; justify-content: space-around; z-index: 50; padding: 0 6px;">
+          
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 3px; color: #6B7280; font-size: 11px; font-weight: 500; padding: 6px 12px;">
+                  <span style="display: flex; align-items: center; opacity: 0.85;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></span>
+                  <span>Jobs</span>
+                </div>
+                
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 3px; color: #6B7280; font-size: 11px; font-weight: 500; padding: 6px 12px;">
+                  <span style="display: flex; align-items: center; opacity: 0.85;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg></span>
+                  <span>Saved</span>
+                </div>
+                
+                <div style="background: #0B1220; color: #FFFFFF; border-radius: 9999px; padding: 8px 16px; display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600;">
+                  <span style="display: flex; align-items: center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg></span>
+                  <span>Applied</span>
+                </div>
+                
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 3px; color: #6B7280; font-size: 11px; font-weight: 500; padding: 6px 12px;">
+                  <span style="display: flex; align-items: center; opacity: 0.85;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+                  <span>Profile</span>
+                </div>
+                
+        </div>
+        
+        <div style="position: absolute; bottom: 6px; left: 50%; transform: translateX(-50%); width: 134px; height: 4px; background: #0B1220; border-radius: 2px; opacity: 0.2; z-index: 60;"></div>
+      </div>
+    </div>
+    
+    
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <div style="font-size: 14px; font-weight: 700; color: #0B1220; letter-spacing: 0.02em;">SCR-08 / Candidate Profile & Portfolio</div>
+      <div style="width: 393px; height: 852px; background: #FAFAFA; border-radius: 36px; border: 8px solid #0B1220; box-shadow: 0 20px 40px rgba(11,18,32,0.12); overflow: hidden; position: relative; display: flex; flex-direction: column;">
+        <div style="position: absolute; top: 10px; left: 50%; transform: translateX(-50%); width: 120px; height: 34px; background: #0B1220; border-radius: 20px; z-index: 45;"></div>
+        <div style="height: 44px; min-height: 44px; display: flex; justify-content: space-between; align-items: center; padding: 0 24px; font-size: 14px; font-weight: 600; color: #0B1220; z-index: 40;">
+          <span>9:41</span>
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <svg width="17" height="11" viewBox="0 0 17 11" fill="none"><path d="M1 9.5C1 9.5 3.5 6.5 8.5 6.5C13.5 6.5 16 9.5 16 9.5" stroke="#0B1220" stroke-width="1.5" stroke-linecap="round"/><path d="M3.5 7C3.5 7 5.5 4.5 8.5 4.5C11.5 4.5 13.5 7 13.5 7" stroke="#0B1220" stroke-width="1.5" stroke-linecap="round"/><circle cx="8.5" cy="9.5" r="1" fill="#0B1220"/></svg>
+            <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="#0B1220"/><rect x="2" y="2" width="16" height="8" rx="2" fill="#0B1220"/><path d="M23 4C23.5 4.5 24 5.2 24 6C24 6.8 23.5 7.5 23 8" stroke="#0B1220" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+        </div>
+        <div style="flex: 1; overflow-y: auto; padding: 8px 20px 90px 20px;">
+          
+<!-- Profile Header (Centred) -->
+<div style="text-align: center; margin: 12px 0 24px 0;">
+  <div style="width: 72px; height: 72px; background: #0B1220; color: #FFFFFF; border-radius: 9999px; margin: 0 auto 12px auto; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 800; box-shadow: 0 8px 20px rgba(11,18,32,0.15);">
+    SP
+  </div>
+  <h1 style="font-size: 24px; font-weight: 700; color: #0B1220; letter-spacing: -0.01em;">Sokha Pech</h1>
+  <p style="font-size: 13px; color: #4B5563; margin-top: 2px;">Royal University of Phnom Penh (RUPP)</p>
+  <p style="font-size: 13px; color: #0369A1; font-weight: 600; margin-top: 2px;">Computer Science • Year 3</p>
+
+  <!-- Icon Pill Links -->
+  <div style="display: flex; justify-content: center; gap: 8px; margin-top: 14px;">
+    <a style="display: flex; align-items: center; gap: 6px; padding: 6px 12px; background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 9999px; font-size: 12px; font-weight: 500; color: #0B1220; text-decoration: none;">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg> github.com/sokhapech
+    </a>
+    <a style="display: flex; align-items: center; gap: 6px; padding: 6px 12px; background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 9999px; font-size: 12px; font-weight: 500; color: #0369A1; text-decoration: none;">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg> sokha.dev
+    </a>
+  </div>
+</div>
+
+<!-- Bento Layout of Cards -->
+<div style="display: flex; flex-direction: column; gap: 16px;">
+  <!-- Card 1: Skills -->
+  <div style="background: #FFFFFF; border-radius: 20px; padding: 20px; border: 1px solid #F0F1F3; box-shadow: 0 8px 24px rgba(11,18,32,0.06);">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+      <h2 style="font-size: 16px; font-weight: 600; color: #0B1220;">Technical skills (5)</h2>
+      <button style="background: none; border: none; font-size: 12px; font-weight: 600; color: #0369A1; cursor: pointer; display: flex; align-items: center; gap: 4px;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg> Add
+      </button>
+    </div>
+    <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+      <span class="chip chip-neutral" style="font-weight: 600;">Flutter</span>
+      <span class="chip chip-neutral" style="font-weight: 600;">Dart</span>
+      <span class="chip chip-neutral" style="font-weight: 600;">TypeScript</span>
+      <span class="chip chip-neutral" style="font-weight: 600;">Node.js</span>
+      <span class="chip chip-neutral" style="font-weight: 600;">Git</span>
+    </div>
+  </div>
+
+  <!-- Card 2: Projects -->
+  <div style="background: #FFFFFF; border-radius: 20px; padding: 20px; border: 1px solid #F0F1F3; box-shadow: 0 8px 24px rgba(11,18,32,0.06);">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+      <h2 style="font-size: 16px; font-weight: 600; color: #0B1220;">Software projects</h2>
+      <button style="background: none; border: none; font-size: 12px; font-weight: 600; color: #0369A1; cursor: pointer; display: flex; align-items: center; gap: 4px;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg> Add
+      </button>
+    </div>
+
+    <div style="margin-bottom: 14px; padding-bottom: 14px; border-bottom: 1px solid #F0F1F3;">
+      <h3 style="font-size: 14px; font-weight: 600; color: #0B1220;">Mobile Shopping App</h3>
+      <p style="font-size: 13px; color: #4B5563; margin-top: 2px;">Offline-first Flutter e-commerce client with SQLite storage.</p>
+      <div style="font-size: 12px; color: #0369A1; font-weight: 500; margin-top: 4px; display: flex; align-items: center; gap: 4px; cursor: pointer;">
+        github.com/sokhapech/shop <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
+      </div>
+    </div>
+
+    <div>
+      <h3 style="font-size: 14px; font-weight: 600; color: #0B1220;">DevPath Backend API</h3>
+      <p style="font-size: 13px; color: #4B5563; margin-top: 2px;">RESTful endpoints built with Node.js, TypeScript, and Prisma ORM.</p>
+    </div>
+  </div>
+
+  <!-- Card 3: Achievements -->
+  <div style="background: #FFFFFF; border-radius: 20px; padding: 20px; border: 1px solid #F0F1F3; box-shadow: 0 8px 24px rgba(11,18,32,0.06);">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+      <h2 style="font-size: 16px; font-weight: 600; color: #0B1220;">Achievements</h2>
+      <button style="background: none; border: none; font-size: 12px; font-weight: 600; color: #0369A1; cursor: pointer; display: flex; align-items: center; gap: 4px;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg> Add
+      </button>
+    </div>
+
+    <div style="display: flex; gap: 12px; align-items: flex-start;">
+      <div style="width: 36px; height: 36px; background: #FFFBEB; color: #B45309; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+      </div>
+      <div>
+        <h3 style="font-size: 14px; font-weight: 600; color: #0B1220;">1st Place — RUPP Hackathon 2025</h3>
+        <p style="font-size: 13px; color: #4B5563; margin-top: 2px;">Built an automated student portal in 24 hours.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+        </div>
+        
+        <div style="position: absolute; bottom: 18px; left: 16px; right: 16px; height: 60px; background: rgba(255, 255, 255, 0.94); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid #E5E7EB; border-radius: 9999px; box-shadow: 0 12px 32px rgba(11, 18, 32, 0.08); display: flex; align-items: center; justify-content: space-around; z-index: 50; padding: 0 6px;">
+          
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 3px; color: #6B7280; font-size: 11px; font-weight: 500; padding: 6px 12px;">
+                  <span style="display: flex; align-items: center; opacity: 0.85;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></span>
+                  <span>Jobs</span>
+                </div>
+                
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 3px; color: #6B7280; font-size: 11px; font-weight: 500; padding: 6px 12px;">
+                  <span style="display: flex; align-items: center; opacity: 0.85;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg></span>
+                  <span>Saved</span>
+                </div>
+                
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 3px; color: #6B7280; font-size: 11px; font-weight: 500; padding: 6px 12px;">
+                  <span style="display: flex; align-items: center; opacity: 0.85;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg></span>
+                  <span>Applied</span>
+                </div>
+                
+                <div style="background: #0B1220; color: #FFFFFF; border-radius: 9999px; padding: 8px 16px; display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600;">
+                  <span style="display: flex; align-items: center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+                  <span>Profile</span>
+                </div>
+                
+        </div>
+        
+        <div style="position: absolute; bottom: 6px; left: 50%; transform: translateX(-50%); width: 134px; height: 4px; background: #0B1220; border-radius: 2px; opacity: 0.2; z-index: 60;"></div>
+      </div>
+    </div>
+    
+  </div>
+
+  <!-- Deliverable 4: Employer Desktop Portal (1440 × 900) -->
+  <div class="board-section-title">
+    <span>04</span> Employer Web Portal (Desktop — 1440 &times; 900)
+  </div>
+  <div style="display: flex; flex-direction: column; gap: 48px;">
+    
+    <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 48px;">
+      <div style="font-size: 14px; font-weight: 700; color: #0B1220; letter-spacing: 0.02em;">SCR-10 / Employer Portal — Recruitment</div>
+      <div style="width: 1440px; height: 900px; background: #FAFAFA; border-radius: 20px; border: 4px solid #0B1220; box-shadow: 0 20px 50px rgba(11,18,32,0.1); display: flex; overflow: hidden;">
+        <aside style="width: 240px; background: #FFFFFF; border-right: 1px solid #E5E7EB; display: flex; flex-direction: column; justify-content: space-between; padding: 24px 16px; flex-shrink: 0;">
+          <div>
+            <div style="display: flex; align-items: center; gap: 10px; padding: 0 8px 24px 8px; border-bottom: 1px solid #F0F1F3; margin-bottom: 20px;">
+              <div style="width: 32px; height: 32px; background: #0B1220; border-radius: 9px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(11,18,32,0.15);">
+                <div style="width: 10px; height: 10px; background: #0EA5E9; border-radius: 3px;"></div>
+              </div>
+              <div style="font-size: 17px; font-weight: 800; color: #0B1220; letter-spacing: -0.02em;">DevPath</div>
+            </div>
+            <nav style="display: flex; flex-direction: column; gap: 4px;">
+              
+            <div style="display: flex; align-items: center; gap: 12px; padding: 10px 14px; background: #0B1220; color: #FFFFFF; border-radius: 12px; font-size: 13px; font-weight: 600;">
+              <span style="display: flex; align-items: center; color: #0EA5E9;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg></span>
+              <span>Dashboard</span>
+            </div>
+            
+            <div style="display: flex; align-items: center; gap: 12px; padding: 10px 14px; color: #4B5563; border-radius: 12px; font-size: 13px; font-weight: 500;">
+              <span style="display: flex; align-items: center; opacity: 0.8;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="7" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></span>
+              <span>Job postings</span>
+            </div>
+            
+            <div style="display: flex; align-items: center; gap: 12px; padding: 10px 14px; color: #4B5563; border-radius: 12px; font-size: 13px; font-weight: 500;">
+              <span style="display: flex; align-items: center; opacity: 0.8;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+              <span>Candidate search</span>
+            </div>
+            
+            <div style="display: flex; align-items: center; gap: 12px; padding: 10px 14px; color: #4B5563; border-radius: 12px; font-size: 13px; font-weight: 500;">
+              <span style="display: flex; align-items: center; opacity: 0.8;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></svg></span>
+              <span>Company profile</span>
+            </div>
+            
+            </nav>
+          </div>
+          <div style="padding-top: 16px; border-top: 1px solid #F0F1F3; display: flex; align-items: center; justify-content: space-between;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <div style="width: 36px; height: 36px; background: #0B1220; color: #FFFFFF; border-radius: 9999px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700;">DC</div>
+              <div>
+                <div style="font-size: 13px; font-weight: 600; color: #0B1220;">Dara Chem</div>
+                <div style="font-size: 11px; color: #6B7280;">TechBridge Solutions</div>
+              </div>
+            </div>
+            <div style="color: #6B7280;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></div>
+          </div>
+        </aside>
+        <main style="flex: 1; overflow-y: auto; padding: 32px 48px; background: #FAFAFA;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px;">
+            <h1 style="font-size: 32px; font-weight: 700; color: #0B1220; letter-spacing: -0.02em;">Recruitment</h1>
+            <div>
+<button class="btn-ink" style="height: 44px; padding: 0 20px; font-size: 14px;">
+  <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span>
+  <span>Post a new job</span>
+</button>
+</div>
+          </div>
+          
+<!-- Bento Row of 4 KPI Cards -->
+<div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 32px;">
+  <div style="background: #FFFFFF; border-radius: 20px; padding: 22px; border: 1px solid #F0F1F3; box-shadow: 0 8px 24px rgba(11,18,32,0.06);">
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+      <span style="font-size: 13px; font-weight: 500; color: #6B7280;">Active roles</span>
+      <span style="font-size: 11px; font-weight: 600; color: #047857; background: #ECFDF5; padding: 2px 8px; border-radius: 9999px;">+1 this month</span>
+    </div>
+    <div style="font-size: 32px; font-weight: 800; color: #0B1220; letter-spacing: -0.02em;">3</div>
+    <span style="font-size: 12px; color: #4B5563; margin-top: 4px; display: block;">Open positions</span>
+  </div>
+
+  <div style="background: #FFFFFF; border-radius: 20px; padding: 22px; border: 1px solid #F0F1F3; box-shadow: 0 8px 24px rgba(11,18,32,0.06);">
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+      <span style="font-size: 13px; font-weight: 500; color: #6B7280;">Total applicants</span>
+      <span style="font-size: 11px; font-weight: 600; color: #0369A1; background: #F0F9FF; padding: 2px 8px; border-radius: 9999px;">+4 this week</span>
+    </div>
+    <div style="font-size: 32px; font-weight: 800; color: #0B1220; letter-spacing: -0.02em;">18</div>
+    <span style="font-size: 12px; color: #4B5563; margin-top: 4px; display: block;">Candidates applied</span>
+  </div>
+
+  <div style="background: #FFFFFF; border-radius: 20px; padding: 22px; border: 1px solid #F0F1F3; box-shadow: 0 8px 24px rgba(11,18,32,0.06);">
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+      <span style="font-size: 13px; font-weight: 500; color: #6B7280;">High match (&gt;65%)</span>
+      <span style="font-size: 11px; font-weight: 600; color: #047857; background: #ECFDF5; padding: 2px 8px; border-radius: 9999px;">61% of total</span>
+    </div>
+    <div style="font-size: 32px; font-weight: 800; color: #047857; letter-spacing: -0.02em;">11</div>
+    <span style="font-size: 12px; color: #4B5563; margin-top: 4px; display: block;">Ready for review</span>
+  </div>
+
+  <div style="background: #FFFFFF; border-radius: 20px; padding: 22px; border: 1px solid #F0F1F3; box-shadow: 0 8px 24px rgba(11,18,32,0.06);">
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+      <span style="font-size: 13px; font-weight: 500; color: #6B7280;">Average match</span>
+      <span style="font-size: 11px; font-weight: 600; color: #0369A1; background: #F0F9FF; padding: 2px 8px; border-radius: 9999px;">+5% vs avg</span>
+    </div>
+    <div style="font-size: 32px; font-weight: 800; color: #0B1220; letter-spacing: -0.02em;">71%</div>
+    <span style="font-size: 12px; color: #4B5563; margin-top: 4px; display: block;">Candidate readiness</span>
+  </div>
+</div>
+
+<!-- Section Title -->
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+  <h2 style="font-size: 20px; font-weight: 600; color: #0B1220;">Active job postings</h2>
+  <span style="font-size: 13px; color: #6B7280;">Showing 3 of 3 roles</span>
+</div>
+
+<!-- Clean Spacious Rows (Not a boxed table) -->
+<div style="display: flex; flex-direction: column; gap: 12px;">
+  <!-- Job Row 1 -->
+  <div style="background: #FFFFFF; border-radius: 16px; padding: 20px 24px; border: 1px solid #F0F1F3; box-shadow: 0 4px 16px rgba(11,18,32,0.03); display: flex; align-items: center; justify-content: space-between;">
+    <div style="width: 320px;">
+      <h3 style="font-size: 16px; font-weight: 600; color: #0B1220; margin-bottom: 4px;">Junior Flutter Developer Intern</h3>
+      <span style="font-size: 13px; color: #6B7280;">Mobile development • Phnom Penh • Posted Nov 3</span>
+    </div>
+
+    <!-- Required Skills -->
+    <div style="display: flex; gap: 6px; width: 220px;">
+      <span class="chip chip-neutral" style="font-size: 11px;">Flutter</span>
+      <span class="chip chip-neutral" style="font-size: 11px;">Git</span>
+      <span class="chip chip-neutral" style="font-size: 11px;">Docker</span>
+    </div>
+
+    <!-- Stipend -->
+    <div style="width: 120px;">
+      <span style="font-size: 14px; font-weight: 600; color: #0B1220;">$250 / mo</span>
+      <span style="font-size: 11px; color: #6B7280; display: block;">Monthly stipend</span>
+    </div>
+
+    <!-- Applicants with Mini Progress Bar for High-Fit -->
+    <div style="width: 160px;">
+      <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px;">
+        <span style="font-weight: 600; color: #0B1220;">4 applicants</span>
+        <span style="color: #047857; font-weight: 500;">2 high-fit</span>
+      </div>
+      <div style="width: 100%; height: 6px; background: #F1F5F9; border-radius: 9999px; overflow: hidden;">
+        <div style="width: 50%; height: 100%; background: #0EA5E9; border-radius: 9999px;"></div>
+      </div>
+    </div>
+
+    <!-- Status -->
+    <div style="width: 90px;">
+      <span class="status-pill status-accepted">
+        <span class="status-dot"></span>
+        Open
+      </span>
+    </div>
+
+    <!-- Action -->
+    <button class="btn-secondary" style="height: 40px; padding: 0 16px; font-size: 13px;">
+      Review applicants (4)
+    </button>
+  </div>
+
+  <!-- Job Row 2 -->
+  <div style="background: #FFFFFF; border-radius: 16px; padding: 20px 24px; border: 1px solid #F0F1F3; box-shadow: 0 4px 16px rgba(11,18,32,0.03); display: flex; align-items: center; justify-content: space-between;">
+    <div style="width: 320px;">
+      <h3 style="font-size: 16px; font-weight: 600; color: #0B1220; margin-bottom: 4px;">Junior QA Automation Engineer</h3>
+      <span style="font-size: 13px; color: #6B7280;">QA & testing • Phnom Penh • Posted Oct 29</span>
+    </div>
+
+    <div style="display: flex; gap: 6px; width: 220px;">
+      <span class="chip chip-neutral" style="font-size: 11px;">Selenium</span>
+      <span class="chip chip-neutral" style="font-size: 11px;">Python</span>
+      <span class="chip chip-neutral" style="font-size: 11px;">Git</span>
+    </div>
+
+    <div style="width: 120px;">
+      <span style="font-size: 14px; font-weight: 600; color: #0B1220;">$300 / mo</span>
+      <span style="font-size: 11px; color: #6B7280; display: block;">Monthly stipend</span>
+    </div>
+
+    <div style="width: 160px;">
+      <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px;">
+        <span style="font-weight: 600; color: #0B1220;">6 applicants</span>
+        <span style="color: #047857; font-weight: 500;">4 high-fit</span>
+      </div>
+      <div style="width: 100%; height: 6px; background: #F1F5F9; border-radius: 9999px; overflow: hidden;">
+        <div style="width: 66%; height: 100%; background: #0EA5E9; border-radius: 9999px;"></div>
+      </div>
+    </div>
+
+    <div style="width: 90px;">
+      <span class="status-pill status-accepted">
+        <span class="status-dot"></span>
+        Open
+      </span>
+    </div>
+
+    <button class="btn-secondary" style="height: 40px; padding: 0 16px; font-size: 13px;">
+      Review applicants (6)
+    </button>
+  </div>
+
+  <!-- Job Row 3 -->
+  <div style="background: #FFFFFF; border-radius: 16px; padding: 20px 24px; border: 1px solid #F0F1F3; box-shadow: 0 4px 16px rgba(11,18,32,0.03); display: flex; align-items: center; justify-content: space-between;">
+    <div style="width: 320px;">
+      <h3 style="font-size: 16px; font-weight: 600; color: #0B1220; margin-bottom: 4px;">DevOps & Cloud Intern</h3>
+      <span style="font-size: 13px; color: #6B7280;">DevOps & cloud • Remote • Posted Oct 25</span>
+    </div>
+
+    <div style="display: flex; gap: 6px; width: 220px;">
+      <span class="chip chip-neutral" style="font-size: 11px;">Docker</span>
+      <span class="chip chip-neutral" style="font-size: 11px;">Linux</span>
+      <span class="chip chip-neutral" style="font-size: 11px;">AWS</span>
+    </div>
+
+    <div style="width: 120px;">
+      <span style="font-size: 14px; font-weight: 600; color: #0B1220;">$280 / mo</span>
+      <span style="font-size: 11px; color: #6B7280; display: block;">Monthly stipend</span>
+    </div>
+
+    <div style="width: 160px;">
+      <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px;">
+        <span style="font-weight: 600; color: #0B1220;">8 applicants</span>
+        <span style="color: #047857; font-weight: 500;">5 high-fit</span>
+      </div>
+      <div style="width: 100%; height: 6px; background: #F1F5F9; border-radius: 9999px; overflow: hidden;">
+        <div style="width: 62%; height: 100%; background: #0EA5E9; border-radius: 9999px;"></div>
+      </div>
+    </div>
+
+    <div style="width: 90px;">
+      <span class="status-pill status-accepted">
+        <span class="status-dot"></span>
+        Open
+      </span>
+    </div>
+
+    <button class="btn-secondary" style="height: 40px; padding: 0 16px; font-size: 13px;">
+      Review applicants (8)
+    </button>
+  </div>
+</div>
+
+        </main>
+      </div>
+    </div>
+    
+    
+    <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 48px;">
+      <div style="font-size: 14px; font-weight: 700; color: #0B1220; letter-spacing: 0.02em;">SCR-12 / Employer Portal — Applicants (Selected Candidate Variant)</div>
+      <div style="width: 1440px; height: 900px; background: #FAFAFA; border-radius: 20px; border: 4px solid #0B1220; box-shadow: 0 20px 50px rgba(11,18,32,0.1); display: flex; overflow: hidden;">
+        <aside style="width: 240px; background: #FFFFFF; border-right: 1px solid #E5E7EB; display: flex; flex-direction: column; justify-content: space-between; padding: 24px 16px; flex-shrink: 0;">
+          <div>
+            <div style="display: flex; align-items: center; gap: 10px; padding: 0 8px 24px 8px; border-bottom: 1px solid #F0F1F3; margin-bottom: 20px;">
+              <div style="width: 32px; height: 32px; background: #0B1220; border-radius: 9px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(11,18,32,0.15);">
+                <div style="width: 10px; height: 10px; background: #0EA5E9; border-radius: 3px;"></div>
+              </div>
+              <div style="font-size: 17px; font-weight: 800; color: #0B1220; letter-spacing: -0.02em;">DevPath</div>
+            </div>
+            <nav style="display: flex; flex-direction: column; gap: 4px;">
+              
+            <div style="display: flex; align-items: center; gap: 12px; padding: 10px 14px; color: #4B5563; border-radius: 12px; font-size: 13px; font-weight: 500;">
+              <span style="display: flex; align-items: center; opacity: 0.8;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg></span>
+              <span>Dashboard</span>
+            </div>
+            
+            <div style="display: flex; align-items: center; gap: 12px; padding: 10px 14px; background: #0B1220; color: #FFFFFF; border-radius: 12px; font-size: 13px; font-weight: 600;">
+              <span style="display: flex; align-items: center; color: #0EA5E9;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="7" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></span>
+              <span>Job postings</span>
+            </div>
+            
+            <div style="display: flex; align-items: center; gap: 12px; padding: 10px 14px; color: #4B5563; border-radius: 12px; font-size: 13px; font-weight: 500;">
+              <span style="display: flex; align-items: center; opacity: 0.8;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+              <span>Candidate search</span>
+            </div>
+            
+            <div style="display: flex; align-items: center; gap: 12px; padding: 10px 14px; color: #4B5563; border-radius: 12px; font-size: 13px; font-weight: 500;">
+              <span style="display: flex; align-items: center; opacity: 0.8;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></svg></span>
+              <span>Company profile</span>
+            </div>
+            
+            </nav>
+          </div>
+          <div style="padding-top: 16px; border-top: 1px solid #F0F1F3; display: flex; align-items: center; justify-content: space-between;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <div style="width: 36px; height: 36px; background: #0B1220; color: #FFFFFF; border-radius: 9999px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700;">DC</div>
+              <div>
+                <div style="font-size: 13px; font-weight: 600; color: #0B1220;">Dara Chem</div>
+                <div style="font-size: 11px; color: #6B7280;">TechBridge Solutions</div>
+              </div>
+            </div>
+            <div style="color: #6B7280;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></div>
+          </div>
+        </aside>
+        <main style="flex: 1; overflow-y: auto; padding: 32px 48px; background: #FAFAFA;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px;">
+            <h1 style="font-size: 32px; font-weight: 700; color: #0B1220; letter-spacing: -0.02em;">Applicants (Selected Candidate Variant)</h1>
+            <div></div>
+          </div>
+          
+    <!-- Breadcrumb -->
+    <div style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #6B7280; margin-top: -12px; margin-bottom: 14px;">
+      <span style="cursor: pointer;">Job postings</span>
+      <span>/</span>
+      <span style="color: #0B1220; font-weight: 500;">Junior Flutter Developer Intern</span>
+      <span>/</span>
+      <span style="color: #0B1220; font-weight: 600;">Applicants</span>
+    </div>
+
+    <!-- Header info with required skills chips -->
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 24px;">
+      <div>
+        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 6px;">
+          <h2 style="font-size: 20px; font-weight: 600; color: #0B1220;">Required skills:</h2>
+          <div style="display: flex; gap: 6px;">
+            <span class="chip chip-neutral" style="font-weight: 600;">Flutter</span>
+            <span class="chip chip-neutral" style="font-weight: 600;">Git</span>
+            <span class="chip chip-neutral" style="font-weight: 600;">Docker</span>
+          </div>
+        </div>
+        <p style="font-size: 13px; color: #6B7280;">4 candidates applied • Ranked by verified technical skill match</p>
+      </div>
+
+      <!-- Filters on Right -->
+      <div style="display: flex; gap: 10px;">
+        <div style="background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 9999px; padding: 8px 16px; font-size: 13px; font-weight: 500; color: #0B1220; display: flex; align-items: center; gap: 6px; cursor: pointer;">
+          <span>Highest skill match</span>
+          <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+        </div>
+        <div style="background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 9999px; padding: 8px 16px; font-size: 13px; font-weight: 500; color: #0B1220; display: flex; align-items: center; gap: 6px; cursor: pointer;">
+          <span>All statuses (4)</span>
+          <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Summary Strip Showing Counts per Status -->
+    <div style="display: flex; gap: 12px; margin-bottom: 20px;">
+      <div style="background: #0B1220; color: #FFFFFF; padding: 6px 14px; border-radius: 9999px; font-size: 12px; font-weight: 600; cursor: pointer;">
+        All (4)
+      </div>
+      <div style="background: #FFFFFF; color: #B45309; border: 1px solid #FDE68A; padding: 6px 14px; border-radius: 9999px; font-size: 12px; font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 6px;">
+        <span style="width: 6px; height: 6px; background: #D97706; border-radius: 50%;"></span>
+        Under review (1)
+      </div>
+      <div style="background: #FFFFFF; color: #047857; border: 1px solid #A7F3D0; padding: 6px 14px; border-radius: 9999px; font-size: 12px; font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 6px;">
+        <span style="width: 6px; height: 6px; background: #10B981; border-radius: 50%;"></span>
+        Accepted (1)
+      </div>
+      <div style="background: #FFFFFF; color: #475569; border: 1px solid #E5E7EB; padding: 6px 14px; border-radius: 9999px; font-size: 12px; font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 6px;">
+        <span style="width: 6px; height: 6px; background: #64748B; border-radius: 50%;"></span>
+        Submitted (2)
+      </div>
+    </div>
+
+    <!-- Spacious Candidate Row Cards -->
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <!-- Candidate 1: Chan Vutha (100% Fit) -->
+      <div style="background: #FFFFFF; border-radius: 18px; padding: 18px 24px; border: 1px solid #F0F1F3; box-shadow: 0 4px 16px rgba(11,18,32,0.03); display: flex; align-items: center; justify-content: space-between;">
+        <div style="display: flex; align-items: center; gap: 14px; width: 380px;">
+          <div style="width: 44px; height: 44px; background: #ECFDF5; color: #047857; border-radius: 9999px; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700; flex-shrink: 0;">
+            CV
+          </div>
+          <div>
+            <div style="font-size: 15px; font-weight: 600; color: #0B1220;">Chan Vutha</div>
+            <div style="font-size: 12px; color: #6B7280;">Institute of Technology of Cambodia • Year 4</div>
+            <a style="font-size: 11px; color: #0369A1; text-decoration: none; display: flex; align-items: center; gap: 4px; margin-top: 2px;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg> github.com/chanvutha
+            </a>
+          </div>
+        </div>
+
+        <!-- Match Ring -->
+        <div style="width: 80px; text-align: center;">
+          <div style="position: relative; width: 48px; height: 48px; display: inline-flex; align-items: center; justify-content: center;">
+      <svg width="48" height="48" style="transform: rotate(-90deg);">
+        <circle cx="24.0" cy="24.0" r="22.0" fill="none" stroke="#F0F1F3" stroke-width="4" />
+        <circle cx="24.0" cy="24.0" r="22.0" fill="none" stroke="#10B981" stroke-width="4"
+                stroke-dasharray="138.22996" stroke-dashoffset="0.0" stroke-linecap="round" />
+      </svg>
+      <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 12px; color: #047857;">
+        100%
+      </div>
+    </div>
+        </div>
+
+        <!-- Matched / Missing Chips Row -->
+        <div style="flex: 1; padding: 0 24px;">
+          <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+            <span class="chip chip-matched"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> Flutter</span>
+            <span class="chip chip-matched"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> Git</span>
+            <span class="chip chip-matched"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> Docker</span>
+          </div>
+        </div>
+
+        <!-- Status Pill -->
+        <div style="width: 110px;">
+          <span class="status-pill status-accepted">
+            <span class="status-dot"></span>
+            Accepted
+          </span>
+        </div>
+
+        <!-- Action -->
+        <button class="btn-secondary" style="height: 38px; padding: 0 16px; font-size: 12px;">
+          View profile
+        </button>
+      </div>
+
+      <!-- Candidate 2: Sokha Pech (Selected Row Variant) -->
+      <div style="border-radius: 18px; padding: 18px 24px; display: flex; align-items: center; justify-content: space-between; border: 1.5px solid #0EA5E9; background: #F0F9FF; box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.12);">
+        <div style="display: flex; align-items: center; gap: 14px; width: 380px;">
+          <div style="width: 44px; height: 44px; background: #0B1220; color: #FFFFFF; border-radius: 9999px; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700; flex-shrink: 0;">
+            SP
+          </div>
+          <div>
+            <div style="font-size: 15px; font-weight: 700; color: #0B1220; display: flex; align-items: center; gap: 6px;">
+              <span>Sokha Pech</span>
+              <span style="font-size: 11px; background: #F0F9FF; color: #0369A1; border: 1px solid #BAE6FD; padding: 1px 6px; border-radius: 4px; font-weight: 600;">Selected</span>
+            </div>
+            <div style="font-size: 12px; color: #6B7280;">Royal University of Phnom Penh • Year 3</div>
+            <a style="font-size: 11px; color: #0369A1; text-decoration: none; display: flex; align-items: center; gap: 4px; margin-top: 2px;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg> github.com/sokhapech
+            </a>
+          </div>
+        </div>
+
+        <!-- Match Ring -->
+        <div style="width: 80px; text-align: center;">
+          <div style="position: relative; width: 48px; height: 48px; display: inline-flex; align-items: center; justify-content: center;">
+      <svg width="48" height="48" style="transform: rotate(-90deg);">
+        <circle cx="24.0" cy="24.0" r="22.0" fill="none" stroke="#F0F1F3" stroke-width="4" />
+        <circle cx="24.0" cy="24.0" r="22.0" fill="none" stroke="#0EA5E9" stroke-width="4"
+                stroke-dasharray="138.22996" stroke-dashoffset="45.6158868" stroke-linecap="round" />
+      </svg>
+      <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 12px; color: #0369A1;">
+        67%
+      </div>
+    </div>
+        </div>
+
+        <!-- Matched & Missing Chips -->
+        <div style="flex: 1; padding: 0 24px;">
+          <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+            <span class="chip chip-matched"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> Flutter</span>
+            <span class="chip chip-matched"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> Git</span>
+            <span class="chip chip-missing"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></svg></span> Docker</span>
+          </div>
+        </div>
+
+        <!-- Status Pill / Dropdown -->
+        <div style="width: 110px;">
+          <span class="status-pill status-under-review">
+            <span class="status-dot"></span>
+            Under review
+          </span>
+        </div>
+
+        <!-- Action -->
+        <button class="btn-ink" style="height: 38px; padding: 0 16px; font-size: 12px;">Review candidate</button>
+      </div>
+
+      <!-- Candidate 3: Bopha Chea (33% Fit) -->
+      <div style="background: #FFFFFF; border-radius: 18px; padding: 18px 24px; border: 1px solid #F0F1F3; box-shadow: 0 4px 16px rgba(11,18,32,0.03); display: flex; align-items: center; justify-content: space-between;">
+        <div style="display: flex; align-items: center; gap: 14px; width: 380px;">
+          <div style="width: 44px; height: 44px; background: #F1F5F9; color: #475569; border-radius: 9999px; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700; flex-shrink: 0;">
+            BC
+          </div>
+          <div>
+            <div style="font-size: 15px; font-weight: 600; color: #0B1220;">Bopha Chea</div>
+            <div style="font-size: 12px; color: #6B7280;">CADT • Year 2</div>
+            <a style="font-size: 11px; color: #6B7280; text-decoration: none; display: flex; align-items: center; gap: 4px; margin-top: 2px;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg> github.com/bophachea
+            </a>
+          </div>
+        </div>
+
+        <!-- Match Ring -->
+        <div style="width: 80px; text-align: center;">
+          <div style="position: relative; width: 48px; height: 48px; display: inline-flex; align-items: center; justify-content: center;">
+      <svg width="48" height="48" style="transform: rotate(-90deg);">
+        <circle cx="24.0" cy="24.0" r="22.0" fill="none" stroke="#F0F1F3" stroke-width="4" />
+        <circle cx="24.0" cy="24.0" r="22.0" fill="none" stroke="#9CA3AF" stroke-width="4"
+                stroke-dasharray="138.22996" stroke-dashoffset="92.61407319999999" stroke-linecap="round" />
+      </svg>
+      <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 12px; color: #4B5563;">
+        33%
+      </div>
+    </div>
+        </div>
+
+        <!-- Matched & Missing Chips -->
+        <div style="flex: 1; padding: 0 24px;">
+          <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+            <span class="chip chip-matched"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> Git</span>
+            <span class="chip chip-missing"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></svg></span> Flutter</span>
+            <span class="chip chip-missing"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></svg></span> Docker</span>
+          </div>
+        </div>
+
+        <!-- Status Pill -->
+        <div style="width: 110px;">
+          <span class="status-pill status-submitted">
+            <span class="status-dot"></span>
+            Submitted
+          </span>
+        </div>
+
+        <!-- Action -->
+        <button class="btn-secondary" style="height: 38px; padding: 0 16px; font-size: 12px;">
+          View profile
+        </button>
+      </div>
+    </div>
+    
+        </main>
+      </div>
+    </div>
+    
+    
+    <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 48px;">
+      <div style="font-size: 14px; font-weight: 700; color: #0B1220; letter-spacing: 0.02em;">SCR-12 / Employer Portal — Applicants (Default / Hover State Variant)</div>
+      <div style="width: 1440px; height: 900px; background: #FAFAFA; border-radius: 20px; border: 4px solid #0B1220; box-shadow: 0 20px 50px rgba(11,18,32,0.1); display: flex; overflow: hidden;">
+        <aside style="width: 240px; background: #FFFFFF; border-right: 1px solid #E5E7EB; display: flex; flex-direction: column; justify-content: space-between; padding: 24px 16px; flex-shrink: 0;">
+          <div>
+            <div style="display: flex; align-items: center; gap: 10px; padding: 0 8px 24px 8px; border-bottom: 1px solid #F0F1F3; margin-bottom: 20px;">
+              <div style="width: 32px; height: 32px; background: #0B1220; border-radius: 9px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(11,18,32,0.15);">
+                <div style="width: 10px; height: 10px; background: #0EA5E9; border-radius: 3px;"></div>
+              </div>
+              <div style="font-size: 17px; font-weight: 800; color: #0B1220; letter-spacing: -0.02em;">DevPath</div>
+            </div>
+            <nav style="display: flex; flex-direction: column; gap: 4px;">
+              
+            <div style="display: flex; align-items: center; gap: 12px; padding: 10px 14px; color: #4B5563; border-radius: 12px; font-size: 13px; font-weight: 500;">
+              <span style="display: flex; align-items: center; opacity: 0.8;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg></span>
+              <span>Dashboard</span>
+            </div>
+            
+            <div style="display: flex; align-items: center; gap: 12px; padding: 10px 14px; background: #0B1220; color: #FFFFFF; border-radius: 12px; font-size: 13px; font-weight: 600;">
+              <span style="display: flex; align-items: center; color: #0EA5E9;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="7" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></span>
+              <span>Job postings</span>
+            </div>
+            
+            <div style="display: flex; align-items: center; gap: 12px; padding: 10px 14px; color: #4B5563; border-radius: 12px; font-size: 13px; font-weight: 500;">
+              <span style="display: flex; align-items: center; opacity: 0.8;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+              <span>Candidate search</span>
+            </div>
+            
+            <div style="display: flex; align-items: center; gap: 12px; padding: 10px 14px; color: #4B5563; border-radius: 12px; font-size: 13px; font-weight: 500;">
+              <span style="display: flex; align-items: center; opacity: 0.8;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></svg></span>
+              <span>Company profile</span>
+            </div>
+            
+            </nav>
+          </div>
+          <div style="padding-top: 16px; border-top: 1px solid #F0F1F3; display: flex; align-items: center; justify-content: space-between;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <div style="width: 36px; height: 36px; background: #0B1220; color: #FFFFFF; border-radius: 9999px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700;">DC</div>
+              <div>
+                <div style="font-size: 13px; font-weight: 600; color: #0B1220;">Dara Chem</div>
+                <div style="font-size: 11px; color: #6B7280;">TechBridge Solutions</div>
+              </div>
+            </div>
+            <div style="color: #6B7280;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></div>
+          </div>
+        </aside>
+        <main style="flex: 1; overflow-y: auto; padding: 32px 48px; background: #FAFAFA;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px;">
+            <h1 style="font-size: 32px; font-weight: 700; color: #0B1220; letter-spacing: -0.02em;">Applicants (Default / Hover State Variant)</h1>
+            <div></div>
+          </div>
+          
+    <!-- Breadcrumb -->
+    <div style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #6B7280; margin-top: -12px; margin-bottom: 14px;">
+      <span style="cursor: pointer;">Job postings</span>
+      <span>/</span>
+      <span style="color: #0B1220; font-weight: 500;">Junior Flutter Developer Intern</span>
+      <span>/</span>
+      <span style="color: #0B1220; font-weight: 600;">Applicants</span>
+    </div>
+
+    <!-- Header info with required skills chips -->
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 24px;">
+      <div>
+        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 6px;">
+          <h2 style="font-size: 20px; font-weight: 600; color: #0B1220;">Required skills:</h2>
+          <div style="display: flex; gap: 6px;">
+            <span class="chip chip-neutral" style="font-weight: 600;">Flutter</span>
+            <span class="chip chip-neutral" style="font-weight: 600;">Git</span>
+            <span class="chip chip-neutral" style="font-weight: 600;">Docker</span>
+          </div>
+        </div>
+        <p style="font-size: 13px; color: #6B7280;">4 candidates applied • Ranked by verified technical skill match</p>
+      </div>
+
+      <!-- Filters on Right -->
+      <div style="display: flex; gap: 10px;">
+        <div style="background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 9999px; padding: 8px 16px; font-size: 13px; font-weight: 500; color: #0B1220; display: flex; align-items: center; gap: 6px; cursor: pointer;">
+          <span>Highest skill match</span>
+          <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+        </div>
+        <div style="background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 9999px; padding: 8px 16px; font-size: 13px; font-weight: 500; color: #0B1220; display: flex; align-items: center; gap: 6px; cursor: pointer;">
+          <span>All statuses (4)</span>
+          <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Summary Strip Showing Counts per Status -->
+    <div style="display: flex; gap: 12px; margin-bottom: 20px;">
+      <div style="background: #0B1220; color: #FFFFFF; padding: 6px 14px; border-radius: 9999px; font-size: 12px; font-weight: 600; cursor: pointer;">
+        All (4)
+      </div>
+      <div style="background: #FFFFFF; color: #B45309; border: 1px solid #FDE68A; padding: 6px 14px; border-radius: 9999px; font-size: 12px; font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 6px;">
+        <span style="width: 6px; height: 6px; background: #D97706; border-radius: 50%;"></span>
+        Under review (1)
+      </div>
+      <div style="background: #FFFFFF; color: #047857; border: 1px solid #A7F3D0; padding: 6px 14px; border-radius: 9999px; font-size: 12px; font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 6px;">
+        <span style="width: 6px; height: 6px; background: #10B981; border-radius: 50%;"></span>
+        Accepted (1)
+      </div>
+      <div style="background: #FFFFFF; color: #475569; border: 1px solid #E5E7EB; padding: 6px 14px; border-radius: 9999px; font-size: 12px; font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 6px;">
+        <span style="width: 6px; height: 6px; background: #64748B; border-radius: 50%;"></span>
+        Submitted (2)
+      </div>
+    </div>
+
+    <!-- Spacious Candidate Row Cards -->
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <!-- Candidate 1: Chan Vutha (100% Fit) -->
+      <div style="background: #FFFFFF; border-radius: 18px; padding: 18px 24px; border: 1px solid #F0F1F3; box-shadow: 0 4px 16px rgba(11,18,32,0.03); display: flex; align-items: center; justify-content: space-between;">
+        <div style="display: flex; align-items: center; gap: 14px; width: 380px;">
+          <div style="width: 44px; height: 44px; background: #ECFDF5; color: #047857; border-radius: 9999px; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700; flex-shrink: 0;">
+            CV
+          </div>
+          <div>
+            <div style="font-size: 15px; font-weight: 600; color: #0B1220;">Chan Vutha</div>
+            <div style="font-size: 12px; color: #6B7280;">Institute of Technology of Cambodia • Year 4</div>
+            <a style="font-size: 11px; color: #0369A1; text-decoration: none; display: flex; align-items: center; gap: 4px; margin-top: 2px;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg> github.com/chanvutha
+            </a>
+          </div>
+        </div>
+
+        <!-- Match Ring -->
+        <div style="width: 80px; text-align: center;">
+          <div style="position: relative; width: 48px; height: 48px; display: inline-flex; align-items: center; justify-content: center;">
+      <svg width="48" height="48" style="transform: rotate(-90deg);">
+        <circle cx="24.0" cy="24.0" r="22.0" fill="none" stroke="#F0F1F3" stroke-width="4" />
+        <circle cx="24.0" cy="24.0" r="22.0" fill="none" stroke="#10B981" stroke-width="4"
+                stroke-dasharray="138.22996" stroke-dashoffset="0.0" stroke-linecap="round" />
+      </svg>
+      <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 12px; color: #047857;">
+        100%
+      </div>
+    </div>
+        </div>
+
+        <!-- Matched / Missing Chips Row -->
+        <div style="flex: 1; padding: 0 24px;">
+          <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+            <span class="chip chip-matched"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> Flutter</span>
+            <span class="chip chip-matched"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> Git</span>
+            <span class="chip chip-matched"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> Docker</span>
+          </div>
+        </div>
+
+        <!-- Status Pill -->
+        <div style="width: 110px;">
+          <span class="status-pill status-accepted">
+            <span class="status-dot"></span>
+            Accepted
+          </span>
+        </div>
+
+        <!-- Action -->
+        <button class="btn-secondary" style="height: 38px; padding: 0 16px; font-size: 12px;">
+          View profile
+        </button>
+      </div>
+
+      <!-- Candidate 2: Sokha Pech (Selected Row Variant) -->
+      <div style="border-radius: 18px; padding: 18px 24px; display: flex; align-items: center; justify-content: space-between; border: 1px solid #F0F1F3; background: #FFFFFF;">
+        <div style="display: flex; align-items: center; gap: 14px; width: 380px;">
+          <div style="width: 44px; height: 44px; background: #0B1220; color: #FFFFFF; border-radius: 9999px; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700; flex-shrink: 0;">
+            SP
+          </div>
+          <div>
+            <div style="font-size: 15px; font-weight: 700; color: #0B1220; display: flex; align-items: center; gap: 6px;">
+              <span>Sokha Pech</span>
+              <span style="font-size: 11px; background: #F0F9FF; color: #0369A1; border: 1px solid #BAE6FD; padding: 1px 6px; border-radius: 4px; font-weight: 600;">Selected</span>
+            </div>
+            <div style="font-size: 12px; color: #6B7280;">Royal University of Phnom Penh • Year 3</div>
+            <a style="font-size: 11px; color: #0369A1; text-decoration: none; display: flex; align-items: center; gap: 4px; margin-top: 2px;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg> github.com/sokhapech
+            </a>
+          </div>
+        </div>
+
+        <!-- Match Ring -->
+        <div style="width: 80px; text-align: center;">
+          <div style="position: relative; width: 48px; height: 48px; display: inline-flex; align-items: center; justify-content: center;">
+      <svg width="48" height="48" style="transform: rotate(-90deg);">
+        <circle cx="24.0" cy="24.0" r="22.0" fill="none" stroke="#F0F1F3" stroke-width="4" />
+        <circle cx="24.0" cy="24.0" r="22.0" fill="none" stroke="#0EA5E9" stroke-width="4"
+                stroke-dasharray="138.22996" stroke-dashoffset="45.6158868" stroke-linecap="round" />
+      </svg>
+      <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 12px; color: #0369A1;">
+        67%
+      </div>
+    </div>
+        </div>
+
+        <!-- Matched & Missing Chips -->
+        <div style="flex: 1; padding: 0 24px;">
+          <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+            <span class="chip chip-matched"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> Flutter</span>
+            <span class="chip chip-matched"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> Git</span>
+            <span class="chip chip-missing"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></svg></span> Docker</span>
+          </div>
+        </div>
+
+        <!-- Status Pill / Dropdown -->
+        <div style="width: 110px;">
+          <span class="status-pill status-under-review">
+            <span class="status-dot"></span>
+            Under review
+          </span>
+        </div>
+
+        <!-- Action -->
+        <button class="btn-secondary" style="height: 38px; padding: 0 16px; font-size: 12px;">Review</button>
+      </div>
+
+      <!-- Candidate 3: Bopha Chea (33% Fit) -->
+      <div style="background: #FFFFFF; border-radius: 18px; padding: 18px 24px; border: 1px solid #F0F1F3; box-shadow: 0 4px 16px rgba(11,18,32,0.03); display: flex; align-items: center; justify-content: space-between;">
+        <div style="display: flex; align-items: center; gap: 14px; width: 380px;">
+          <div style="width: 44px; height: 44px; background: #F1F5F9; color: #475569; border-radius: 9999px; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700; flex-shrink: 0;">
+            BC
+          </div>
+          <div>
+            <div style="font-size: 15px; font-weight: 600; color: #0B1220;">Bopha Chea</div>
+            <div style="font-size: 12px; color: #6B7280;">CADT • Year 2</div>
+            <a style="font-size: 11px; color: #6B7280; text-decoration: none; display: flex; align-items: center; gap: 4px; margin-top: 2px;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg> github.com/bophachea
+            </a>
+          </div>
+        </div>
+
+        <!-- Match Ring -->
+        <div style="width: 80px; text-align: center;">
+          <div style="position: relative; width: 48px; height: 48px; display: inline-flex; align-items: center; justify-content: center;">
+      <svg width="48" height="48" style="transform: rotate(-90deg);">
+        <circle cx="24.0" cy="24.0" r="22.0" fill="none" stroke="#F0F1F3" stroke-width="4" />
+        <circle cx="24.0" cy="24.0" r="22.0" fill="none" stroke="#9CA3AF" stroke-width="4"
+                stroke-dasharray="138.22996" stroke-dashoffset="92.61407319999999" stroke-linecap="round" />
+      </svg>
+      <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 12px; color: #4B5563;">
+        33%
+      </div>
+    </div>
+        </div>
+
+        <!-- Matched & Missing Chips -->
+        <div style="flex: 1; padding: 0 24px;">
+          <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+            <span class="chip chip-matched"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> Git</span>
+            <span class="chip chip-missing"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></svg></span> Flutter</span>
+            <span class="chip chip-missing"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></svg></span> Docker</span>
+          </div>
+        </div>
+
+        <!-- Status Pill -->
+        <div style="width: 110px;">
+          <span class="status-pill status-submitted">
+            <span class="status-dot"></span>
+            Submitted
+          </span>
+        </div>
+
+        <!-- Action -->
+        <button class="btn-secondary" style="height: 38px; padding: 0 16px; font-size: 12px;">
+          View profile
+        </button>
+      </div>
+    </div>
+    
+        </main>
+      </div>
+    </div>
+    
+  </div>
+</body>
+</html>

@@ -3,202 +3,419 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=1440, height=900">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Khmer:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Khmer:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
 <style>
-  :root {
-    --bg-page: #F7F8FA;
-    --surface: #FFFFFF;
-    --border: #E8EAF0;
-    --divider: #EEF0F4;
-    --text-primary: #0F172A;
-    --text-secondary: #475569;
-    --text-muted: #64748B;
-    --accent: #4F46E5;
-    --accent-hover: #4338CA;
-    --accent-tint: #EEF2FF;
-    --semantic-match-bg: #ECFDF5;
-    --semantic-match-text: #15803D;
-    --semantic-review-bg: #FFFBEB;
-    --semantic-review-text: #B45309;
-    --semantic-neutral-bg: #F1F5F9;
-    --semantic-neutral-text: #475569;
-    --shadow-sm: 0 1px 2px rgba(16, 24, 40, 0.04);
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Plus Jakarta Sans', 'Noto Sans Khmer', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
   }
-  * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', 'Noto Sans Khmer', -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
-  body { width: 1440px; height: 900px; background: var(--bg-page); color: var(--text-primary); display: flex; flex-direction: column; overflow: hidden; }
-  .chip-neutral { display: inline-flex; align-items: center; background: var(--semantic-neutral-bg); color: var(--semantic-neutral-text); padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 500; }
-  .pill { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 999px; font-size: 12px; font-weight: 500; }
-  .pill-dot { width: 6px; height: 6px; border-radius: 50%; }
-  .pill-open { background: var(--semantic-match-bg); color: var(--semantic-match-text); }
-  .pill-open .pill-dot { background: #10B981; }
-  .btn-primary-d { height: 36px; background: var(--accent); color: #FFFFFF; border: none; border-radius: 10px; padding: 0 16px; font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; cursor: pointer; box-shadow: var(--shadow-sm); }
-  .btn-secondary-d { height: 36px; background: var(--surface); color: var(--text-primary); border: 1px solid var(--border); border-radius: 10px; padding: 0 14px; font-size: 13px; font-weight: 500; display: inline-flex; align-items: center; gap: 6px; cursor: pointer; box-shadow: var(--shadow-sm); }
-  .table-row:hover { background: #FAFAFB; }
+  body {
+    background: #FAFAFA;
+    color: #0B1220;
+    margin: 0;
+    padding: 0;
+  }
+  .card-shadow {
+    box-shadow: 0 8px 24px rgba(11, 18, 32, 0.06);
+  }
+  .hairline {
+    border: 1px solid #F0F1F3;
+  }
+  .border-subtle {
+    border: 1px solid #E5E7EB;
+  }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 28px;
+    padding: 0 10px;
+    border-radius: 9999px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  .chip-neutral {
+    background: #F1F5F9;
+    color: #475569;
+  }
+  .chip-matched {
+    background: #ECFDF5;
+    color: #047857;
+  }
+  .chip-missing {
+    background: #FFF1F2;
+    color: #BE123C;
+    border: 1px dashed #FECDD3;
+  }
+  .chip-selected {
+    background: #F0F9FF;
+    color: #0369A1;
+    border: 1.5px solid #0EA5E9;
+    font-weight: 600;
+  }
+  .status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 24px;
+    padding: 0 10px;
+    border-radius: 9999px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+  }
+  .status-under-review {
+    background: #FFFBEB;
+    color: #B45309;
+  }
+  .status-under-review .status-dot {
+    background: #D97706;
+  }
+  .status-submitted {
+    background: #F1F5F9;
+    color: #475569;
+  }
+  .status-submitted .status-dot {
+    background: #64748B;
+  }
+  .status-accepted {
+    background: #ECFDF5;
+    color: #047857;
+  }
+  .status-accepted .status-dot {
+    background: #10B981;
+  }
+  .status-rejected {
+    background: #FFF1F2;
+    color: #BE123C;
+  }
+  .status-rejected .status-dot {
+    background: #F43F5E;
+  }
+  .btn-ink {
+    background: #0B1220;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 14px;
+    height: 48px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 4px 12px rgba(11, 18, 32, 0.12);
+  }
+  .btn-secondary {
+    background: #FFFFFF;
+    color: #0B1220;
+    border: 1px solid #E5E7EB;
+    border-radius: 14px;
+    height: 48px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .input-filled {
+    height: 52px;
+    border-radius: 14px;
+    background: #F5F6F8;
+    border: 2px solid transparent;
+    padding: 0 16px;
+    font-size: 14px;
+    color: #0B1220;
+    width: 100%;
+    outline: none;
+    transition: all 0.15s ease;
+  }
+  .input-filled:focus {
+    background: #FFFFFF;
+    border-color: #0EA5E9;
+    box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.15);
+  }
+
+  body {
+    width: 1440px;
+    height: 900px;
+    background: #FAFAFA;
+    display: flex;
+    overflow: hidden;
+  }
+  .sidebar {
+    width: 240px;
+    background: #FFFFFF;
+    border-right: 1px solid #E5E7EB;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 24px 16px;
+    flex-shrink: 0;
+  }
+  .main-pane {
+    flex: 1;
+    overflow-y: auto;
+    padding: 32px 48px;
+    background: #FAFAFA;
+  }
 </style>
 </head>
 <body>
-  <header style="height: 64px; background: #FFFFFF; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 40px;">
-    <div style="display: flex; align-items: center; gap: 36px;">
-      <div style="display: flex; align-items: center; gap: 10px;">
-        <div style="width: 32px; height: 32px; background: #4F46E5; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #FFFFFF;">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg>
+  <!-- Slim Left Sidebar -->
+  <aside class="sidebar">
+    <div>
+      <!-- DevPath Brand -->
+      <div style="display: flex; align-items: center; gap: 10px; padding: 0 8px 24px 8px; border-bottom: 1px solid #F0F1F3; margin-bottom: 20px;">
+        <div style="width: 32px; height: 32px; background: #0B1220; border-radius: 9px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(11,18,32,0.15);">
+          <div style="width: 10px; height: 10px; background: #0EA5E9; border-radius: 3px;"></div>
         </div>
-        <span style="font-size: 16px; font-weight: 700; color: #0F172A; letter-spacing: -0.3px;">DevPath <span style="font-size: 12px; font-weight: 600; color: #4F46E5; background: #EEF2FF; padding: 2px 6px; border-radius: 4px; margin-left: 2px;">Recruiter</span></span>
+        <div style="font-size: 17px; font-weight: 800; color: #0B1220; letter-spacing: -0.02em;">DevPath</div>
       </div>
-      <nav style="display: flex; gap: 28px; font-size: 14px; font-weight: 500;">
-        <span style="color: #4F46E5; font-weight: 600; border-bottom: 2px solid #4F46E5; padding: 21px 0;">Dashboard</span>
-        <span style="color: #64748B; padding: 21px 0; cursor: pointer;">Job Postings</span>
-        <span style="color: #64748B; padding: 21px 0; cursor: pointer;">Candidate Search</span>
-        <span style="color: #64748B; padding: 21px 0; cursor: pointer;">Company Profile</span>
+
+      <!-- Navigation Links -->
+      <nav style="display: flex; flex-direction: column; gap: 4px;">
+        
+            <div style="display: flex; align-items: center; gap: 12px; padding: 10px 14px; background: #0B1220; color: #FFFFFF; border-radius: 12px; font-size: 13px; font-weight: 600; cursor: pointer;">
+              <span style="display: flex; align-items: center; color: #0EA5E9;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg></span>
+              <span>Dashboard</span>
+            </div>
+            
+            <div style="display: flex; align-items: center; gap: 12px; padding: 10px 14px; color: #4B5563; border-radius: 12px; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.15s;">
+              <span style="display: flex; align-items: center; opacity: 0.8;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="7" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></span>
+              <span>Job postings</span>
+            </div>
+            
+            <div style="display: flex; align-items: center; gap: 12px; padding: 10px 14px; color: #4B5563; border-radius: 12px; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.15s;">
+              <span style="display: flex; align-items: center; opacity: 0.8;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+              <span>Candidate search</span>
+            </div>
+            
+            <div style="display: flex; align-items: center; gap: 12px; padding: 10px 14px; color: #4B5563; border-radius: 12px; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.15s;">
+              <span style="display: flex; align-items: center; opacity: 0.8;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></svg></span>
+              <span>Company profile</span>
+            </div>
+            
       </nav>
     </div>
 
-    <div style="display: flex; align-items: center; gap: 12px;">
-      <div style="text-align: right;">
-        <div style="font-size: 13px; font-weight: 600; color: #0F172A;">Dara Chem</div>
-        <div style="font-size: 12px; color: #64748B;">TechBridge Solutions</div>
+    <!-- User Card at Bottom -->
+    <div style="padding-top: 16px; border-top: 1px solid #F0F1F3; display: flex; align-items: center; justify-content: space-between;">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <div style="width: 36px; height: 36px; background: #0B1220; color: #FFFFFF; border-radius: 9999px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700;">
+          DC
+        </div>
+        <div>
+          <div style="font-size: 13px; font-weight: 600; color: #0B1220;">Dara Chem</div>
+          <div style="font-size: 11px; color: #6B7280;">TechBridge Solutions</div>
+        </div>
       </div>
-      <div style="width: 36px; height: 36px; background: #EEF2FF; border: 1.5px solid #C7D2FE; border-radius: 999px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: #4F46E5;">
-        DC
+      <div style="color: #6B7280; opacity: 0.8; cursor: pointer;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
       </div>
     </div>
-  </header>
+  </aside>
 
-  <main style="flex: 1; padding: 32px 40px; overflow-y: auto;">
-    <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 28px;">
+  <!-- Main View -->
+  <main class="main-pane">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px;">
+      <h1 style="font-size: 32px; font-weight: 700; color: #0B1220; letter-spacing: -0.02em;">Recruitment</h1>
       <div>
-        <h1 style="font-size: 28px; font-weight: 700; color: #0F172A; letter-spacing: -0.5px;">Recruitment dashboard</h1>
-        <p style="font-size: 14px; color: #64748B; margin-top: 4px;">Publish entry-level tech roles and evaluate candidates ranked by skill match.</p>
-      </div>
-      <button class="btn-primary-d">
-        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M5 12h14m-7-7v14"/></svg>
-        Post a new IT job
-      </button>
+<button class="btn-ink" style="height: 44px; padding: 0 20px; font-size: 14px;">
+  <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span>
+  <span>Post a new job</span>
+</button>
+</div>
+    </div>
+    
+<!-- Bento Row of 4 KPI Cards -->
+<div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 32px;">
+  <div style="background: #FFFFFF; border-radius: 20px; padding: 22px; border: 1px solid #F0F1F3; box-shadow: 0 8px 24px rgba(11,18,32,0.06);">
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+      <span style="font-size: 13px; font-weight: 500; color: #6B7280;">Active roles</span>
+      <span style="font-size: 11px; font-weight: 600; color: #047857; background: #ECFDF5; padding: 2px 8px; border-radius: 9999px;">+1 this month</span>
+    </div>
+    <div style="font-size: 32px; font-weight: 800; color: #0B1220; letter-spacing: -0.02em;">3</div>
+    <span style="font-size: 12px; color: #4B5563; margin-top: 4px; display: block;">Open positions</span>
+  </div>
+
+  <div style="background: #FFFFFF; border-radius: 20px; padding: 22px; border: 1px solid #F0F1F3; box-shadow: 0 8px 24px rgba(11,18,32,0.06);">
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+      <span style="font-size: 13px; font-weight: 500; color: #6B7280;">Total applicants</span>
+      <span style="font-size: 11px; font-weight: 600; color: #0369A1; background: #F0F9FF; padding: 2px 8px; border-radius: 9999px;">+4 this week</span>
+    </div>
+    <div style="font-size: 32px; font-weight: 800; color: #0B1220; letter-spacing: -0.02em;">18</div>
+    <span style="font-size: 12px; color: #4B5563; margin-top: 4px; display: block;">Candidates applied</span>
+  </div>
+
+  <div style="background: #FFFFFF; border-radius: 20px; padding: 22px; border: 1px solid #F0F1F3; box-shadow: 0 8px 24px rgba(11,18,32,0.06);">
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+      <span style="font-size: 13px; font-weight: 500; color: #6B7280;">High match (&gt;65%)</span>
+      <span style="font-size: 11px; font-weight: 600; color: #047857; background: #ECFDF5; padding: 2px 8px; border-radius: 9999px;">61% of total</span>
+    </div>
+    <div style="font-size: 32px; font-weight: 800; color: #047857; letter-spacing: -0.02em;">11</div>
+    <span style="font-size: 12px; color: #4B5563; margin-top: 4px; display: block;">Ready for review</span>
+  </div>
+
+  <div style="background: #FFFFFF; border-radius: 20px; padding: 22px; border: 1px solid #F0F1F3; box-shadow: 0 8px 24px rgba(11,18,32,0.06);">
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+      <span style="font-size: 13px; font-weight: 500; color: #6B7280;">Average match</span>
+      <span style="font-size: 11px; font-weight: 600; color: #0369A1; background: #F0F9FF; padding: 2px 8px; border-radius: 9999px;">+5% vs avg</span>
+    </div>
+    <div style="font-size: 32px; font-weight: 800; color: #0B1220; letter-spacing: -0.02em;">71%</div>
+    <span style="font-size: 12px; color: #4B5563; margin-top: 4px; display: block;">Candidate readiness</span>
+  </div>
+</div>
+
+<!-- Section Title -->
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+  <h2 style="font-size: 20px; font-weight: 600; color: #0B1220;">Active job postings</h2>
+  <span style="font-size: 13px; color: #6B7280;">Showing 3 of 3 roles</span>
+</div>
+
+<!-- Clean Spacious Rows (Not a boxed table) -->
+<div style="display: flex; flex-direction: column; gap: 12px;">
+  <!-- Job Row 1 -->
+  <div style="background: #FFFFFF; border-radius: 16px; padding: 20px 24px; border: 1px solid #F0F1F3; box-shadow: 0 4px 16px rgba(11,18,32,0.03); display: flex; align-items: center; justify-content: space-between;">
+    <div style="width: 320px;">
+      <h3 style="font-size: 16px; font-weight: 600; color: #0B1220; margin-bottom: 4px;">Junior Flutter Developer Intern</h3>
+      <span style="font-size: 13px; color: #6B7280;">Mobile development • Phnom Penh • Posted Nov 3</span>
     </div>
 
-    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 32px;">
-      <div style="background: #FFFFFF; border: 1px solid var(--border); border-radius: 16px; padding: 20px; box-shadow: var(--shadow-sm);">
-        <div style="font-size: 12px; font-weight: 500; color: #64748B; text-transform: uppercase; letter-spacing: 0.5px;">Active Tech Jobs</div>
-        <div style="font-size: 28px; font-weight: 700; color: #0F172A; margin: 8px 0 4px 0; letter-spacing: -0.5px;">3</div>
-        <span style="font-size: 12px; color: #15803D; font-weight: 500;">All accepting applications</span>
-      </div>
+    <!-- Required Skills -->
+    <div style="display: flex; gap: 6px; width: 220px;">
+      <span class="chip chip-neutral" style="font-size: 11px;">Flutter</span>
+      <span class="chip chip-neutral" style="font-size: 11px;">Git</span>
+      <span class="chip chip-neutral" style="font-size: 11px;">Docker</span>
+    </div>
 
-      <div style="background: #FFFFFF; border: 1px solid var(--border); border-radius: 16px; padding: 20px; box-shadow: var(--shadow-sm);">
-        <div style="font-size: 12px; font-weight: 500; color: #64748B; text-transform: uppercase; letter-spacing: 0.5px;">Total Applicants</div>
-        <div style="font-size: 28px; font-weight: 700; color: #0F172A; margin: 8px 0 4px 0; letter-spacing: -0.5px;">18</div>
-        <span style="font-size: 12px; color: #4F46E5; background: #EEF2FF; padding: 2px 8px; border-radius: 999px; font-weight: 600;">+4 this week</span>
-      </div>
+    <!-- Stipend -->
+    <div style="width: 120px;">
+      <span style="font-size: 14px; font-weight: 600; color: #0B1220;">$250 / mo</span>
+      <span style="font-size: 11px; color: #6B7280; display: block;">Monthly stipend</span>
+    </div>
 
-      <div style="background: #FFFFFF; border: 1px solid var(--border); border-radius: 16px; padding: 20px; box-shadow: var(--shadow-sm);">
-        <div style="font-size: 12px; font-weight: 500; color: #64748B; text-transform: uppercase; letter-spacing: 0.5px;">High Match (>65%)</div>
-        <div style="font-size: 28px; font-weight: 700; color: #0F172A; margin: 8px 0 4px 0; letter-spacing: -0.5px;">11</div>
-        <span style="font-size: 12px; color: #64748B; font-weight: 500;">61% candidate ratio</span>
+    <!-- Applicants with Mini Progress Bar for High-Fit -->
+    <div style="width: 160px;">
+      <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px;">
+        <span style="font-weight: 600; color: #0B1220;">4 applicants</span>
+        <span style="color: #047857; font-weight: 500;">2 high-fit</span>
       </div>
-
-      <div style="background: #FFFFFF; border: 1px solid var(--border); border-radius: 16px; padding: 20px; box-shadow: var(--shadow-sm);">
-        <div style="font-size: 12px; font-weight: 500; color: #64748B; text-transform: uppercase; letter-spacing: 0.5px;">Average Match Score</div>
-        <div style="font-size: 28px; font-weight: 700; color: #0F172A; margin: 8px 0 4px 0; letter-spacing: -0.5px;">71%</div>
-        <span style="font-size: 12px; color: #64748B; font-weight: 500;">Across all postings</span>
+      <div style="width: 100%; height: 6px; background: #F1F5F9; border-radius: 9999px; overflow: hidden;">
+        <div style="width: 50%; height: 100%; background: #0EA5E9; border-radius: 9999px;"></div>
       </div>
     </div>
 
-    <div style="background: #FFFFFF; border: 1px solid var(--border); border-radius: 16px; box-shadow: var(--shadow-sm); overflow: hidden;">
-      <div style="padding: 18px 24px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;">
-        <h2 style="font-size: 16px; font-weight: 600; color: #0F172A;">Active IT job postings</h2>
-        <span style="font-size: 13px; color: #64748B;">Showing 3 of 3 roles</span>
-      </div>
-
-      <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 14px;">
-        <thead>
-          <tr style="background: #F7F8FA; border-bottom: 1px solid var(--border); color: #64748B; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px;">
-            <th style="padding: 12px 24px; font-weight: 600;">Job position</th>
-            <th style="padding: 12px 18px; font-weight: 600;">Required skills</th>
-            <th style="padding: 12px 18px; font-weight: 600;">Stipend</th>
-            <th style="padding: 12px 18px; font-weight: 600;">Applicants</th>
-            <th style="padding: 12px 18px; font-weight: 600;">Status</th>
-            <th style="padding: 12px 24px; font-weight: 600; text-align: right;">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="table-row" style="border-bottom: 1px solid var(--divider);">
-            <td style="padding: 16px 24px;">
-              <div style="font-weight: 600; color: #0F172A;">Junior Flutter Developer Intern</div>
-              <div style="color: #64748B; font-size: 12px; margin-top: 2px;">Mobile Development · Phnom Penh · Posted Nov 3</div>
-            </td>
-            <td style="padding: 16px 18px;">
-              <div style="display: flex; gap: 6px;">
-                <span class="chip-neutral">Flutter</span>
-                <span class="chip-neutral">Git</span>
-                <span class="chip-neutral">Docker</span>
-              </div>
-            </td>
-            <td style="padding: 16px 18px; font-weight: 500; color: #0F172A;">$250 / mo</td>
-            <td style="padding: 16px 18px;">
-              <div style="font-weight: 600; color: #0F172A;">4 candidates</div>
-              <div style="font-size: 12px; color: #64748B;">2 high fit</div>
-            </td>
-            <td style="padding: 16px 18px;">
-              <span class="pill pill-open"><span class="pill-dot"></span>Open</span>
-            </td>
-            <td style="padding: 16px 24px; text-align: right;">
-              <button class="btn-secondary-d">Review applicants (4)</button>
-            </td>
-          </tr>
-
-          <tr class="table-row" style="border-bottom: 1px solid var(--divider);">
-            <td style="padding: 16px 24px;">
-              <div style="font-weight: 600; color: #0F172A;">Junior QA Automation Engineer</div>
-              <div style="color: #64748B; font-size: 12px; margin-top: 2px;">QA & Testing · Phnom Penh · Posted Oct 29</div>
-            </td>
-            <td style="padding: 16px 18px;">
-              <div style="display: flex; gap: 6px;">
-                <span class="chip-neutral">Selenium</span>
-                <span class="chip-neutral">Python</span>
-                <span class="chip-neutral">Git</span>
-              </div>
-            </td>
-            <td style="padding: 16px 18px; font-weight: 500; color: #0F172A;">$300 / mo</td>
-            <td style="padding: 16px 18px;">
-              <div style="font-weight: 600; color: #0F172A;">6 candidates</div>
-              <div style="font-size: 12px; color: #64748B;">4 high fit</div>
-            </td>
-            <td style="padding: 16px 18px;">
-              <span class="pill pill-open"><span class="pill-dot"></span>Open</span>
-            </td>
-            <td style="padding: 16px 24px; text-align: right;">
-              <button class="btn-secondary-d">Review applicants (6)</button>
-            </td>
-          </tr>
-
-          <tr class="table-row">
-            <td style="padding: 16px 24px;">
-              <div style="font-weight: 600; color: #0F172A;">DevOps & Cloud Intern</div>
-              <div style="color: #64748B; font-size: 12px; margin-top: 2px;">DevOps & Cloud · Remote · Posted Oct 25</div>
-            </td>
-            <td style="padding: 16px 18px;">
-              <div style="display: flex; gap: 6px;">
-                <span class="chip-neutral">Docker</span>
-                <span class="chip-neutral">Linux</span>
-                <span class="chip-neutral">AWS</span>
-              </div>
-            </td>
-            <td style="padding: 16px 18px; font-weight: 500; color: #0F172A;">$280 / mo</td>
-            <td style="padding: 16px 18px;">
-              <div style="font-weight: 600; color: #0F172A;">8 candidates</div>
-              <div style="font-size: 12px; color: #64748B;">5 high fit</div>
-            </td>
-            <td style="padding: 16px 18px;">
-              <span class="pill pill-open"><span class="pill-dot"></span>Open</span>
-            </td>
-            <td style="padding: 16px 24px; text-align: right;">
-              <button class="btn-secondary-d">Review applicants (8)</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+    <!-- Status -->
+    <div style="width: 90px;">
+      <span class="status-pill status-accepted">
+        <span class="status-dot"></span>
+        Open
+      </span>
     </div>
+
+    <!-- Action -->
+    <button class="btn-secondary" style="height: 40px; padding: 0 16px; font-size: 13px;">
+      Review applicants (4)
+    </button>
+  </div>
+
+  <!-- Job Row 2 -->
+  <div style="background: #FFFFFF; border-radius: 16px; padding: 20px 24px; border: 1px solid #F0F1F3; box-shadow: 0 4px 16px rgba(11,18,32,0.03); display: flex; align-items: center; justify-content: space-between;">
+    <div style="width: 320px;">
+      <h3 style="font-size: 16px; font-weight: 600; color: #0B1220; margin-bottom: 4px;">Junior QA Automation Engineer</h3>
+      <span style="font-size: 13px; color: #6B7280;">QA & testing • Phnom Penh • Posted Oct 29</span>
+    </div>
+
+    <div style="display: flex; gap: 6px; width: 220px;">
+      <span class="chip chip-neutral" style="font-size: 11px;">Selenium</span>
+      <span class="chip chip-neutral" style="font-size: 11px;">Python</span>
+      <span class="chip chip-neutral" style="font-size: 11px;">Git</span>
+    </div>
+
+    <div style="width: 120px;">
+      <span style="font-size: 14px; font-weight: 600; color: #0B1220;">$300 / mo</span>
+      <span style="font-size: 11px; color: #6B7280; display: block;">Monthly stipend</span>
+    </div>
+
+    <div style="width: 160px;">
+      <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px;">
+        <span style="font-weight: 600; color: #0B1220;">6 applicants</span>
+        <span style="color: #047857; font-weight: 500;">4 high-fit</span>
+      </div>
+      <div style="width: 100%; height: 6px; background: #F1F5F9; border-radius: 9999px; overflow: hidden;">
+        <div style="width: 66%; height: 100%; background: #0EA5E9; border-radius: 9999px;"></div>
+      </div>
+    </div>
+
+    <div style="width: 90px;">
+      <span class="status-pill status-accepted">
+        <span class="status-dot"></span>
+        Open
+      </span>
+    </div>
+
+    <button class="btn-secondary" style="height: 40px; padding: 0 16px; font-size: 13px;">
+      Review applicants (6)
+    </button>
+  </div>
+
+  <!-- Job Row 3 -->
+  <div style="background: #FFFFFF; border-radius: 16px; padding: 20px 24px; border: 1px solid #F0F1F3; box-shadow: 0 4px 16px rgba(11,18,32,0.03); display: flex; align-items: center; justify-content: space-between;">
+    <div style="width: 320px;">
+      <h3 style="font-size: 16px; font-weight: 600; color: #0B1220; margin-bottom: 4px;">DevOps & Cloud Intern</h3>
+      <span style="font-size: 13px; color: #6B7280;">DevOps & cloud • Remote • Posted Oct 25</span>
+    </div>
+
+    <div style="display: flex; gap: 6px; width: 220px;">
+      <span class="chip chip-neutral" style="font-size: 11px;">Docker</span>
+      <span class="chip chip-neutral" style="font-size: 11px;">Linux</span>
+      <span class="chip chip-neutral" style="font-size: 11px;">AWS</span>
+    </div>
+
+    <div style="width: 120px;">
+      <span style="font-size: 14px; font-weight: 600; color: #0B1220;">$280 / mo</span>
+      <span style="font-size: 11px; color: #6B7280; display: block;">Monthly stipend</span>
+    </div>
+
+    <div style="width: 160px;">
+      <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px;">
+        <span style="font-weight: 600; color: #0B1220;">8 applicants</span>
+        <span style="color: #047857; font-weight: 500;">5 high-fit</span>
+      </div>
+      <div style="width: 100%; height: 6px; background: #F1F5F9; border-radius: 9999px; overflow: hidden;">
+        <div style="width: 62%; height: 100%; background: #0EA5E9; border-radius: 9999px;"></div>
+      </div>
+    </div>
+
+    <div style="width: 90px;">
+      <span class="status-pill status-accepted">
+        <span class="status-dot"></span>
+        Open
+      </span>
+    </div>
+
+    <button class="btn-secondary" style="height: 40px; padding: 0 16px; font-size: 13px;">
+      Review applicants (8)
+    </button>
+  </div>
+</div>
+
   </main>
 </body>
 </html>

@@ -3,225 +3,379 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=393, height=852, initial-scale=1.0">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Khmer:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg-page: #F7F8FA;
-    --surface: #FFFFFF;
-    --border: #E8EAF0;
-    --divider: #EEF0F4;
-    --text-primary: #0F172A;
-    --text-secondary: #475569;
-    --text-muted: #64748B;
-    --accent: #4F46E5;
-    --accent-hover: #4338CA;
-    --accent-tint: #EEF2FF;
-    --semantic-match-bg: #ECFDF5;
-    --semantic-match-text: #15803D;
-    --semantic-gap-bg: #FEF2F2;
-    --semantic-gap-text: #B91C1C;
-    --semantic-review-bg: #FFFBEB;
-    --semantic-review-text: #B45309;
-    --semantic-neutral-bg: #F1F5F9;
-    --semantic-neutral-text: #475569;
-    --shadow-sm: 0 1px 2px rgba(16, 24, 40, 0.04);
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', 'Noto Sans Khmer', -apple-system, BlinkMacSystemFont, sans-serif; -webkit-font-smoothing: antialiased; }
-  body { width: 393px; height: 852px; background: var(--bg-page); color: var(--text-primary); overflow: hidden; position: relative; display: flex; flex-direction: column; }
-  .status-bar { height: 48px; min-height: 48px; display: flex; justify-content: space-between; align-items: center; padding: 0 24px; font-size: 14px; font-weight: 600; color: var(--text-primary); z-index: 50; }
-  .dynamic-island { position: absolute; top: 11px; left: 50%; transform: translateX(-50%); width: 120px; height: 35px; background: #000000; border-radius: 20px; z-index: 50; }
-  .status-icons { display: flex; align-items: center; gap: 6px; }
-  .home-indicator { position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); width: 134px; height: 5px; background: var(--text-primary); border-radius: 3px; opacity: 0.2; z-index: 50; }
-  .bottom-nav { position: absolute; bottom: 0; left: 0; right: 0; height: 76px; background: rgba(255, 255, 255, 0.92); backdrop-filter: blur(12px); border-top: 1px solid var(--divider); display: flex; justify-content: space-around; padding-top: 8px; z-index: 40; }
-  .nav-item { display: flex; flex-direction: column; align-items: center; gap: 4px; color: var(--text-muted); font-size: 11px; font-weight: 500; text-decoration: none; position: relative; min-width: 54px; }
-  .nav-item.active { color: var(--accent); font-weight: 600; }
-  .nav-pill { width: 16px; height: 3px; background: var(--accent); border-radius: 999px; margin-top: 2px; }
-  .content-scroll { flex: 1; overflow-y: auto; padding: 12px 20px 84px 20px; }
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Khmer:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  .btn-primary-m { width: 100%; height: 44px; background: var(--accent); color: #FFFFFF; border: none; border-radius: 10px; font-size: 14px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; box-shadow: var(--shadow-sm); }
-  .btn-secondary-m { width: 100%; height: 44px; background: var(--surface); color: var(--text-primary); border: 1px solid var(--border); border-radius: 10px; font-size: 14px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; box-shadow: var(--shadow-sm); }
-  .chip-matched { display: inline-flex; align-items: center; gap: 4px; background: var(--semantic-match-bg); color: var(--semantic-match-text); padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; }
-  .chip-gap { display: inline-flex; align-items: center; gap: 4px; background: var(--semantic-gap-bg); color: var(--semantic-gap-text); border: 1px dashed #FECACA; padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; }
-  .chip-neutral { display: inline-flex; align-items: center; background: var(--semantic-neutral-bg); color: var(--semantic-neutral-text); padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 500; }
-  .pill { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 999px; font-size: 12px; font-weight: 500; }
-  .pill-dot { width: 6px; height: 6px; border-radius: 50%; }
-  .pill-accepted { background: var(--semantic-match-bg); color: var(--semantic-match-text); }
-  .pill-accepted .pill-dot { background: #10B981; }
-  .pill-review { background: var(--semantic-review-bg); color: var(--semantic-review-text); }
-  .pill-review .pill-dot { background: #D97706; }
-  .pill-submitted { background: var(--semantic-neutral-bg); color: var(--semantic-neutral-text); }
-  .pill-submitted .pill-dot { background: #64748B; }
-  .input-field { width: 100%; height: 46px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 0 14px 0 42px; font-size: 14px; color: var(--text-primary); outline: none; box-shadow: var(--shadow-sm); }
-  .input-field:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15); }
-  .ui-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; box-shadow: var(--shadow-sm); padding: 18px; }
+<style>
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Plus Jakarta Sans', 'Noto Sans Khmer', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    background: #FAFAFA;
+    color: #0B1220;
+    margin: 0;
+    padding: 0;
+  }
+  .card-shadow {
+    box-shadow: 0 8px 24px rgba(11, 18, 32, 0.06);
+  }
+  .hairline {
+    border: 1px solid #F0F1F3;
+  }
+  .border-subtle {
+    border: 1px solid #E5E7EB;
+  }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 28px;
+    padding: 0 10px;
+    border-radius: 9999px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  .chip-neutral {
+    background: #F1F5F9;
+    color: #475569;
+  }
+  .chip-matched {
+    background: #ECFDF5;
+    color: #047857;
+  }
+  .chip-missing {
+    background: #FFF1F2;
+    color: #BE123C;
+    border: 1px dashed #FECDD3;
+  }
+  .chip-selected {
+    background: #F0F9FF;
+    color: #0369A1;
+    border: 1.5px solid #0EA5E9;
+    font-weight: 600;
+  }
+  .status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 24px;
+    padding: 0 10px;
+    border-radius: 9999px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+  }
+  .status-under-review {
+    background: #FFFBEB;
+    color: #B45309;
+  }
+  .status-under-review .status-dot {
+    background: #D97706;
+  }
+  .status-submitted {
+    background: #F1F5F9;
+    color: #475569;
+  }
+  .status-submitted .status-dot {
+    background: #64748B;
+  }
+  .status-accepted {
+    background: #ECFDF5;
+    color: #047857;
+  }
+  .status-accepted .status-dot {
+    background: #10B981;
+  }
+  .status-rejected {
+    background: #FFF1F2;
+    color: #BE123C;
+  }
+  .status-rejected .status-dot {
+    background: #F43F5E;
+  }
+  .btn-ink {
+    background: #0B1220;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 14px;
+    height: 48px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 4px 12px rgba(11, 18, 32, 0.12);
+  }
+  .btn-secondary {
+    background: #FFFFFF;
+    color: #0B1220;
+    border: 1px solid #E5E7EB;
+    border-radius: 14px;
+    height: 48px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .input-filled {
+    height: 52px;
+    border-radius: 14px;
+    background: #F5F6F8;
+    border: 2px solid transparent;
+    padding: 0 16px;
+    font-size: 14px;
+    color: #0B1220;
+    width: 100%;
+    outline: none;
+    transition: all 0.15s ease;
+  }
+  .input-filled:focus {
+    background: #FFFFFF;
+    border-color: #0EA5E9;
+    box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.15);
+  }
+
+  body {
+    width: 393px;
+    height: 852px;
+    background: #FAFAFA;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .status-bar {
+    height: 44px;
+    min-height: 44px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 24px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #0B1220;
+    z-index: 40;
+  }
+  .dynamic-island {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 34px;
+    background: #0B1220;
+    border-radius: 20px;
+    z-index: 45;
+  }
+  .content-area {
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px 20px 90px 20px;
+  }
+  .home-indicator {
+    position: absolute;
+    bottom: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 134px;
+    height: 4px;
+    background: #0B1220;
+    border-radius: 2px;
+    opacity: 0.2;
+    z-index: 60;
+  }
 </style>
 </head>
 <body>
   <div class="dynamic-island"></div>
   <div class="status-bar">
     <span>9:41</span>
-    <div class="status-icons">
-      <svg width="17" height="11" viewBox="0 0 17 11" fill="none"><path d="M1 9.5C1 9.5 3.5 6.5 8.5 6.5C13.5 6.5 16 9.5 16 9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M3.5 7C3.5 7 5.5 4.5 8.5 4.5C11.5 4.5 13.5 7 13.5 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="8.5" cy="9.5" r="1" fill="currentColor"/></svg>
-      <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="currentColor"/><rect x="2" y="2" width="16" height="8" rx="2" fill="currentColor"/><path d="M23 4C23.5 4.5 24 5.2 24 6C24 6.8 23.5 7.5 23 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    <div style="display: flex; align-items: center; gap: 6px;">
+      <svg width="17" height="11" viewBox="0 0 17 11" fill="none"><path d="M1 9.5C1 9.5 3.5 6.5 8.5 6.5C13.5 6.5 16 9.5 16 9.5" stroke="#0B1220" stroke-width="1.5" stroke-linecap="round"/><path d="M3.5 7C3.5 7 5.5 4.5 8.5 4.5C11.5 4.5 13.5 7 13.5 7" stroke="#0B1220" stroke-width="1.5" stroke-linecap="round"/><circle cx="8.5" cy="9.5" r="1" fill="#0B1220"/></svg>
+      <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="#0B1220"/><rect x="2" y="2" width="16" height="8" rx="2" fill="#0B1220"/><path d="M23 4C23.5 4.5 24 5.2 24 6C24 6.8 23.5 7.5 23 8" stroke="#0B1220" stroke-width="1.5" stroke-linecap="round"/></svg>
     </div>
   </div>
-  
-<div style="padding: 10px 20px 0 20px; display: flex; justify-content: space-between; align-items: center;">
+  <div class="content-area">
+    
+<!-- Greeting & Header -->
+<div style="display: flex; justify-content: space-between; align-items: center; margin: 8px 0 18px 0;">
   <div>
-    <h1 style="font-size: 20px; font-weight: 700; color: #0F172A; letter-spacing: -0.3px;">Welcome back, Sokha</h1>
-    <span style="font-size: 13px; color: #64748B;">Find entry-level roles fitting your skills</span>
+    <h1 style="font-size: 32px; font-weight: 700; color: #0B1220; letter-spacing: -0.02em; line-height: 1.1;">Hi Sokha</h1>
+    <p style="font-size: 13px; color: #4B5563; margin-top: 2px;">Find beginner tech internships</p>
   </div>
-  <div style="position: relative; width: 38px; height: 38px; background: #FFFFFF; border: 1px solid var(--border); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #475569;">
-    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
-    <div style="position: absolute; top: 9px; right: 9px; width: 6px; height: 6px; background: #4F46E5; border-radius: 50%;"></div>
-  </div>
-</div>
-
-<div class="content-scroll" style="padding-top: 14px;">
-  <div style="position: relative; margin-bottom: 14px;">
-    <input type="text" class="input-field" placeholder="Search junior roles, skills, or companies..." style="padding-right: 42px;">
-    <span style="position: absolute; left: 14px; top: 14px; color: #64748B;"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></span>
-    <span style="position: absolute; right: 14px; top: 14px; color: #4F46E5; cursor: pointer;"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="4" x2="4" y1="21" y2="14"/><line x1="4" x2="4" y1="10" y2="3"/><line x1="12" x2="12" y1="21" y2="12"/><line x1="12" x2="12" y1="8" y2="3"/><line x1="20" x2="20" y1="21" y2="16"/><line x1="20" x2="20" y1="12" y2="3"/><line x1="1" x2="7" y1="14" y2="14"/><line x1="9" x2="15" y1="8" y2="8"/><line x1="17" x2="23" y1="16" y2="16"/></svg></span>
-  </div>
-
-  <div style="display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; margin-bottom: 18px;">
-    <div style="background: #0F172A; color: #FFFFFF; padding: 6px 14px; border-radius: 999px; font-size: 12px; font-weight: 600; white-space: nowrap;">All roles (14)</div>
-    <div style="background: #FFFFFF; color: #475569; border: 1px solid var(--border); padding: 6px 14px; border-radius: 999px; font-size: 12px; font-weight: 500; white-space: nowrap;">Mobile dev</div>
-    <div style="background: #FFFFFF; color: #475569; border: 1px solid var(--border); padding: 6px 14px; border-radius: 999px; font-size: 12px; font-weight: 500; white-space: nowrap;">Frontend</div>
-    <div style="background: #FFFFFF; color: #475569; border: 1px solid var(--border); padding: 6px 14px; border-radius: 999px; font-size: 12px; font-weight: 500; white-space: nowrap;">Backend</div>
-    <div style="background: #FFFFFF; color: #475569; border: 1px solid var(--border); padding: 6px 14px; border-radius: 999px; font-size: 12px; font-weight: 500; white-space: nowrap;">DevOps</div>
-  </div>
-
-  <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 12px;">
-    <h2 style="font-size: 16px; font-weight: 600; color: #0F172A;">Recommended for you</h2>
-    <span style="font-size: 12px; color: #64748B;">Based on your 5 skills</span>
-  </div>
-
-  <div class="ui-card" style="margin-bottom: 14px;">
-    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
-      <div style="display: flex; gap: 12px;">
-        <div style="width: 44px; height: 44px; background: #EEF2FF; border: 1px solid #E0E7FF; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 700; color: #4F46E5; font-size: 16px;">TB</div>
-        <div>
-          <h3 style="font-size: 16px; font-weight: 600; color: #0F172A; margin-bottom: 2px;">Junior Flutter Developer Intern</h3>
-          <span style="font-size: 13px; color: #64748B;">TechBridge Solutions · Phnom Penh</span>
-        </div>
-      </div>
-      <div style="color: #64748B; cursor: pointer;"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg></div>
+  <div style="display: flex; align-items: center; gap: 10px;">
+    <div style="width: 40px; height: 40px; border-radius: 9999px; background: #FFFFFF; border: 1px solid #E5E7EB; display: flex; align-items: center; justify-content: center; color: #0B1220; cursor: pointer; position: relative;">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+      <div style="position: absolute; top: 10px; right: 10px; width: 6px; height: 6px; background: #0EA5E9; border-radius: 50%;"></div>
     </div>
-
-    <div style="display: flex; gap: 6px; margin-bottom: 14px;">
-      <span class="chip-neutral">Internship</span>
-      <span class="chip-neutral">On-site</span>
-      <span class="chip-neutral">$250 / mo</span>
-    </div>
-
-    <div style="background: #F8FAFC; border: 1px solid #EEF0F4; border-radius: 12px; padding: 10px 12px; margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between; gap: 12px;">
-      <div style="display: flex; align-items: center; gap: 8px;">
-        
-    <div style="position: relative; width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;">
-      <svg width="40" height="40" style="transform: rotate(-90deg);">
-        <circle cx="20.0" cy="20.0" r="17.0" stroke="#EEF0F4" stroke-width="3" fill="none"/>
-        <circle cx="20.0" cy="20.0" r="17.0" stroke="#4F46E5" stroke-width="3" fill="none" stroke-dasharray="106.8" stroke-dashoffset="35.2" stroke-linecap="round"/>
-      </svg>
-      <span style="position: absolute; font-size: 11px; font-weight: 700; color: #4F46E5;">67%</span>
-    </div>
-    
-        <div>
-          <div style="font-size: 12px; font-weight: 600; color: #0F172A;">Skill match</div>
-          <div style="font-size: 11px; color: #64748B;">2 of 3 skills</div>
-        </div>
-      </div>
-      <div style="display: flex; gap: 5px; flex-wrap: wrap; justify-content: flex-end;">
-        <span class="chip-matched"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg> Flutter</span>
-        <span class="chip-matched"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg> Git</span>
-        <span class="chip-gap"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg> Docker</span>
-      </div>
-    </div>
-
-    <div style="display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: #64748B;">
-      <span>Posted 2 days ago · 4 applicants</span>
-      <span style="color: #4F46E5; font-weight: 600; display: inline-flex; align-items: center; gap: 4px;">
-        View details <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
-      </span>
-    </div>
-  </div>
-
-  <div class="ui-card" style="margin-bottom: 14px;">
-    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
-      <div style="display: flex; gap: 12px;">
-        <div style="width: 44px; height: 44px; background: #ECFDF5; border: 1px solid #D1FAE5; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 700; color: #15803D; font-size: 16px;">ND</div>
-        <div>
-          <h3 style="font-size: 16px; font-weight: 600; color: #0F172A; margin-bottom: 2px;">Junior Backend Developer</h3>
-          <span style="font-size: 13px; color: #64748B;">NextGen Digital · Remote</span>
-        </div>
-      </div>
-      <div style="color: #4F46E5; cursor: pointer;"><svg width="18" height="18" fill="#4F46E5" stroke="#4F46E5" stroke-width="1.5" viewBox="0 0 24 24"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg></div>
-    </div>
-
-    <div style="display: flex; gap: 6px; margin-bottom: 14px;">
-      <span class="chip-neutral">Entry-level</span>
-      <span class="chip-neutral">Remote</span>
-      <span class="chip-neutral">$350 / mo</span>
-    </div>
-
-    <div style="background: #F8FAFC; border: 1px solid #EEF0F4; border-radius: 12px; padding: 10px 12px; margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between; gap: 12px;">
-      <div style="display: flex; align-items: center; gap: 8px;">
-        
-    <div style="position: relative; width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;">
-      <svg width="40" height="40" style="transform: rotate(-90deg);">
-        <circle cx="20.0" cy="20.0" r="17.0" stroke="#EEF0F4" stroke-width="3" fill="none"/>
-        <circle cx="20.0" cy="20.0" r="17.0" stroke="#10B981" stroke-width="3" fill="none" stroke-dasharray="106.8" stroke-dashoffset="21.4" stroke-linecap="round"/>
-      </svg>
-      <span style="position: absolute; font-size: 11px; font-weight: 700; color: #15803D;">80%</span>
-    </div>
-    
-        <div>
-          <div style="font-size: 12px; font-weight: 600; color: #0F172A;">Skill match</div>
-          <div style="font-size: 11px; color: #64748B;">4 of 5 skills</div>
-        </div>
-      </div>
-      <div style="display: flex; gap: 5px; flex-wrap: wrap; justify-content: flex-end;">
-        <span class="chip-matched"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg> Node.js</span>
-        <span class="chip-matched"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg> TypeScript</span>
-        <span class="chip-gap"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg> Docker</span>
-      </div>
-    </div>
-
-    <div style="display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: #64748B;">
-      <span>Posted yesterday · 8 applicants</span>
-      <span style="color: #4F46E5; font-weight: 600; display: inline-flex; align-items: center; gap: 4px;">
-        View details <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
-      </span>
+    <div style="width: 40px; height: 40px; border-radius: 9999px; background: #0B1220; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700;">
+      SP
     </div>
   </div>
 </div>
 
+<!-- Search Field with Integrated Filter Button -->
+<div style="position: relative; margin-bottom: 16px;">
+  <input type="text" class="input-filled" placeholder="Search roles, tools, or companies..." style="padding-left: 44px; padding-right: 50px;">
+  <div style="position: absolute; left: 16px; top: 16px; color: #6B7280;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></div>
+  <button style="position: absolute; right: 8px; top: 8px; width: 36px; height: 36px; border-radius: 10px; background: #FFFFFF; border: 1px solid #E5E7EB; display: flex; align-items: center; justify-content: center; color: #0B1220; cursor: pointer;">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="4" y1="21" y2="14"/><line x1="4" x2="4" y1="10" y2="3"/><line x1="12" x2="12" y1="21" y2="12"/><line x1="12" x2="12" y1="8" y2="3"/><line x1="20" x2="20" y1="21" y2="16"/><line x1="20" x2="20" y1="12" y2="3"/><line x1="1" x2="7" y1="14" y2="14"/><line x1="9" x2="15" y1="8" y2="8"/><line x1="17" x2="23" y1="16" y2="16"/></svg>
+  </button>
+</div>
+
+<!-- Category Chips (Active = Ink filled) -->
+<div style="display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; margin-bottom: 22px;">
+  <div style="background: #0B1220; color: #FFFFFF; padding: 7px 16px; border-radius: 9999px; font-size: 12px; font-weight: 600; white-space: nowrap; cursor: pointer;">
+    All roles (14)
+  </div>
+  <div style="background: #FFFFFF; color: #4B5563; border: 1px solid #E5E7EB; padding: 7px 16px; border-radius: 9999px; font-size: 12px; font-weight: 500; white-space: nowrap; cursor: pointer;">
+    Mobile dev
+  </div>
+  <div style="background: #FFFFFF; color: #4B5563; border: 1px solid #E5E7EB; padding: 7px 16px; border-radius: 9999px; font-size: 12px; font-weight: 500; white-space: nowrap; cursor: pointer;">
+    Frontend
+  </div>
+  <div style="background: #FFFFFF; color: #4B5563; border: 1px solid #E5E7EB; padding: 7px 16px; border-radius: 9999px; font-size: 12px; font-weight: 500; white-space: nowrap; cursor: pointer;">
+    Backend
+  </div>
+</div>
+
+<div style="font-size: 13px; font-weight: 600; color: #6B7280; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 12px;">
+  Recommended for you
+</div>
+
+<!-- Job Card 1 -->
+<div style="background: #FFFFFF; border-radius: 20px; padding: 20px; border: 1px solid #F0F1F3; margin-bottom: 16px; box-shadow: 0 8px 24px rgba(11,18,32,0.06);">
+  <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px;">
+    <div style="display: flex; gap: 12px;">
+      <div style="width: 44px; height: 44px; background: #F0F9FF; border: 1px solid #BAE6FD; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700; color: #0369A1;">
+        TB
+      </div>
+      <div>
+        <h2 style="font-size: 16px; font-weight: 600; color: #0B1220; margin-bottom: 2px;">Junior Flutter Developer Intern</h2>
+        <span style="font-size: 13px; color: #4B5563;">TechBridge Solutions • Phnom Penh</span>
+      </div>
+    </div>
+    <!-- Compact Match Ring -->
+    <div style="position: relative; width: 46px; height: 46px; display: inline-flex; align-items: center; justify-content: center;">
+      <svg width="46" height="46" style="transform: rotate(-90deg);">
+        <circle cx="23.0" cy="23.0" r="21.0" fill="none" stroke="#F0F1F3" stroke-width="4" />
+        <circle cx="23.0" cy="23.0" r="21.0" fill="none" stroke="#0EA5E9" stroke-width="4"
+                stroke-dasharray="131.94678" stroke-dashoffset="43.54243739999999" stroke-linecap="round" />
+      </svg>
+      <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 12px; color: #0369A1;">
+        67%
+      </div>
+    </div>
+  </div>
+
+  <!-- Tiny Neutral Chips -->
+  <div style="display: flex; gap: 6px; margin-bottom: 14px;">
+    <span class="chip chip-neutral" style="height: 24px; font-size: 11px;">Internship</span>
+    <span class="chip chip-neutral" style="height: 24px; font-size: 11px;">On-site</span>
+    <span class="chip chip-neutral" style="height: 24px; font-size: 11px;">$250 / mo</span>
+  </div>
+
+  <!-- Matching and Missing Skills as Mini Chips -->
+  <div style="display: flex; flex-wrap: wrap; gap: 6px; padding: 12px; background: #FAFAFA; border-radius: 14px; margin-bottom: 12px;">
+    <div class="chip chip-matched" style="height: 24px; font-size: 11px;"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> Flutter</div>
+    <div class="chip chip-matched" style="height: 24px; font-size: 11px;"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> Git</div>
+    <div class="chip chip-missing" style="height: 24px; font-size: 11px;"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></svg></span> Docker</div>
+  </div>
+
+  <!-- Footer Line -->
+  <div style="display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: #6B7280; padding-top: 4px;">
+    <span>Posted 2 days ago • 4 applicants</span>
+    <span style="color: #0369A1; font-weight: 600; cursor: pointer;">View details &rarr;</span>
+  </div>
+</div>
+
+<!-- Job Card 2 -->
+<div style="background: #FFFFFF; border-radius: 20px; padding: 20px; border: 1px solid #F0F1F3; margin-bottom: 16px; box-shadow: 0 8px 24px rgba(11,18,32,0.06);">
+  <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px;">
+    <div style="display: flex; gap: 12px;">
+      <div style="width: 44px; height: 44px; background: #ECFDF5; border: 1px solid #A7F3D0; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700; color: #047857;">
+        ND
+      </div>
+      <div>
+        <h2 style="font-size: 16px; font-weight: 600; color: #0B1220; margin-bottom: 2px;">Junior Backend Developer</h2>
+        <span style="font-size: 13px; color: #4B5563;">NextGen Digital • Remote</span>
+      </div>
+    </div>
+    <!-- Compact Match Ring (80% green) -->
+    <div style="position: relative; width: 46px; height: 46px; display: inline-flex; align-items: center; justify-content: center;">
+      <svg width="46" height="46" style="transform: rotate(-90deg);">
+        <circle cx="23.0" cy="23.0" r="21.0" fill="none" stroke="#F0F1F3" stroke-width="4" />
+        <circle cx="23.0" cy="23.0" r="21.0" fill="none" stroke="#10B981" stroke-width="4"
+                stroke-dasharray="131.94678" stroke-dashoffset="26.389355999999992" stroke-linecap="round" />
+      </svg>
+      <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 12px; color: #047857;">
+        80%
+      </div>
+    </div>
+  </div>
+
+  <div style="display: flex; gap: 6px; margin-bottom: 14px;">
+    <span class="chip chip-neutral" style="height: 24px; font-size: 11px;">Entry-level</span>
+    <span class="chip chip-neutral" style="height: 24px; font-size: 11px;">Remote</span>
+    <span class="chip chip-neutral" style="height: 24px; font-size: 11px;">$350 / mo</span>
+  </div>
+
+  <div style="display: flex; flex-wrap: wrap; gap: 6px; padding: 12px; background: #FAFAFA; border-radius: 14px; margin-bottom: 12px;">
+    <div class="chip chip-matched" style="height: 24px; font-size: 11px;"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> Node.js</div>
+    <div class="chip chip-matched" style="height: 24px; font-size: 11px;"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> TypeScript</div>
+    <div class="chip chip-matched" style="height: 24px; font-size: 11px;"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> Git</div>
+    <div class="chip chip-missing" style="height: 24px; font-size: 11px;"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></svg></span> Docker</div>
+  </div>
+
+  <div style="display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: #6B7280; padding-top: 4px;">
+    <span>Posted yesterday • 8 applicants</span>
+    <span style="color: #0369A1; font-weight: 600; cursor: pointer;">View details &rarr;</span>
+  </div>
+</div>
+
+  </div>
   
-  <div class="bottom-nav">
-    <div class="nav-item active">
-      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-      <span>Jobs</span>
-      <div class='nav-pill'></div>
-    </div>
-    <div class="nav-item ">
-      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>
-      <span>Saved</span>
-      
-    </div>
-    <div class="nav-item ">
-      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
-      <span>Applied</span>
-      
-    </div>
-    <div class="nav-item ">
-      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-      <span>Profile</span>
-      
-    </div>
-  </div>
-    
+        <!-- Floating Pill Bottom Nav -->
+        <div style="position: absolute; bottom: 18px; left: 16px; right: 16px; height: 60px; background: rgba(255, 255, 255, 0.94); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid #E5E7EB; border-radius: 9999px; box-shadow: 0 12px 32px rgba(11, 18, 32, 0.08); display: flex; align-items: center; justify-content: space-around; z-index: 50; padding: 0 6px;">
+          
+                <div style="background: #0B1220; color: #FFFFFF; border-radius: 9999px; padding: 8px 16px; display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600;">
+                  <span style="display: flex; align-items: center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></span>
+                  <span>Jobs</span>
+                </div>
+                
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 3px; color: #6B7280; font-size: 11px; font-weight: 500; padding: 6px 12px;">
+                  <span style="display: flex; align-items: center; opacity: 0.85;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg></span>
+                  <span>Saved</span>
+                </div>
+                
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 3px; color: #6B7280; font-size: 11px; font-weight: 500; padding: 6px 12px;">
+                  <span style="display: flex; align-items: center; opacity: 0.85;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg></span>
+                  <span>Applied</span>
+                </div>
+                
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 3px; color: #6B7280; font-size: 11px; font-weight: 500; padding: 6px 12px;">
+                  <span style="display: flex; align-items: center; opacity: 0.85;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+                  <span>Profile</span>
+                </div>
+                
+        </div>
+        
   <div class="home-indicator"></div>
 </body>
 </html>

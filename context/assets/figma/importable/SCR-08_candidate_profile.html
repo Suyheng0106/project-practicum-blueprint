@@ -3,179 +3,326 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=393, height=852, initial-scale=1.0">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Khmer:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg-page: #F7F8FA;
-    --surface: #FFFFFF;
-    --border: #E8EAF0;
-    --divider: #EEF0F4;
-    --text-primary: #0F172A;
-    --text-secondary: #475569;
-    --text-muted: #64748B;
-    --accent: #4F46E5;
-    --accent-hover: #4338CA;
-    --accent-tint: #EEF2FF;
-    --semantic-match-bg: #ECFDF5;
-    --semantic-match-text: #15803D;
-    --semantic-gap-bg: #FEF2F2;
-    --semantic-gap-text: #B91C1C;
-    --semantic-review-bg: #FFFBEB;
-    --semantic-review-text: #B45309;
-    --semantic-neutral-bg: #F1F5F9;
-    --semantic-neutral-text: #475569;
-    --shadow-sm: 0 1px 2px rgba(16, 24, 40, 0.04);
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', 'Noto Sans Khmer', -apple-system, BlinkMacSystemFont, sans-serif; -webkit-font-smoothing: antialiased; }
-  body { width: 393px; height: 852px; background: var(--bg-page); color: var(--text-primary); overflow: hidden; position: relative; display: flex; flex-direction: column; }
-  .status-bar { height: 48px; min-height: 48px; display: flex; justify-content: space-between; align-items: center; padding: 0 24px; font-size: 14px; font-weight: 600; color: var(--text-primary); z-index: 50; }
-  .dynamic-island { position: absolute; top: 11px; left: 50%; transform: translateX(-50%); width: 120px; height: 35px; background: #000000; border-radius: 20px; z-index: 50; }
-  .status-icons { display: flex; align-items: center; gap: 6px; }
-  .home-indicator { position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); width: 134px; height: 5px; background: var(--text-primary); border-radius: 3px; opacity: 0.2; z-index: 50; }
-  .bottom-nav { position: absolute; bottom: 0; left: 0; right: 0; height: 76px; background: rgba(255, 255, 255, 0.92); backdrop-filter: blur(12px); border-top: 1px solid var(--divider); display: flex; justify-content: space-around; padding-top: 8px; z-index: 40; }
-  .nav-item { display: flex; flex-direction: column; align-items: center; gap: 4px; color: var(--text-muted); font-size: 11px; font-weight: 500; text-decoration: none; position: relative; min-width: 54px; }
-  .nav-item.active { color: var(--accent); font-weight: 600; }
-  .nav-pill { width: 16px; height: 3px; background: var(--accent); border-radius: 999px; margin-top: 2px; }
-  .content-scroll { flex: 1; overflow-y: auto; padding: 12px 20px 84px 20px; }
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Khmer:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  .btn-primary-m { width: 100%; height: 44px; background: var(--accent); color: #FFFFFF; border: none; border-radius: 10px; font-size: 14px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; box-shadow: var(--shadow-sm); }
-  .btn-secondary-m { width: 100%; height: 44px; background: var(--surface); color: var(--text-primary); border: 1px solid var(--border); border-radius: 10px; font-size: 14px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; box-shadow: var(--shadow-sm); }
-  .chip-matched { display: inline-flex; align-items: center; gap: 4px; background: var(--semantic-match-bg); color: var(--semantic-match-text); padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; }
-  .chip-gap { display: inline-flex; align-items: center; gap: 4px; background: var(--semantic-gap-bg); color: var(--semantic-gap-text); border: 1px dashed #FECACA; padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; }
-  .chip-neutral { display: inline-flex; align-items: center; background: var(--semantic-neutral-bg); color: var(--semantic-neutral-text); padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 500; }
-  .pill { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 999px; font-size: 12px; font-weight: 500; }
-  .pill-dot { width: 6px; height: 6px; border-radius: 50%; }
-  .pill-accepted { background: var(--semantic-match-bg); color: var(--semantic-match-text); }
-  .pill-accepted .pill-dot { background: #10B981; }
-  .pill-review { background: var(--semantic-review-bg); color: var(--semantic-review-text); }
-  .pill-review .pill-dot { background: #D97706; }
-  .pill-submitted { background: var(--semantic-neutral-bg); color: var(--semantic-neutral-text); }
-  .pill-submitted .pill-dot { background: #64748B; }
-  .input-field { width: 100%; height: 46px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 0 14px 0 42px; font-size: 14px; color: var(--text-primary); outline: none; box-shadow: var(--shadow-sm); }
-  .input-field:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15); }
-  .ui-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; box-shadow: var(--shadow-sm); padding: 18px; }
+<style>
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Plus Jakarta Sans', 'Noto Sans Khmer', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    background: #FAFAFA;
+    color: #0B1220;
+    margin: 0;
+    padding: 0;
+  }
+  .card-shadow {
+    box-shadow: 0 8px 24px rgba(11, 18, 32, 0.06);
+  }
+  .hairline {
+    border: 1px solid #F0F1F3;
+  }
+  .border-subtle {
+    border: 1px solid #E5E7EB;
+  }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 28px;
+    padding: 0 10px;
+    border-radius: 9999px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  .chip-neutral {
+    background: #F1F5F9;
+    color: #475569;
+  }
+  .chip-matched {
+    background: #ECFDF5;
+    color: #047857;
+  }
+  .chip-missing {
+    background: #FFF1F2;
+    color: #BE123C;
+    border: 1px dashed #FECDD3;
+  }
+  .chip-selected {
+    background: #F0F9FF;
+    color: #0369A1;
+    border: 1.5px solid #0EA5E9;
+    font-weight: 600;
+  }
+  .status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 24px;
+    padding: 0 10px;
+    border-radius: 9999px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+  }
+  .status-under-review {
+    background: #FFFBEB;
+    color: #B45309;
+  }
+  .status-under-review .status-dot {
+    background: #D97706;
+  }
+  .status-submitted {
+    background: #F1F5F9;
+    color: #475569;
+  }
+  .status-submitted .status-dot {
+    background: #64748B;
+  }
+  .status-accepted {
+    background: #ECFDF5;
+    color: #047857;
+  }
+  .status-accepted .status-dot {
+    background: #10B981;
+  }
+  .status-rejected {
+    background: #FFF1F2;
+    color: #BE123C;
+  }
+  .status-rejected .status-dot {
+    background: #F43F5E;
+  }
+  .btn-ink {
+    background: #0B1220;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 14px;
+    height: 48px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 4px 12px rgba(11, 18, 32, 0.12);
+  }
+  .btn-secondary {
+    background: #FFFFFF;
+    color: #0B1220;
+    border: 1px solid #E5E7EB;
+    border-radius: 14px;
+    height: 48px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .input-filled {
+    height: 52px;
+    border-radius: 14px;
+    background: #F5F6F8;
+    border: 2px solid transparent;
+    padding: 0 16px;
+    font-size: 14px;
+    color: #0B1220;
+    width: 100%;
+    outline: none;
+    transition: all 0.15s ease;
+  }
+  .input-filled:focus {
+    background: #FFFFFF;
+    border-color: #0EA5E9;
+    box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.15);
+  }
+
+  body {
+    width: 393px;
+    height: 852px;
+    background: #FAFAFA;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .status-bar {
+    height: 44px;
+    min-height: 44px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 24px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #0B1220;
+    z-index: 40;
+  }
+  .dynamic-island {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 34px;
+    background: #0B1220;
+    border-radius: 20px;
+    z-index: 45;
+  }
+  .content-area {
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px 20px 90px 20px;
+  }
+  .home-indicator {
+    position: absolute;
+    bottom: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 134px;
+    height: 4px;
+    background: #0B1220;
+    border-radius: 2px;
+    opacity: 0.2;
+    z-index: 60;
+  }
 </style>
 </head>
 <body>
   <div class="dynamic-island"></div>
   <div class="status-bar">
     <span>9:41</span>
-    <div class="status-icons">
-      <svg width="17" height="11" viewBox="0 0 17 11" fill="none"><path d="M1 9.5C1 9.5 3.5 6.5 8.5 6.5C13.5 6.5 16 9.5 16 9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M3.5 7C3.5 7 5.5 4.5 8.5 4.5C11.5 4.5 13.5 7 13.5 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="8.5" cy="9.5" r="1" fill="currentColor"/></svg>
-      <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="currentColor"/><rect x="2" y="2" width="16" height="8" rx="2" fill="currentColor"/><path d="M23 4C23.5 4.5 24 5.2 24 6C24 6.8 23.5 7.5 23 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    <div style="display: flex; align-items: center; gap: 6px;">
+      <svg width="17" height="11" viewBox="0 0 17 11" fill="none"><path d="M1 9.5C1 9.5 3.5 6.5 8.5 6.5C13.5 6.5 16 9.5 16 9.5" stroke="#0B1220" stroke-width="1.5" stroke-linecap="round"/><path d="M3.5 7C3.5 7 5.5 4.5 8.5 4.5C11.5 4.5 13.5 7 13.5 7" stroke="#0B1220" stroke-width="1.5" stroke-linecap="round"/><circle cx="8.5" cy="9.5" r="1" fill="#0B1220"/></svg>
+      <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="#0B1220"/><rect x="2" y="2" width="16" height="8" rx="2" fill="#0B1220"/><path d="M23 4C23.5 4.5 24 5.2 24 6C24 6.8 23.5 7.5 23 8" stroke="#0B1220" stroke-width="1.5" stroke-linecap="round"/></svg>
     </div>
   </div>
-  
-<div style="padding: 10px 20px 0 20px; display: flex; justify-content: space-between; align-items: center;">
-  <h1 style="font-size: 20px; font-weight: 700; color: #0F172A; letter-spacing: -0.3px;">Profile</h1>
-  <button class="btn-ghost" style="display: inline-flex; align-items: center; gap: 4px;">Edit</button>
+  <div class="content-area">
+    
+<!-- Profile Header (Centred) -->
+<div style="text-align: center; margin: 12px 0 24px 0;">
+  <div style="width: 72px; height: 72px; background: #0B1220; color: #FFFFFF; border-radius: 9999px; margin: 0 auto 12px auto; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 800; box-shadow: 0 8px 20px rgba(11,18,32,0.15);">
+    SP
+  </div>
+  <h1 style="font-size: 24px; font-weight: 700; color: #0B1220; letter-spacing: -0.01em;">Sokha Pech</h1>
+  <p style="font-size: 13px; color: #4B5563; margin-top: 2px;">Royal University of Phnom Penh (RUPP)</p>
+  <p style="font-size: 13px; color: #0369A1; font-weight: 600; margin-top: 2px;">Computer Science • Year 3</p>
+
+  <!-- Icon Pill Links -->
+  <div style="display: flex; justify-content: center; gap: 8px; margin-top: 14px;">
+    <a style="display: flex; align-items: center; gap: 6px; padding: 6px 12px; background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 9999px; font-size: 12px; font-weight: 500; color: #0B1220; text-decoration: none;">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg> github.com/sokhapech
+    </a>
+    <a style="display: flex; align-items: center; gap: 6px; padding: 6px 12px; background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 9999px; font-size: 12px; font-weight: 500; color: #0369A1; text-decoration: none;">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg> sokha.dev
+    </a>
+  </div>
 </div>
 
-<div class="content-scroll" style="padding-top: 14px;">
-  <div class="ui-card" style="margin-bottom: 14px; text-align: center;">
-    <div style="width: 64px; height: 64px; background: #EEF2FF; border: 1.5px solid #C7D2FE; color: #4F46E5; border-radius: 999px; margin: 0 auto 10px auto; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 700;">
-      SP
+<!-- Bento Layout of Cards -->
+<div style="display: flex; flex-direction: column; gap: 16px;">
+  <!-- Card 1: Skills -->
+  <div style="background: #FFFFFF; border-radius: 20px; padding: 20px; border: 1px solid #F0F1F3; box-shadow: 0 8px 24px rgba(11,18,32,0.06);">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+      <h2 style="font-size: 16px; font-weight: 600; color: #0B1220;">Technical skills (5)</h2>
+      <button style="background: none; border: none; font-size: 12px; font-weight: 600; color: #0369A1; cursor: pointer; display: flex; align-items: center; gap: 4px;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg> Add
+      </button>
     </div>
-    <h2 style="font-size: 18px; font-weight: 700; color: #0F172A;">Sokha Pech</h2>
-    <div style="font-size: 13px; font-weight: 500; color: #0F172A; margin-top: 2px;">Computer Science · Year 3</div>
-    <div style="font-size: 12px; color: #64748B; margin-top: 2px;">Royal University of Phnom Penh (RUPP)</div>
-
-    <div style="display: flex; justify-content: center; gap: 8px; margin-top: 14px;">
-      <span class="chip-neutral" style="font-size: 11px; gap: 5px;">
-        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z"/></svg>
-        github.com/sokhapech
-      </span>
-      <span class="chip-neutral" style="font-size: 11px; gap: 5px;">
-        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
-        sokha.dev
-      </span>
+    <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+      <span class="chip chip-neutral" style="font-weight: 600;">Flutter</span>
+      <span class="chip chip-neutral" style="font-weight: 600;">Dart</span>
+      <span class="chip chip-neutral" style="font-weight: 600;">TypeScript</span>
+      <span class="chip chip-neutral" style="font-weight: 600;">Node.js</span>
+      <span class="chip chip-neutral" style="font-weight: 600;">Git</span>
     </div>
   </div>
 
-  <div class="ui-card" style="margin-bottom: 14px;">
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-      <h3 style="font-size: 14px; font-weight: 600; color: #0F172A;">Technical skills (5)</h3>
-      <button class="btn-ghost">+ Add</button>
-    </div>
-    <div style="display: flex; flex-wrap: wrap; gap: 6px;">
-      <span class="chip-neutral">Flutter</span>
-      <span class="chip-neutral">Dart</span>
-      <span class="chip-neutral">TypeScript</span>
-      <span class="chip-neutral">Node.js</span>
-      <span class="chip-neutral">Git</span>
-    </div>
-  </div>
-
-  <div class="ui-card" style="margin-bottom: 14px;">
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-      <h3 style="font-size: 14px; font-weight: 600; color: #0F172A;">Software projects</h3>
-      <button class="btn-ghost">+ Add</button>
+  <!-- Card 2: Projects -->
+  <div style="background: #FFFFFF; border-radius: 20px; padding: 20px; border: 1px solid #F0F1F3; box-shadow: 0 8px 24px rgba(11,18,32,0.06);">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+      <h2 style="font-size: 16px; font-weight: 600; color: #0B1220;">Software projects</h2>
+      <button style="background: none; border: none; font-size: 12px; font-weight: 600; color: #0369A1; cursor: pointer; display: flex; align-items: center; gap: 4px;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg> Add
+      </button>
     </div>
 
-    <div style="margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px solid #EEF0F4;">
-      <div style="font-size: 14px; font-weight: 600; color: #0F172A;">Mobile Shopping App</div>
-      <p style="font-size: 12px; color: #64748B; margin: 3px 0 6px 0; line-height: 1.45;">
-        Offline-first product catalog built with Flutter and SQLite.
-      </p>
-      <span style="font-size: 12px; color: #4F46E5; font-weight: 500; display: inline-flex; align-items: center; gap: 4px;">
-        github.com/sokhapech/shop <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
-      </span>
+    <div style="margin-bottom: 14px; padding-bottom: 14px; border-bottom: 1px solid #F0F1F3;">
+      <h3 style="font-size: 14px; font-weight: 600; color: #0B1220;">Mobile Shopping App</h3>
+      <p style="font-size: 13px; color: #4B5563; margin-top: 2px;">Offline-first Flutter e-commerce client with SQLite storage.</p>
+      <div style="font-size: 12px; color: #0369A1; font-weight: 500; margin-top: 4px; display: flex; align-items: center; gap: 4px; cursor: pointer;">
+        github.com/sokhapech/shop <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
+      </div>
     </div>
 
     <div>
-      <div style="font-size: 14px; font-weight: 600; color: #0F172A;">DevPath API Prototype</div>
-      <p style="font-size: 12px; color: #64748B; margin: 3px 0 6px 0; line-height: 1.45;">
-        RESTful backend with Express, TypeScript, and Prisma ORM.
-      </p>
-      <span style="font-size: 12px; color: #4F46E5; font-weight: 500; display: inline-flex; align-items: center; gap: 4px;">
-        github.com/sokhapech/devpath-api <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
-      </span>
+      <h3 style="font-size: 14px; font-weight: 600; color: #0B1220;">DevPath Backend API</h3>
+      <p style="font-size: 13px; color: #4B5563; margin-top: 2px;">RESTful endpoints built with Node.js, TypeScript, and Prisma ORM.</p>
     </div>
   </div>
 
-  <div class="ui-card">
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-      <h3 style="font-size: 14px; font-weight: 600; color: #0F172A;">Achievements</h3>
-      <button class="btn-ghost">+ Add</button>
+  <!-- Card 3: Achievements -->
+  <div style="background: #FFFFFF; border-radius: 20px; padding: 20px; border: 1px solid #F0F1F3; box-shadow: 0 8px 24px rgba(11,18,32,0.06);">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+      <h2 style="font-size: 16px; font-weight: 600; color: #0B1220;">Achievements</h2>
+      <button style="background: none; border: none; font-size: 12px; font-weight: 600; color: #0369A1; cursor: pointer; display: flex; align-items: center; gap: 4px;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg> Add
+      </button>
     </div>
-    <div style="display: flex; align-items: center; gap: 12px;">
-      <div style="width: 38px; height: 38px; background: #FFFBEB; color: #B45309; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+
+    <div style="display: flex; gap: 12px; align-items: flex-start;">
+      <div style="width: 36px; height: 36px; background: #FFFBEB; color: #B45309; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
       </div>
       <div>
-        <div style="font-size: 13px; font-weight: 600; color: #0F172A;">1st Place — RUPP Hackathon 2025</div>
-        <div style="font-size: 12px; color: #64748B;">Built an automated student portal in 24 hours.</div>
+        <h3 style="font-size: 14px; font-weight: 600; color: #0B1220;">1st Place — RUPP Hackathon 2025</h3>
+        <p style="font-size: 13px; color: #4B5563; margin-top: 2px;">Built an automated student portal in 24 hours.</p>
       </div>
     </div>
   </div>
 </div>
 
-  
-  <div class="bottom-nav">
-    <div class="nav-item ">
-      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-      <span>Jobs</span>
-      
-    </div>
-    <div class="nav-item ">
-      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>
-      <span>Saved</span>
-      
-    </div>
-    <div class="nav-item ">
-      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
-      <span>Applied</span>
-      
-    </div>
-    <div class="nav-item active">
-      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-      <span>Profile</span>
-      <div class='nav-pill'></div>
-    </div>
   </div>
-    
+  
+        <!-- Floating Pill Bottom Nav -->
+        <div style="position: absolute; bottom: 18px; left: 16px; right: 16px; height: 60px; background: rgba(255, 255, 255, 0.94); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid #E5E7EB; border-radius: 9999px; box-shadow: 0 12px 32px rgba(11, 18, 32, 0.08); display: flex; align-items: center; justify-content: space-around; z-index: 50; padding: 0 6px;">
+          
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 3px; color: #6B7280; font-size: 11px; font-weight: 500; padding: 6px 12px;">
+                  <span style="display: flex; align-items: center; opacity: 0.85;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></span>
+                  <span>Jobs</span>
+                </div>
+                
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 3px; color: #6B7280; font-size: 11px; font-weight: 500; padding: 6px 12px;">
+                  <span style="display: flex; align-items: center; opacity: 0.85;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg></span>
+                  <span>Saved</span>
+                </div>
+                
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 3px; color: #6B7280; font-size: 11px; font-weight: 500; padding: 6px 12px;">
+                  <span style="display: flex; align-items: center; opacity: 0.85;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg></span>
+                  <span>Applied</span>
+                </div>
+                
+                <div style="background: #0B1220; color: #FFFFFF; border-radius: 9999px; padding: 8px 16px; display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600;">
+                  <span style="display: flex; align-items: center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+                  <span>Profile</span>
+                </div>
+                
+        </div>
+        
   <div class="home-indicator"></div>
 </body>
 </html>

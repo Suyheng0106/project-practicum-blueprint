@@ -38,8 +38,8 @@ Status values: Not started · In progress · Submitted · Rework needed
 
 | Item | Link |
 |---|---|
-| Figma file | https://www.figma.com/design/otuXkH2lhb0nVRzsNo5uY7?node-id=10-2 |
-| Figma prototype | https://www.figma.com/proto/otuXkH2lhb0nVRzsNo5uY7?node-id=10-2&scaling=scale-down |
+| Figma file | https://www.figma.com/design/otuXkH2lhb0nVRzsNo5uY7?node-id=13-2 |
+| Figma prototype | https://www.figma.com/proto/otuXkH2lhb0nVRzsNo5uY7?node-id=13-2&scaling=scale-down |
 | Alpha demo video | |
 | Thesis | |
 | Defense slides | |

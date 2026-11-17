@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440, height=900">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Khmer:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Plus Jakarta Sans', 'Noto Sans Khmer', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    background: #FAFAFA;
+    color: #0B1220;
+    margin: 0;
+    padding: 0;
+  }
+  .card-shadow {
+    box-shadow: 0 8px 24px rgba(11, 18, 32, 0.06);
+  }
+  .hairline {
+    border: 1px solid #F0F1F3;
+  }
+  .border-subtle {
+    border: 1px solid #E5E7EB;
+  }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 28px;
+    padding: 0 10px;
+    border-radius: 9999px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  .chip-neutral {
+    background: #F1F5F9;
+    color: #475569;
+  }
+  .chip-matched {
+    background: #ECFDF5;
+    color: #047857;
+  }
+  .chip-missing {
+    background: #FFF1F2;
+    color: #BE123C;
+    border: 1px dashed #FECDD3;
+  }
+  .chip-selected {
+    background: #F0F9FF;
+    color: #0369A1;
+    border: 1.5px solid #0EA5E9;
+    font-weight: 600;
+  }
+  .status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 24px;
+    padding: 0 10px;
+    border-radius: 9999px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+  }
+  .status-under-review {
+    background: #FFFBEB;
+    color: #B45309;
+  }
+  .status-under-review .status-dot {
+    background: #D97706;
+  }
+  .status-submitted {
+    background: #F1F5F9;
+    color: #475569;
+  }
+  .status-submitted .status-dot {
+    background: #64748B;
+  }
+  .status-accepted {
+    background: #ECFDF5;
+    color: #047857;
+  }
+  .status-accepted .status-dot {
+    background: #10B981;
+  }
+  .status-rejected {
+    background: #FFF1F2;
+    color: #BE123C;
+  }
+  .status-rejected .status-dot {
+    background: #F43F5E;
+  }
+  .btn-ink {
+    background: #0B1220;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 14px;
+    height: 48px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 4px 12px rgba(11, 18, 32, 0.12);
+  }
+  .btn-secondary {
+    background: #FFFFFF;
+    color: #0B1220;
+    border: 1px solid #E5E7EB;
+    border-radius: 14px;
+    height: 48px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .input-filled {
+    height: 52px;
+    border-radius: 14px;
+    background: #F5F6F8;
+    border: 2px solid transparent;
+    padding: 0 16px;
+    font-size: 14px;
+    color: #0B1220;
+    width: 100%;
+    outline: none;
+    transition: all 0.15s ease;
+  }
+  .input-filled:focus {
+    background: #FFFFFF;
+    border-color: #0EA5E9;
+    box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.15);
+  }
+
+  body {
+    width: 1440px;
+    background: #FAFAFA;
+    padding: 48px;
+  }
+  .component-card {
+    background: #FFFFFF;
+    border-radius: 20px;
+    padding: 24px;
+    border: 1px solid #F0F1F3;
+    box-shadow: 0 8px 24px rgba(11,18,32,0.06);
+    margin-bottom: 24px;
+  }
+  .state-col {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+  .state-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: #6B7280;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+  <div style="margin-bottom: 32px;">
+    <h1 style="font-size: 32px; font-weight: 700; color: #0B1220; letter-spacing: -0.02em;">DevPath — Component State Sheet</h1>
+    <p style="font-size: 14px; color: #4B5563; margin-top: 4px;">Universal reusable design components in every required interactive state.</p>
+  </div>
+
+  <!-- Primary & Secondary Buttons -->
+  <div class="component-card">
+    <h2 style="font-size: 18px; font-weight: 700; color: #0B1220; margin-bottom: 16px;">Buttons</h2>
+    <div style="display: flex; gap: 32px;">
+      <div class="state-col">
+        <span class="state-label">Primary (Default)</span>
+        <button class="btn-ink" style="padding: 0 24px;">Sign in</button>
+      </div>
+      <div class="state-col">
+        <span class="state-label">Primary (Hover)</span>
+        <button class="btn-ink" style="padding: 0 24px; background: #1E293B;">Sign in</button>
+      </div>
+      <div class="state-col">
+        <span class="state-label">Primary (Focus)</span>
+        <button class="btn-ink" style="padding: 0 24px; box-shadow: 0 0 0 4px rgba(14,165,233,0.3);">Sign in</button>
+      </div>
+      <div class="state-col">
+        <span class="state-label">Primary (Disabled)</span>
+        <button class="btn-ink" style="padding: 0 24px; background: #E5E7EB; color: #9CA3AF; box-shadow: none; cursor: not-allowed;">Sign in</button>
+      </div>
+      <div class="state-col">
+        <span class="state-label">Secondary (White/Hairline)</span>
+        <button class="btn-secondary" style="padding: 0 24px;">Review applicants</button>
+      </div>
+      <div class="state-col">
+        <span class="state-label">Tertiary (Text Only)</span>
+        <button style="background: none; border: none; font-size: 13px; font-weight: 600; color: #0369A1; cursor: pointer; padding: 12px 8px;">Skip for now</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Skill Chips & Status Pills -->
+  <div class="component-card">
+    <h2 style="font-size: 18px; font-weight: 700; color: #0B1220; margin-bottom: 16px;">Skill Chips &amp; Status Pills</h2>
+    <div style="display: flex; gap: 40px; align-items: flex-start;">
+      <div>
+        <div style="font-size: 12px; font-weight: 600; color: #6B7280; margin-bottom: 10px;">Skill Chips (28px Pill)</div>
+        <div style="display: flex; gap: 10px;">
+          <div class="chip chip-matched"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> Flutter (Matched)</div>
+          <div class="chip chip-missing"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></svg></span> Docker (Missing)</div>
+          <div class="chip chip-selected"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> Dart (Selected)</div>
+          <div class="chip chip-neutral">PostgreSQL (Neutral)</div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size: 12px; font-weight: 600; color: #6B7280; margin-bottom: 10px;">Status Pills (Sentence Case + Colored Dot)</div>
+        <div style="display: flex; gap: 10px;">
+          <div class="status-pill status-accepted"><span class="status-dot"></span> Accepted</div>
+          <div class="status-pill status-under-review"><span class="status-dot"></span> Under review</div>
+          <div class="status-pill status-submitted"><span class="status-dot"></span> Submitted</div>
+          <div class="status-pill status-rejected"><span class="status-dot"></span> Rejected</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Signature Match Rings -->
+  <div class="component-card">
+    <h2 style="font-size: 18px; font-weight: 700; color: #0B1220; margin-bottom: 16px;">Signature Match Rings (Core Brand Element)</h2>
+    <div style="display: flex; gap: 40px; align-items: center;">
+      <div style="text-align: center;">
+        <span class="state-label" style="display: block; margin-bottom: 8px;">High Fit (80%+ Green)</span>
+        <div style="position: relative; width: 52px; height: 52px; display: inline-flex; align-items: center; justify-content: center;">
+      <svg width="52" height="52" style="transform: rotate(-90deg);">
+        <circle cx="26.0" cy="26.0" r="23.5" fill="none" stroke="#F0F1F3" stroke-width="5" />
+        <circle cx="26.0" cy="26.0" r="23.5" fill="none" stroke="#10B981" stroke-width="5"
+                stroke-dasharray="147.65473" stroke-dashoffset="0.0" stroke-linecap="round" />
+      </svg>
+      <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 13px; color: #047857;">
+        100%
+      </div>
+    </div>
+      </div>
+      <div style="text-align: center;">
+        <span class="state-label" style="display: block; margin-bottom: 8px;">Standard Fit (Sky Blue)</span>
+        <div style="position: relative; width: 52px; height: 52px; display: inline-flex; align-items: center; justify-content: center;">
+      <svg width="52" height="52" style="transform: rotate(-90deg);">
+        <circle cx="26.0" cy="26.0" r="23.5" fill="none" stroke="#F0F1F3" stroke-width="5" />
+        <circle cx="26.0" cy="26.0" r="23.5" fill="none" stroke="#0EA5E9" stroke-width="5"
+                stroke-dasharray="147.65473" stroke-dashoffset="48.72606089999999" stroke-linecap="round" />
+      </svg>
+      <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 13px; color: #0369A1;">
+        67%
+      </div>
+    </div>
+      </div>
+      <div style="text-align: center;">
+        <span class="state-label" style="display: block; margin-bottom: 8px;">Low Fit (&lt;40% Grey)</span>
+        <div style="position: relative; width: 52px; height: 52px; display: inline-flex; align-items: center; justify-content: center;">
+      <svg width="52" height="52" style="transform: rotate(-90deg);">
+        <circle cx="26.0" cy="26.0" r="23.5" fill="none" stroke="#F0F1F3" stroke-width="5" />
+        <circle cx="26.0" cy="26.0" r="23.5" fill="none" stroke="#9CA3AF" stroke-width="5"
+                stroke-dasharray="147.65473" stroke-dashoffset="98.9286691" stroke-linecap="round" />
+      </svg>
+      <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 13px; color: #4B5563;">
+        33%
+      </div>
+    </div>
+      </div>
+      <div style="text-align: center; border-left: 1px solid #E5E7EB; padding-left: 40px;">
+        <span class="state-label" style="display: block; margin-bottom: 8px;">Large Hero Ring (96px, 8px Stroke)</span>
+        <div style="position: relative; width: 96px; height: 96px; display: inline-flex; align-items: center; justify-content: center;">
+      <svg width="96" height="96" style="transform: rotate(-90deg);">
+        <circle cx="48.0" cy="48.0" r="44.0" fill="none" stroke="#F0F1F3" stroke-width="8" />
+        <circle cx="48.0" cy="48.0" r="44.0" fill="none" stroke="#0EA5E9" stroke-width="8"
+                stroke-dasharray="276.45992" stroke-dashoffset="91.2317736" stroke-linecap="round" />
+      </svg>
+      <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 24px; color: #0369A1;">
+        67%
+      </div>
+    </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Text Input States -->
+  <div class="component-card">
+    <h2 style="font-size: 18px; font-weight: 700; color: #0B1220; margin-bottom: 16px;">Text Inputs (52px Tall, 14px Radius)</h2>
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;">
+      <div>
+        <span class="state-label">Default (Filled #F5F6F8)</span>
+        <input type="text" class="input-filled" placeholder="Enter full name" style="margin-top: 6px;">
+      </div>
+      <div>
+        <span class="state-label">Filled Text</span>
+        <input type="text" class="input-filled" value="sokha.pech@it.edu.kh" style="margin-top: 6px;">
+      </div>
+      <div>
+        <span class="state-label">Focused (2px Sky Ring)</span>
+        <input type="text" class="input-filled" value="Flutter" style="margin-top: 6px; border-color: #0EA5E9; box-shadow: 0 0 0 4px rgba(14,165,233,0.15); background: #FFFFFF;">
+      </div>
+      <div>
+        <span class="state-label">Disabled</span>
+        <input type="text" class="input-filled" value="readonly@it.edu.kh" disabled style="margin-top: 6px; opacity: 0.6; cursor: not-allowed;">
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -3,148 +3,289 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=393, height=852, initial-scale=1.0">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Khmer:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg-page: #F7F8FA;
-    --surface: #FFFFFF;
-    --border: #E8EAF0;
-    --divider: #EEF0F4;
-    --text-primary: #0F172A;
-    --text-secondary: #475569;
-    --text-muted: #64748B;
-    --accent: #4F46E5;
-    --accent-hover: #4338CA;
-    --accent-tint: #EEF2FF;
-    --semantic-match-bg: #ECFDF5;
-    --semantic-match-text: #15803D;
-    --semantic-gap-bg: #FEF2F2;
-    --semantic-gap-text: #B91C1C;
-    --semantic-review-bg: #FFFBEB;
-    --semantic-review-text: #B45309;
-    --semantic-neutral-bg: #F1F5F9;
-    --semantic-neutral-text: #475569;
-    --shadow-sm: 0 1px 2px rgba(16, 24, 40, 0.04);
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', 'Noto Sans Khmer', -apple-system, BlinkMacSystemFont, sans-serif; -webkit-font-smoothing: antialiased; }
-  body { width: 393px; height: 852px; background: var(--bg-page); color: var(--text-primary); overflow: hidden; position: relative; display: flex; flex-direction: column; }
-  .status-bar { height: 48px; min-height: 48px; display: flex; justify-content: space-between; align-items: center; padding: 0 24px; font-size: 14px; font-weight: 600; color: var(--text-primary); z-index: 50; }
-  .dynamic-island { position: absolute; top: 11px; left: 50%; transform: translateX(-50%); width: 120px; height: 35px; background: #000000; border-radius: 20px; z-index: 50; }
-  .status-icons { display: flex; align-items: center; gap: 6px; }
-  .home-indicator { position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); width: 134px; height: 5px; background: var(--text-primary); border-radius: 3px; opacity: 0.2; z-index: 50; }
-  .bottom-nav { position: absolute; bottom: 0; left: 0; right: 0; height: 76px; background: rgba(255, 255, 255, 0.92); backdrop-filter: blur(12px); border-top: 1px solid var(--divider); display: flex; justify-content: space-around; padding-top: 8px; z-index: 40; }
-  .nav-item { display: flex; flex-direction: column; align-items: center; gap: 4px; color: var(--text-muted); font-size: 11px; font-weight: 500; text-decoration: none; position: relative; min-width: 54px; }
-  .nav-item.active { color: var(--accent); font-weight: 600; }
-  .nav-pill { width: 16px; height: 3px; background: var(--accent); border-radius: 999px; margin-top: 2px; }
-  .content-scroll { flex: 1; overflow-y: auto; padding: 12px 20px 24px 20px; }
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Khmer:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  .btn-primary-m { width: 100%; height: 44px; background: var(--accent); color: #FFFFFF; border: none; border-radius: 10px; font-size: 14px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; box-shadow: var(--shadow-sm); }
-  .btn-secondary-m { width: 100%; height: 44px; background: var(--surface); color: var(--text-primary); border: 1px solid var(--border); border-radius: 10px; font-size: 14px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; box-shadow: var(--shadow-sm); }
-  .chip-matched { display: inline-flex; align-items: center; gap: 4px; background: var(--semantic-match-bg); color: var(--semantic-match-text); padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; }
-  .chip-gap { display: inline-flex; align-items: center; gap: 4px; background: var(--semantic-gap-bg); color: var(--semantic-gap-text); border: 1px dashed #FECACA; padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; }
-  .chip-neutral { display: inline-flex; align-items: center; background: var(--semantic-neutral-bg); color: var(--semantic-neutral-text); padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 500; }
-  .pill { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 999px; font-size: 12px; font-weight: 500; }
-  .pill-dot { width: 6px; height: 6px; border-radius: 50%; }
-  .pill-accepted { background: var(--semantic-match-bg); color: var(--semantic-match-text); }
-  .pill-accepted .pill-dot { background: #10B981; }
-  .pill-review { background: var(--semantic-review-bg); color: var(--semantic-review-text); }
-  .pill-review .pill-dot { background: #D97706; }
-  .pill-submitted { background: var(--semantic-neutral-bg); color: var(--semantic-neutral-text); }
-  .pill-submitted .pill-dot { background: #64748B; }
-  .input-field { width: 100%; height: 46px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 0 14px 0 42px; font-size: 14px; color: var(--text-primary); outline: none; box-shadow: var(--shadow-sm); }
-  .input-field:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15); }
-  .ui-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; box-shadow: var(--shadow-sm); padding: 18px; }
+<style>
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Plus Jakarta Sans', 'Noto Sans Khmer', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    background: #FAFAFA;
+    color: #0B1220;
+    margin: 0;
+    padding: 0;
+  }
+  .card-shadow {
+    box-shadow: 0 8px 24px rgba(11, 18, 32, 0.06);
+  }
+  .hairline {
+    border: 1px solid #F0F1F3;
+  }
+  .border-subtle {
+    border: 1px solid #E5E7EB;
+  }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 28px;
+    padding: 0 10px;
+    border-radius: 9999px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  .chip-neutral {
+    background: #F1F5F9;
+    color: #475569;
+  }
+  .chip-matched {
+    background: #ECFDF5;
+    color: #047857;
+  }
+  .chip-missing {
+    background: #FFF1F2;
+    color: #BE123C;
+    border: 1px dashed #FECDD3;
+  }
+  .chip-selected {
+    background: #F0F9FF;
+    color: #0369A1;
+    border: 1.5px solid #0EA5E9;
+    font-weight: 600;
+  }
+  .status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 24px;
+    padding: 0 10px;
+    border-radius: 9999px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+  }
+  .status-under-review {
+    background: #FFFBEB;
+    color: #B45309;
+  }
+  .status-under-review .status-dot {
+    background: #D97706;
+  }
+  .status-submitted {
+    background: #F1F5F9;
+    color: #475569;
+  }
+  .status-submitted .status-dot {
+    background: #64748B;
+  }
+  .status-accepted {
+    background: #ECFDF5;
+    color: #047857;
+  }
+  .status-accepted .status-dot {
+    background: #10B981;
+  }
+  .status-rejected {
+    background: #FFF1F2;
+    color: #BE123C;
+  }
+  .status-rejected .status-dot {
+    background: #F43F5E;
+  }
+  .btn-ink {
+    background: #0B1220;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 14px;
+    height: 48px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 4px 12px rgba(11, 18, 32, 0.12);
+  }
+  .btn-secondary {
+    background: #FFFFFF;
+    color: #0B1220;
+    border: 1px solid #E5E7EB;
+    border-radius: 14px;
+    height: 48px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .input-filled {
+    height: 52px;
+    border-radius: 14px;
+    background: #F5F6F8;
+    border: 2px solid transparent;
+    padding: 0 16px;
+    font-size: 14px;
+    color: #0B1220;
+    width: 100%;
+    outline: none;
+    transition: all 0.15s ease;
+  }
+  .input-filled:focus {
+    background: #FFFFFF;
+    border-color: #0EA5E9;
+    box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.15);
+  }
+
+  body {
+    width: 393px;
+    height: 852px;
+    background: #FAFAFA;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .status-bar {
+    height: 44px;
+    min-height: 44px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 24px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #0B1220;
+    z-index: 40;
+  }
+  .dynamic-island {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 34px;
+    background: #0B1220;
+    border-radius: 20px;
+    z-index: 45;
+  }
+  .content-area {
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px 20px 24px 20px;
+  }
+  .home-indicator {
+    position: absolute;
+    bottom: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 134px;
+    height: 4px;
+    background: #0B1220;
+    border-radius: 2px;
+    opacity: 0.2;
+    z-index: 60;
+  }
 </style>
 </head>
 <body>
   <div class="dynamic-island"></div>
   <div class="status-bar">
     <span>9:41</span>
-    <div class="status-icons">
-      <svg width="17" height="11" viewBox="0 0 17 11" fill="none"><path d="M1 9.5C1 9.5 3.5 6.5 8.5 6.5C13.5 6.5 16 9.5 16 9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M3.5 7C3.5 7 5.5 4.5 8.5 4.5C11.5 4.5 13.5 7 13.5 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="8.5" cy="9.5" r="1" fill="currentColor"/></svg>
-      <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="currentColor"/><rect x="2" y="2" width="16" height="8" rx="2" fill="currentColor"/><path d="M23 4C23.5 4.5 24 5.2 24 6C24 6.8 23.5 7.5 23 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    <div style="display: flex; align-items: center; gap: 6px;">
+      <svg width="17" height="11" viewBox="0 0 17 11" fill="none"><path d="M1 9.5C1 9.5 3.5 6.5 8.5 6.5C13.5 6.5 16 9.5 16 9.5" stroke="#0B1220" stroke-width="1.5" stroke-linecap="round"/><path d="M3.5 7C3.5 7 5.5 4.5 8.5 4.5C11.5 4.5 13.5 7 13.5 7" stroke="#0B1220" stroke-width="1.5" stroke-linecap="round"/><circle cx="8.5" cy="9.5" r="1" fill="#0B1220"/></svg>
+      <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="#0B1220"/><rect x="2" y="2" width="16" height="8" rx="2" fill="#0B1220"/><path d="M23 4C23.5 4.5 24 5.2 24 6C24 6.8 23.5 7.5 23 8" stroke="#0B1220" stroke-width="1.5" stroke-linecap="round"/></svg>
     </div>
   </div>
-  
-<div style="padding: 10px 20px 0 20px;">
-  <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;">
-    <div style="width: 36px; height: 36px; background: #FFFFFF; border: 1px solid var(--border); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: var(--text-primary); cursor: pointer;">
-      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg>
-    </div>
-    <div style="display: flex; gap: 6px; width: 140px;">
-      <div style="flex: 1; height: 4px; background: #4F46E5; border-radius: 999px;"></div>
-      <div style="flex: 1; height: 4px; background: #4F46E5; border-radius: 999px;"></div>
-    </div>
-    <span style="font-size: 13px; font-weight: 500; color: #64748B; cursor: pointer;">Skip</span>
+  <div class="content-area">
+    
+<!-- Segmented Progress Bar -->
+<div style="display: flex; gap: 6px; margin: 8px 0 20px 0;">
+  <div style="flex: 1; height: 4px; background: #0B1220; border-radius: 9999px;"></div>
+  <div style="flex: 1; height: 4px; background: #0EA5E9; border-radius: 9999px;"></div>
+</div>
+
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+  <span style="font-size: 12px; font-weight: 600; color: #0369A1; background: #F0F9FF; padding: 4px 10px; border-radius: 9999px;">Step 2 of 2</span>
+  <span style="font-size: 13px; color: #6B7280; font-weight: 500; cursor: pointer;">Skip for now</span>
+</div>
+
+<h1 style="font-size: 32px; font-weight: 700; color: #0B1220; letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 6px;">
+  What do you build with?
+</h1>
+<p style="font-size: 14px; color: #4B5563; margin-bottom: 20px;">
+  Select the technologies you know. We'll match them against real job requirements.
+</p>
+
+<!-- Search Field -->
+<div style="position: relative; margin-bottom: 24px;">
+  <input type="text" class="input-filled" placeholder="Search skills (e.g. Flutter, React, SQL)..." style="padding-left: 44px;">
+  <div style="position: absolute; left: 16px; top: 16px; color: #6B7280;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></div>
+</div>
+
+<!-- Category 1: Mobile -->
+<div style="margin-bottom: 22px;">
+  <div style="font-size: 13px; font-weight: 600; color: #4B5563; margin-bottom: 10px;">Mobile development</div>
+  <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+    <div class="chip chip-selected"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> Flutter</div>
+    <div class="chip chip-selected"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> Dart</div>
+    <div class="chip chip-neutral" style="cursor: pointer;">React Native</div>
+    <div class="chip chip-neutral" style="cursor: pointer;">Kotlin</div>
+    <div class="chip chip-neutral" style="cursor: pointer;">Swift</div>
   </div>
 </div>
 
-<div class="content-scroll" style="padding-top: 8px; padding-bottom: 96px;">
-  <h1 style="font-size: 20px; font-weight: 700; color: #0F172A; letter-spacing: -0.3px; margin-bottom: 4px;">Select your skills</h1>
-  <p style="font-size: 14px; color: #64748B; margin-bottom: 20px; line-height: 1.4;">DevPath uses these to calculate your fit score for junior tech jobs.</p>
-
-  <div style="position: relative; margin-bottom: 22px;">
-    <input type="text" class="input-field" placeholder="Search skills (e.g. Flutter, TypeScript, SQL)..." style="height: 44px;">
-    <span style="position: absolute; left: 14px; top: 13px; color: #64748B;"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></span>
-  </div>
-
-  <div style="margin-bottom: 20px;">
-    <div style="font-size: 11px; font-weight: 600; color: #64748B; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px;">Mobile</div>
-    <div style="display: flex; flex-wrap: wrap; gap: 8px;">
-      <div style="background: #EEF2FF; border: 1px solid #C7D2FE; color: #4F46E5; padding: 6px 12px; border-radius: 999px; font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; gap: 5px;">
-        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg> Flutter
-      </div>
-      <div style="background: #EEF2FF; border: 1px solid #C7D2FE; color: #4F46E5; padding: 6px 12px; border-radius: 999px; font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; gap: 5px;">
-        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg> Dart
-      </div>
-      <div style="background: #FFFFFF; border: 1px solid #E8EAF0; color: #475569; padding: 6px 12px; border-radius: 999px; font-size: 13px; font-weight: 500;">React Native</div>
-      <div style="background: #FFFFFF; border: 1px solid #E8EAF0; color: #475569; padding: 6px 12px; border-radius: 999px; font-size: 13px; font-weight: 500;">Kotlin</div>
-      <div style="background: #FFFFFF; border: 1px solid #E8EAF0; color: #475569; padding: 6px 12px; border-radius: 999px; font-size: 13px; font-weight: 500;">Swift</div>
-    </div>
-  </div>
-
-  <div style="margin-bottom: 20px;">
-    <div style="font-size: 11px; font-weight: 600; color: #64748B; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px;">Frontend & Web</div>
-    <div style="display: flex; flex-wrap: wrap; gap: 8px;">
-      <div style="background: #EEF2FF; border: 1px solid #C7D2FE; color: #4F46E5; padding: 6px 12px; border-radius: 999px; font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; gap: 5px;">
-        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg> TypeScript
-      </div>
-      <div style="background: #FFFFFF; border: 1px solid #E8EAF0; color: #475569; padding: 6px 12px; border-radius: 999px; font-size: 13px; font-weight: 500;">React</div>
-      <div style="background: #FFFFFF; border: 1px solid #E8EAF0; color: #475569; padding: 6px 12px; border-radius: 999px; font-size: 13px; font-weight: 500;">HTML / CSS</div>
-      <div style="background: #FFFFFF; border: 1px solid #E8EAF0; color: #475569; padding: 6px 12px; border-radius: 999px; font-size: 13px; font-weight: 500;">Next.js</div>
-      <div style="background: #FFFFFF; border: 1px solid #E8EAF0; color: #475569; padding: 6px 12px; border-radius: 999px; font-size: 13px; font-weight: 500;">Tailwind</div>
-    </div>
-  </div>
-
-  <div style="margin-bottom: 24px;">
-    <div style="font-size: 11px; font-weight: 600; color: #64748B; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px;">Backend & Database</div>
-    <div style="display: flex; flex-wrap: wrap; gap: 8px;">
-      <div style="background: #EEF2FF; border: 1px solid #C7D2FE; color: #4F46E5; padding: 6px 12px; border-radius: 999px; font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; gap: 5px;">
-        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg> Node.js
-      </div>
-      <div style="background: #EEF2FF; border: 1px solid #C7D2FE; color: #4F46E5; padding: 6px 12px; border-radius: 999px; font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; gap: 5px;">
-        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg> Git
-      </div>
-      <div style="background: #FFFFFF; border: 1px solid #E8EAF0; color: #475569; padding: 6px 12px; border-radius: 999px; font-size: 13px; font-weight: 500;">PostgreSQL</div>
-      <div style="background: #FFFFFF; border: 1px solid #E8EAF0; color: #475569; padding: 6px 12px; border-radius: 999px; font-size: 13px; font-weight: 500;">Docker</div>
-      <div style="background: #FFFFFF; border: 1px solid #E8EAF0; color: #475569; padding: 6px 12px; border-radius: 999px; font-size: 13px; font-weight: 500;">Python</div>
-    </div>
+<!-- Category 2: Frontend -->
+<div style="margin-bottom: 22px;">
+  <div style="font-size: 13px; font-weight: 600; color: #4B5563; margin-bottom: 10px;">Frontend & web</div>
+  <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+    <div class="chip chip-selected"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> TypeScript</div>
+    <div class="chip chip-neutral" style="cursor: pointer;">React</div>
+    <div class="chip chip-neutral" style="cursor: pointer;">Tailwind CSS</div>
+    <div class="chip chip-neutral" style="cursor: pointer;">Next.js</div>
+    <div class="chip chip-neutral" style="cursor: pointer;">HTML & CSS</div>
   </div>
 </div>
 
-<div style="position: absolute; bottom: 0; left: 0; right: 0; height: 76px; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); border-top: 1px solid #EEF0F4; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; z-index: 45;">
+<!-- Category 3: Backend & Database -->
+<div style="margin-bottom: 32px;">
+  <div style="font-size: 13px; font-weight: 600; color: #4B5563; margin-bottom: 10px;">Backend & database</div>
+  <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+    <div class="chip chip-selected"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> Node.js</div>
+    <div class="chip chip-selected"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> Git</div>
+    <div class="chip chip-neutral" style="cursor: pointer;">PostgreSQL</div>
+    <div class="chip chip-neutral" style="cursor: pointer;">Docker</div>
+    <div class="chip chip-neutral" style="cursor: pointer;">Python</div>
+  </div>
+</div>
+
+<!-- Sticky Bottom Bar -->
+<div style="background: #FFFFFF; border-top: 1px solid #E5E7EB; margin: 0 -20px -24px -20px; padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 -4px 16px rgba(11,18,32,0.04);">
   <div>
-    <span style="font-size: 14px; font-weight: 600; color: #0F172A;">5 skills selected</span>
-    <div style="font-size: 12px; color: #64748B;">Ready to match roles</div>
+    <span style="font-size: 11px; color: #6B7280; font-weight: 500; display: block;">Selected</span>
+    <span style="font-size: 15px; font-weight: 700; color: #0B1220;">5 skills</span>
   </div>
-  <button class="btn-primary-m" style="width: auto; padding: 0 18px;">
-    Save & go to job board
-    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+  <button class="btn-ink" style="padding: 0 24px;">
+    <span>Save & continue</span>
+    <span style="display: flex; align-items: center;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
   </button>
 </div>
 
+  </div>
   
   <div class="home-indicator"></div>
 </body>
