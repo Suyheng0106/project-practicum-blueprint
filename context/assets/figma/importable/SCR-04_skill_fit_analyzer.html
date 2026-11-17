@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=393, height=852, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
+  body { width: 393px; height: 852px; background: #F8FAFC; color: #0F172A; overflow: hidden; position: relative; display: flex; flex-direction: column; }
+  .status-bar { height: 48px; min-height: 48px; display: flex; justify-content: space-between; align-items: center; padding: 0 24px; font-size: 14px; font-weight: 600; color: #0F172A; z-index: 50; }
+  .dynamic-island { position: absolute; top: 11px; left: 50%; transform: translateX(-50%); width: 120px; height: 35px; background: #000000; border-radius: 20px; z-index: 50; }
+  .status-icons { display: flex; align-items: center; gap: 6px; }
+  .home-indicator { position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); width: 134px; height: 5px; background: #0F172A; border-radius: 3px; opacity: 0.25; z-index: 50; }
+  .bottom-nav { position: absolute; bottom: 0; left: 0; right: 0; height: 82px; background: #FFFFFF; border-top: 1px solid #E2E8F0; display: flex; justify-content: space-around; padding-top: 10px; z-index: 40; }
+  .nav-item { display: flex; flex-direction: column; align-items: center; gap: 4px; color: #64748B; font-size: 11px; font-weight: 500; text-decoration: none; }
+  .nav-item.active { color: #2563EB; font-weight: 600; }
+  .nav-item svg { width: 22px; height: 22px; }
+  .content-scroll { flex: 1; overflow-y: auto; padding: 12px 20px 24px 20px; }
+  .badge { display: inline-flex; align-items: center; padding: 3px 8px; border-radius: 6px; font-size: 11px; font-weight: 600; }
+  .badge-success { background: #DCFCE7; color: #15803D; border: 1px solid #BBF7D0; }
+  .badge-warning { background: #FEF3C7; color: #B45309; border: 1px solid #FDE68A; }
+  .badge-error { background: #FEE2E2; color: #B91C1C; border: 1px solid #FECACA; }
+  .badge-blue { background: #EFF6FF; color: #1D4ED8; border: 1px solid #DBEAFE; }
+  .badge-slate { background: #F1F5F9; color: #475569; }
+</style>
+</head>
+<body>
+  <div class="dynamic-island"></div>
+  <div class="status-bar">
+    <span>9:41</span>
+    <div class="status-icons">
+      <svg width="17" height="11" viewBox="0 0 17 11" fill="none"><path d="M1 9.5C1 9.5 3.5 6.5 8.5 6.5C13.5 6.5 16 9.5 16 9.5" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"/><path d="M3.5 7C3.5 7 5.5 4.5 8.5 4.5C11.5 4.5 13.5 7 13.5 7" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"/><circle cx="8.5" cy="9.5" r="1" fill="#0F172A"/></svg>
+      <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="#0F172A"/><rect x="2" y="2" width="16" height="8" rx="2" fill="#0F172A"/><path d="M23 4C23.5 4.5 24 5.2 24 6C24 6.8 23.5 7.5 23 8" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </div>
+  </div>
+  
+<div style="padding: 10px 20px 0 20px; display: flex; justify-content: space-between; align-items: center;">
+  <div style="width: 36px; height: 36px; background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 10px; display: flex; align-items: center; justify-content: center;">
+    <svg width="18" height="18" fill="none" stroke="#0F172A" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+  </div>
+  <span style="font-size: 14px; font-weight: 700; color: #0F172A;">Job Details</span>
+  <div style="width: 36px; height: 36px; background: #EFF6FF; border: 1px solid #DBEAFE; border-radius: 10px; display: flex; align-items: center; justify-content: center;">
+    <svg width="18" height="18" fill="#2563EB" stroke="#2563EB" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/></svg>
+  </div>
+</div>
+
+<div class="content-scroll" style="padding-top: 14px; padding-bottom: 100px;">
+  <div style="margin-bottom: 16px;">
+    <div style="display: flex; gap: 12px; align-items: center; margin-bottom: 10px;">
+      <div style="width: 48px; height: 48px; background: #EFF6FF; border: 1px solid #DBEAFE; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-weight: 800; color: #2563EB; font-size: 18px;">TB</div>
+      <div>
+        <h2 style="font-size: 17px; font-weight: 800; color: #0F172A;">Junior Flutter Developer Intern</h2>
+        <span style="font-size: 13px; color: #64748B;">TechBridge Solutions • Phnom Penh</span>
+      </div>
+    </div>
+    <div style="display: flex; gap: 6px;">
+      <span class="badge badge-blue">Internship</span>
+      <span class="badge badge-slate">On-Site</span>
+      <span class="badge badge-slate">$250.00 / month</span>
+    </div>
+  </div>
+
+  <div style="background: #FFFFFF; border: 2px solid #2563EB; border-radius: 16px; padding: 16px; margin-bottom: 18px; box-shadow: 0 10px 20px -5px rgba(37,99,235,0.1);">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <div style="width: 28px; height: 28px; background: #DBEAFE; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+          <svg width="16" height="16" fill="none" stroke="#2563EB" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </div>
+        <span style="font-size: 13px; font-weight: 800; color: #1E3A8A;">AUTOMATED SKILL GAP ANALYSIS</span>
+      </div>
+      <div style="font-size: 18px; font-weight: 800; color: #15803D;">67% Fit</div>
+    </div>
+
+    <div style="height: 8px; background: #E2E8F0; border-radius: 9999px; overflow: hidden; margin-bottom: 14px;">
+      <div style="height: 100%; width: 67%; background: linear-gradient(90deg, #16A34A, #22C55E); border-radius: 9999px;"></div>
+    </div>
+
+    <p style="font-size: 12px; color: #475569; margin-bottom: 12px;">You match <strong style="color: #0F172A;">2 of 3</strong> required skills for this entry-level role.</p>
+
+    <div style="margin-bottom: 12px;">
+      <span style="display: block; font-size: 11px; font-weight: 700; color: #15803D; margin-bottom: 6px;">MATCHING SKILLS (2)</span>
+      <div style="display: flex; gap: 6px;">
+        <span style="font-size: 12px; font-weight: 600; color: #15803D; background: #DCFCE7; border: 1px solid #BBF7D0; padding: 4px 10px; border-radius: 6px; display: flex; align-items: center; gap: 4px;">
+          ✓ Flutter
+        </span>
+        <span style="font-size: 12px; font-weight: 600; color: #15803D; background: #DCFCE7; border: 1px solid #BBF7D0; padding: 4px 10px; border-radius: 6px; display: flex; align-items: center; gap: 4px;">
+          ✓ Git
+        </span>
+      </div>
+    </div>
+
+    <div style="margin-bottom: 14px;">
+      <span style="display: block; font-size: 11px; font-weight: 700; color: #B91C1C; margin-bottom: 6px;">SKILL GAP — MISSING (1)</span>
+      <div style="display: flex; gap: 6px;">
+        <span style="font-size: 12px; font-weight: 600; color: #B91C1C; background: #FEE2E2; border: 1px solid #FECACA; padding: 4px 10px; border-radius: 6px; display: flex; align-items: center; gap: 4px;">
+          ✗ Docker
+        </span>
+      </div>
+    </div>
+
+    <div style="background: #EFF6FF; border: 1px solid #BFDBFE; border-radius: 8px; padding: 10px; display: flex; gap: 8px; align-items: flex-start;">
+      <svg style="width: 16px; height: 16px; color: #2563EB; flex-shrink: 0; margin-top: 1px;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      <div style="font-size: 11px; color: #1E40AF; line-height: 1.35;">
+        <strong>Preparation Hub Tip:</strong> Close your Docker gap before your technical interview by reviewing the <span style="text-decoration: underline; font-weight: 600;">Docker for Beginners Guide</span>.
+      </div>
+    </div>
+  </div>
+
+  <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 14px; padding: 16px; margin-bottom: 14px;">
+    <h3 style="font-size: 14px; font-weight: 700; color: #0F172A; margin-bottom: 8px;">Role Overview</h3>
+    <p style="font-size: 12px; color: #475569; line-height: 1.5; margin-bottom: 10px;">We are seeking an enthusiastic IT or Computer Science student looking for hands-on experience in cross-platform mobile development. You will pair with senior developers to write clean Flutter code and integrate REST APIs.</p>
+    <h4 style="font-size: 13px; font-weight: 700; color: #0F172A; margin-bottom: 6px;">Responsibilities</h4>
+    <ul style="font-size: 12px; color: #475569; line-height: 1.5; padding-left: 18px;">
+      <li>Build and maintain Flutter mobile screens</li>
+      <li>Use Git for version control and pull request reviews</li>
+      <li>Collaborate on team sprints in Phnom Penh office</li>
+    </ul>
+  </div>
+</div>
+
+<div style="position: absolute; bottom: 0; left: 0; right: 0; height: 80px; background: #FFFFFF; border-top: 1px solid #E2E8F0; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; z-index: 45;">
+  <div>
+    <span style="font-size: 11px; color: #64748B; font-weight: 500;">Match Readiness</span>
+    <div style="font-size: 14px; font-weight: 800; color: #15803D;">67% Fit Score</div>
+  </div>
+  <button style="height: 48px; background: #2563EB; color: #FFFFFF; border: none; border-radius: 10px; padding: 0 24px; font-size: 14px; font-weight: 700; display: flex; align-items: center; gap: 8px; cursor: pointer; box-shadow: 0 4px 12px rgba(37,99,235,0.25);">
+    Apply Now
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+  </button>
+</div>
+
+  
+  <div class="home-indicator"></div>
+</body>
+</html>

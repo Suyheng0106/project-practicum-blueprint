@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=393, height=852, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
+  body { width: 393px; height: 852px; background: #F8FAFC; color: #0F172A; overflow: hidden; position: relative; display: flex; flex-direction: column; }
+  .status-bar { height: 48px; min-height: 48px; display: flex; justify-content: space-between; align-items: center; padding: 0 24px; font-size: 14px; font-weight: 600; color: #0F172A; z-index: 50; }
+  .dynamic-island { position: absolute; top: 11px; left: 50%; transform: translateX(-50%); width: 120px; height: 35px; background: #000000; border-radius: 20px; z-index: 50; }
+  .status-icons { display: flex; align-items: center; gap: 6px; }
+  .home-indicator { position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); width: 134px; height: 5px; background: #0F172A; border-radius: 3px; opacity: 0.25; z-index: 50; }
+  .bottom-nav { position: absolute; bottom: 0; left: 0; right: 0; height: 82px; background: #FFFFFF; border-top: 1px solid #E2E8F0; display: flex; justify-content: space-around; padding-top: 10px; z-index: 40; }
+  .nav-item { display: flex; flex-direction: column; align-items: center; gap: 4px; color: #64748B; font-size: 11px; font-weight: 500; text-decoration: none; }
+  .nav-item.active { color: #2563EB; font-weight: 600; }
+  .nav-item svg { width: 22px; height: 22px; }
+  .content-scroll { flex: 1; overflow-y: auto; padding: 12px 20px 24px 20px; }
+  .badge { display: inline-flex; align-items: center; padding: 3px 8px; border-radius: 6px; font-size: 11px; font-weight: 600; }
+  .badge-success { background: #DCFCE7; color: #15803D; border: 1px solid #BBF7D0; }
+  .badge-warning { background: #FEF3C7; color: #B45309; border: 1px solid #FDE68A; }
+  .badge-error { background: #FEE2E2; color: #B91C1C; border: 1px solid #FECACA; }
+  .badge-blue { background: #EFF6FF; color: #1D4ED8; border: 1px solid #DBEAFE; }
+  .badge-slate { background: #F1F5F9; color: #475569; }
+</style>
+</head>
+<body>
+  <div class="dynamic-island"></div>
+  <div class="status-bar">
+    <span>9:41</span>
+    <div class="status-icons">
+      <svg width="17" height="11" viewBox="0 0 17 11" fill="none"><path d="M1 9.5C1 9.5 3.5 6.5 8.5 6.5C13.5 6.5 16 9.5 16 9.5" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"/><path d="M3.5 7C3.5 7 5.5 4.5 8.5 4.5C11.5 4.5 13.5 7 13.5 7" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"/><circle cx="8.5" cy="9.5" r="1" fill="#0F172A"/></svg>
+      <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="#0F172A"/><rect x="2" y="2" width="16" height="8" rx="2" fill="#0F172A"/><path d="M23 4C23.5 4.5 24 5.2 24 6C24 6.8 23.5 7.5 23 8" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </div>
+  </div>
+  
+<div class="content-scroll" style="display: flex; flex-direction: column; justify-content: center; padding-top: 10px;">
+  <div style="text-align: center; margin-bottom: 28px;">
+    <div style="width: 64px; height: 64px; background: linear-gradient(135deg, #2563EB, #1D4ED8); border-radius: 16px; margin: 0 auto 14px auto; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.35);">
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 18l6-6-6-6"/><path d="M8 6l-6 6 6 6"/></svg>
+    </div>
+    <h1 style="font-size: 26px; font-weight: 800; color: #0F172A; letter-spacing: -0.5px;">DevPath</h1>
+    <p style="font-size: 13px; color: #64748B; margin-top: 4px; font-weight: 500;">Match your tech skills with junior IT roles</p>
+  </div>
+
+  <div style="display: flex; background: #E2E8F0; padding: 4px; border-radius: 12px; margin-bottom: 24px;">
+    <div style="flex: 1; text-align: center; padding: 8px; font-size: 13px; font-weight: 600; background: #FFFFFF; color: #2563EB; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.06);">Candidate</div>
+    <div style="flex: 1; text-align: center; padding: 8px; font-size: 13px; font-weight: 500; color: #64748B;">Employer</div>
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: 16px;">
+    <div>
+      <label style="display: block; font-size: 12px; font-weight: 600; color: #334155; margin-bottom: 6px;">Email address</label>
+      <div style="position: relative;">
+        <input type="text" value="sokha.pech@it.edu.kh" style="width: 100%; height: 46px; border: 1.5px solid #2563EB; border-radius: 10px; padding: 0 14px 0 38px; font-size: 14px; color: #0F172A; background: #FFFFFF; outline: none; box-shadow: 0 0 0 3px rgba(37,99,235,0.12);">
+        <svg style="position: absolute; left: 12px; top: 14px; width: 18px; height: 18px; color: #2563EB;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+      </div>
+    </div>
+
+    <div>
+      <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+        <label style="font-size: 12px; font-weight: 600; color: #334155;">Password</label>
+        <span style="font-size: 12px; color: #2563EB; font-weight: 500;">Forgot password?</span>
+      </div>
+      <div style="position: relative;">
+        <input type="password" value="••••••••••••" style="width: 100%; height: 46px; border: 1.5px solid #CBD5E1; border-radius: 10px; padding: 0 38px 0 38px; font-size: 14px; color: #0F172A; background: #FFFFFF; outline: none;">
+        <svg style="position: absolute; left: 12px; top: 14px; width: 18px; height: 18px; color: #94A3B8;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+        <svg style="position: absolute; right: 12px; top: 14px; width: 18px; height: 18px; color: #94A3B8;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+      </div>
+    </div>
+
+    <button style="width: 100%; height: 48px; background: #2563EB; color: #FFFFFF; border: none; border-radius: 10px; font-size: 15px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 6px; cursor: pointer; box-shadow: 0 4px 12px rgba(37,99,235,0.25);">
+      Sign In
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+    </button>
+  </div>
+
+  <div style="display: flex; align-items: center; margin: 24px 0;">
+    <div style="flex: 1; height: 1px; background: #E2E8F0;"></div>
+    <span style="font-size: 12px; color: #94A3B8; padding: 0 12px; font-weight: 500;">Or sign in with</span>
+    <div style="flex: 1; height: 1px; background: #E2E8F0;"></div>
+  </div>
+
+  <button style="width: 100%; height: 46px; background: #0F172A; color: #FFFFFF; border: none; border-radius: 10px; font-size: 14px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 10px;">
+    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+    Continue with GitHub
+  </button>
+
+  <div style="text-align: center; margin-top: 24px; font-size: 13px; color: #64748B;">
+    Don't have an account? <span style="color: #2563EB; font-weight: 600; cursor: pointer;">Register here</span>
+  </div>
+</div>
+
+  
+  <div class="home-indicator"></div>
+</body>
+</html>

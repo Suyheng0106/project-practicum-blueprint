@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>DevPath Design System Canvas</title>
+<style>
+  body {
+    background: #1E1E1E;
+    color: #FFFFFF;
+    font-family: -apple-system, sans-serif;
+    padding: 40px;
+    margin: 0;
+  }
+  h1 { font-size: 28px; margin-bottom: 8px; color: #60A5FA; }
+  p { color: #94A3B8; margin-bottom: 32px; font-size: 14px; }
+  .section-title { font-size: 20px; font-weight: 700; margin: 30px 0 16px 0; color: #F1F5F9; border-bottom: 1px solid #334155; padding-bottom: 8px; }
+  .canvas-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    align-items: flex-start;
+  }
+  .frame-card {
+    background: #2D2D2D;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  }
+  .frame-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #93C5FD;
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+  }
+  iframe {
+    border: none;
+    border-radius: 8px;
+    background: #FFFFFF;
+    display: block;
+  }
+</style>
+</head>
+<body>
+  <h1>DevPath — Figma UI/UX Design System Board</h1>
+  <p>All 8 key application frames for Candidate Mobile App (iPhone 15) and Employer Web Portal.</p>
+
+  <div class="section-title">📱 Candidate Mobile Screens (393 × 852)</div>
+  <div class="canvas-grid">
+    <div class="frame-card">
+      <div class="frame-title">SCR-01 / Candidate Login</div>
+      <iframe src="SCR-01_login.html" width="393" height="852"></iframe>
+    </div>
+    <div class="frame-card">
+      <div class="frame-title">SCR-02 / Registration & Skills Selection</div>
+      <iframe src="SCR-02_register_skills.html" width="393" height="852"></iframe>
+    </div>
+    <div class="frame-card">
+      <div class="frame-title">SCR-03 / Curated IT Job Board</div>
+      <iframe src="SCR-03_job_board.html" width="393" height="852"></iframe>
+    </div>
+    <div class="frame-card">
+      <div class="frame-title">SCR-04 / Job Details & Skill Fit Analyzer</div>
+      <iframe src="SCR-04_skill_fit_analyzer.html" width="393" height="852"></iframe>
+    </div>
+    <div class="frame-card">
+      <div class="frame-title">SCR-06 / Candidate Applications Tracker</div>
+      <iframe src="SCR-06_applications.html" width="393" height="852"></iframe>
+    </div>
+    <div class="frame-card">
+      <div class="frame-title">SCR-08 / Candidate Profile & Portfolio</div>
+      <iframe src="SCR-08_candidate_profile.html" width="393" height="852"></iframe>
+    </div>
+  </div>
+
+  <div class="section-title">💻 Employer Web Portal (1280 × 800)</div>
+  <div class="canvas-grid">
+    <div class="frame-card">
+      <div class="frame-title">SCR-10 / Employer Recruitment Dashboard</div>
+      <iframe src="SCR-10_employer_dashboard.html" width="1280" height="800"></iframe>
+    </div>
+    <div class="frame-card">
+      <div class="frame-title">SCR-12 / Employer Review Applicants & Skill Match</div>
+      <iframe src="SCR-12_employer_applicants.html" width="1280" height="800"></iframe>
+    </div>
+  </div>
+</body>
+</html>
