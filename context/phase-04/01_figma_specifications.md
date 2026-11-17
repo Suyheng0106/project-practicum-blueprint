@@ -107,7 +107,7 @@ Set in **Plus Jakarta Sans** for Latin characters, headings, and numerical displ
 | **Signature Match Ring** | Circular SVG progress ring with round caps. Sky `#0EA5E9` default; Green `#10B981` at 80%+; Grey `#9CA3AF` under 40%. Central bold percentage. Sizes: 36px (compact), 48px (table row), 96px (hero card). | Yes |
 | **Status Pill** | Soft tinted background with 6px colored dot and sentence-case text: `Under review`, `Submitted`, `Accepted`, `Rejected`. | Yes |
 | **Text Inputs** | 52px height, 14px radius, filled `#F5F6F8` background, no border until focused (then 2px `#0EA5E9` ring with white surface). | Yes |
-| **Mobile Bottom Nav** | Floating pill bar inset 16px from edges, blurred white background (`rgba(255,255,255,0.94)`), ink-black active pill with white icon & label. | Yes |
+| **Mobile Bottom Nav** | Floating pill bar inset 16px from edges, blurred white background (`rgba(255,255,255,0.94)`), four core candidate destinations (`Jobs`, `Prep Hub`, `Applied`, `Profile`), ink-black active pill with white icon & label. | Yes |
 | **Desktop Left Sidebar** | 240px slim left rail with DevPath brand, navigation links (active ink-black filled pill with sky icon), and user card at bottom. | Yes |
 
 ---
