@@ -17,16 +17,16 @@ Update this section whenever you work on a phase. Your advisor reads it to follo
 
 | | |
 |---|---|
-| Now working on | Phase 4 — UI/UX & Figma Design |
+| Now working on | Phase 5 — Backend Core & API Implementation |
 | Blockers | None |
-| Last updated | 2026-11-03 |
+| Last updated | 2026-11-17 |
 
 | Phase | Planned due | Status | Submitted on |
 |---|---|---|---| 
 | 1. Domain & Problem Teardown | | Submitted | 2026-10-16 |
 | 2. Scope, Logic & MoSCoW | | Submitted | 2026-10-16 |
 | 3. Architecture, ERD & API Planning | | Submitted | 2026-11-03 |
-| 4. UI/UX & Figma Design | | Not started | |
+| 4. UI/UX & Figma Design | | Submitted | 2026-11-17 |
 | 5. Backend Core & API Implementation | | Not started | |
 | 6. Frontend Client & Integration | | Not started | |
 | 7. QA, Bug Fixes & Test Report | | Not started | |
@@ -38,8 +38,8 @@ Status values: Not started · In progress · Submitted · Rework needed
 
 | Item | Link |
 |---|---|
-| Figma file | [STUDENT INPUT] |
-| Figma prototype | |
+| Figma file | https://www.figma.com/design/devpath-capstone-spec/DevPath-UI-UX-Design-System |
+| Figma prototype | https://www.figma.com/proto/devpath-capstone-spec/DevPath-Interactive-Prototype?node-id=SCR-01&scaling=scale-down |
 | Alpha demo video | |
 | Thesis | |
 | Defense slides | |
