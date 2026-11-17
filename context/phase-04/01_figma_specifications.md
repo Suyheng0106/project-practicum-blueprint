@@ -118,7 +118,7 @@ The system provides 12 distinct screens covering both user surfaces (Candidate M
 
 | Screen ID | Screen name | Surface | Purpose | User journey | Endpoint | Feature |
 |---|---|---|---|---|---|---|
-| **SCR-01** | Candidate Login & Welcome | Mobile | Bold hero headline "Match your skills with your first tech job." with soft sky glow, sliding segmented control, filled inputs, ink-black Sign In, and real GitHub button. | UJ-01 | EP-03, EP-04 | Baseline |
+| **SCR-01** | Candidate Login & Welcome | Mobile | Bold hero headline "Match your skills with your first tech job." with soft sky glow, filled inputs, ink-black Sign In, real GitHub button, and discrete web portal link for recruiters. | UJ-01 | EP-03, EP-04 | Baseline |
 | **SCR-02** | Registration & Skills Selection | Mobile | Segmented progress bar, "What do you build with?" heading, search input, category skill pills (selected with sky tint + check), and sticky bottom bar. | UJ-01 | EP-02, EP-05, EP-08 | F-01 |
 | **SCR-03** | Candidate Job Board & Search | Mobile | "Hi Sokha" greeting with avatar and bell icon, integrated search & filter, ink category chips, job cards with compact match ring, and floating bottom nav. | UJ-02 | EP-10 | F-02, F-03 |
 | **SCR-04** | Job Details & Skill Fit Analyzer | Mobile | Hero card with large 96px match ring, "You match 2 of 3 required skills", matched vs missing chip groups, sky Preparation Hub tip, and sticky bottom bar. | UJ-03, UJ-04, UJ-07 | EP-11, EP-12, EP-14, EP-16 | F-02, F-03, F-06 |
