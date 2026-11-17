@@ -6,8 +6,8 @@
 
 | Item | Value |
 |---|---|
-| Figma view-only project URL | https://www.figma.com/design/devpath-capstone-spec/DevPath-UI-UX-Design-System |
-| Figma interactive prototype URL | https://www.figma.com/proto/devpath-capstone-spec/DevPath-Interactive-Prototype?node-id=SCR-01&scaling=scale-down |
+| Figma view-only project URL | https://www.figma.com/design/otuXkH2lhb0nVRzsNo5uY7 |
+| Figma interactive prototype URL | https://www.figma.com/proto/otuXkH2lhb0nVRzsNo5uY7?node-id=1-2&scaling=scale-down |
 | Target frame resolution | Mobile 393×852 (iPhone 15) & Web 1280×800 (Desktop Web Portal) |
 
 Set both links to "Anyone with the link can view" and test them in a private browser window.

@@ -38,8 +38,8 @@ Status values: Not started · In progress · Submitted · Rework needed
 
 | Item | Link |
 |---|---|
-| Figma file | https://www.figma.com/design/devpath-capstone-spec/DevPath-UI-UX-Design-System |
-| Figma prototype | https://www.figma.com/proto/devpath-capstone-spec/DevPath-Interactive-Prototype?node-id=SCR-01&scaling=scale-down |
+| Figma file | https://www.figma.com/design/otuXkH2lhb0nVRzsNo5uY7 |
+| Figma prototype | https://www.figma.com/proto/otuXkH2lhb0nVRzsNo5uY7?node-id=1-2&scaling=scale-down |
 | Alpha demo video | |
 | Thesis | |
 | Defense slides | |
