@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: devpath-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: devpath
+      POSTGRES_PASSWORD: devpath_secret
+      POSTGRES_DB: devpath_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:

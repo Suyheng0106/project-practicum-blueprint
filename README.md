@@ -17,9 +17,9 @@ Update this section whenever you work on a phase. Your advisor reads it to follo
 
 | | |
 |---|---|
-| Now working on | Phase 5 — Backend Core & API Implementation |
+| Now working on | Phase 6 — Frontend Client & Integration |
 | Blockers | None |
-| Last updated | 2026-11-17 |
+| Last updated | 2026-11-20 |
 
 | Phase | Planned due | Status | Submitted on |
 |---|---|---|---| 
@@ -27,8 +27,8 @@ Update this section whenever you work on a phase. Your advisor reads it to follo
 | 2. Scope, Logic & MoSCoW | | Submitted | 2026-10-16 |
 | 3. Architecture, ERD & API Planning | | Submitted | 2026-11-03 |
 | 4. UI/UX & Figma Design | | Submitted | 2026-11-17 |
-| 5. Backend Core & API Implementation | | Not started | |
-| 6. Frontend Client & Integration | | Not started | |
+| 5. Backend Core & API Implementation | | Submitted | 2026-11-20 |
+| 6. Frontend Client & Integration | | In progress | |
 | 7. QA, Bug Fixes & Test Report | | Not started | |
 | 8. Code Freeze, Final Report & Defense | | Not started | |
 
@@ -46,7 +46,31 @@ Status values: Not started · In progress · Submitted · Rework needed
 
 ## How to Run
 
-[STUDENT INPUT: From Phase 5 onward, list the commands to start the database, run migrations and seeds, start the API on port 8000, run the API tests, and start the client.]
+1. **Start Database:**
+   ```bash
+   docker compose up -d
+   ```
+2. **Install Backend Dependencies:**
+   ```bash
+   cd backend && npm install
+   ```
+3. **Run Migrations & Seed Initial Data:**
+   ```bash
+   cd backend && npx prisma migrate dev && npx prisma db seed
+   ```
+4. **Start Backend API (Port 8000):**
+   ```bash
+   cd backend && npm run dev
+   # Or build and start: npm run build && npm start
+   ```
+5. **Run Automated API Verification Suite (41 Tests):**
+   ```bash
+   cd backend && npx ts-node tests/api_verification.ts
+   ```
+6. **Check Service Health:**
+   ```bash
+   curl http://localhost:8000/api/v1/health
+   ```
 
 ## Repository Layout
 
