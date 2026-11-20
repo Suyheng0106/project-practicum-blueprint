@@ -2,7 +2,7 @@
 
 **Objective:** Design the data model your features need: every table, column, constraint and relationship, decided before any migration is written.
 
-**Status:** Submitted · **Last updated:** 2026-11-03
+**Status:** Submitted / Revised · **Last updated:** 2026-11-20
 
 ## Done When
 
@@ -41,6 +41,8 @@ erDiagram
     job_listings ||--o{ job_applications : "receives"
     candidate_profiles ||--o{ saved_jobs : "bookmarks"
     job_listings ||--o{ saved_jobs : "saved_as"
+    preparation_guides ||--o{ preparation_guide_skills : "covers"
+    skills ||--o{ preparation_guide_skills : "tagged_in"
 
     users {
         uuid id PK
@@ -177,6 +179,14 @@ erDiagram
         string category
         string summary
         string content
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    preparation_guide_skills {
+        uuid id PK
+        uuid preparation_guide_id FK
+        uuid skill_id FK
         timestamp created_at
         timestamp updated_at
     }
@@ -395,3 +405,18 @@ Stores curated study guides, project ideas, and interview preparation content fo
 | `content` | text | None | No | Full markdown guide content |
 | `created_at` | timestamp | DEFAULT now() | No | Guide creation timestamp |
 | `updated_at` | timestamp | DEFAULT now() | No | Guide last modified timestamp |
+
+---
+
+### Table: `preparation_guide_skills`
+Associates technical skills with preparation guides to enable skill gap-based guide recommendations (serving F-04 and UJ-05).
+
+| Column | Data type | Constraints | Nullable | Description |
+|---|---|---|---|---|
+| `id` | uuid | PRIMARY KEY, DEFAULT gen_random_uuid() | No | Unique association identifier |
+| `preparation_guide_id` | uuid | FK → preparation_guides(id) ON DELETE CASCADE | No | Parent preparation guide |
+| `skill_id` | uuid | FK → skills(id) ON DELETE RESTRICT | No | Associated technical skill |
+| `created_at` | timestamp | DEFAULT now() | No | Association timestamp |
+| `updated_at` | timestamp | DEFAULT now() | No | Association last modified timestamp |
+
+*Table Constraint:* `UNIQUE (preparation_guide_id, skill_id)` prevents linking the same skill to a preparation guide multiple times.

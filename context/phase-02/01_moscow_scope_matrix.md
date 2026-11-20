@@ -2,7 +2,7 @@
 
 **Objective:** Decide exactly what you will build, and just as importantly what you will not build. This matrix protects you from scope creep for the rest of the project.
 
-**Status:** In Progress / Revised · **Last updated:** 2026-10-27
+**Status:** In Progress / Revised · **Last updated:** 2026-11-20
 
 ## Done When
 
@@ -42,3 +42,4 @@ After this phase, scope is frozen so you can focus on building. Changes are stil
 |---|---|---|
 | 2026-10-27 | Added F-09 (Employer Web Portal & Job Management, Must-Have) and upgraded F-06 (In-App Direct Job Applications) from Could-Have to Must-Have. Established dual-client architecture: Candidates on Flutter mobile, Employers on React web portal, sharing a single backend and PostgreSQL database. | Advisor mandated an end-to-end solution for both employer and candidate, with employer functionality on a desktop web portal and candidate on mobile. |
 | 2026-11-09 | Rebranded project to DevPath, updated core user terminology from "student" to "candidate" (`candidate_profiles`), and explicitly restricted domain strictly to the IT & Tech industry (candidates must be in IT/tech; jobs must be software/IT roles; skills taxonomy limited strictly to technical skills). | Focuses the matching engine on discrete, verifiable technical skills, eliminating ambiguity and optimizing the platform specifically for junior software engineers and tech employers. |
+| 2026-11-20 | Added `preparation_guide_skills` table linking preparation guides to technical skills in a many-to-many relationship. | Enables Preparation Hub to dynamically filter and recommend articles directly tailored to the candidate's identified skill gaps. |

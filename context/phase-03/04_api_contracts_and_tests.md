@@ -2,7 +2,7 @@
 
 **Objective:** Specify every endpoint before you implement it, and write a test request for each one in your API testing tool. The tests fail now and turn green during Phase 5.
 
-**Status:** Submitted · **Last updated:** 2026-11-03
+**Status:** Submitted / Revised · **Last updated:** 2026-11-20
 
 ## Done When
 
@@ -765,6 +765,8 @@ Success response, `200 OK`:
 Headers:
 * `Authorization: Bearer <candidate_jwt>`
 
+Query parameters: `?skillId=s004-uuid&category=Portfolio%20Guides` (optional: filter guides by specific skill, category, or candidate skill gaps)
+
 Request body: `none`
 
 Success response, `200 OK`:
@@ -775,7 +777,13 @@ Success response, `200 OK`:
     "title": "How to Structure an IT Internship Portfolio",
     "category": "Portfolio Guides",
     "summary": "Step-by-step tips for candidates showcasing coding projects to employers.",
-    "content": "## Building Your First Portfolio\nWhen applying for your first software job..."
+    "content": "## Building Your First Portfolio\nWhen applying for your first software job...",
+    "skills": [
+      {
+        "id": "s004-uuid",
+        "name": "Docker"
+      }
+    ]
   }
 ]
 ```
